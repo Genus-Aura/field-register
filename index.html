@@ -484,6 +484,11 @@ textarea {
       <p>Please complete prior to starting work. <strong><u>Submission must be no later than 8am.</u></strong><br>This does not replace the JHA.</p>
       <form id="bog-form" onsubmit="validateBogForm()">
 
+        <label for="bog-project">Project</label>
+            <select id="bog-project" name="bog-project" required>
+          <option value="Kalgoorlie-Wallaroo" selected>Kalgoorlie - Wallaroo</option>
+        </select>
+
         <label for="bog-date">Date</label>
         <input type="date" id="bog-date" name="bog-date" required />
 
@@ -500,21 +505,9 @@ textarea {
         <label for="bog-company-name">Your Company Name</label>
         <select id="bog-company-name" name="bog-company-name" required>
           <option value="">Select one</option>
-          <option value="Across Aus Boring">Across Aus Boring</option>
-          <option value="Boretech Contracting">Boretech Contracting</option>
-          <option value="Connectit Communications">Connectit Communications</option>
-          <option value="Dawn Techcomms">Dawn Techcomms</option>
-          <option value="DDS Underground">DDS Underground</option>
-          <option value="Dizza Communications">Dizza Communications</option>
-          <option value="Djara Network Service">Djara Network Service</option>
-          <option value="Feverpitch Enterprises">Feverpitch Enterprises</option>
+          <option value="Genus Services">Genus Services</option>
           <option value="JNJTech Services">JNJTech Services</option>
-          <option value="Lightsource">Lightsource</option>
           <option value="MNC Drilling">MNC Drilling</option>
-          <option value="Netline Services">Netline Services</option>
-          <option value="Syndicate Communications">Syndicate Communications</option>
-          <option value="TAT Communications">TAT Communications</option>
-          <option value="Versatile Services">Versatile Services</option>
         </select>
 
 <label for="bog-estimated-start-time">Estimated Start Time</label>
@@ -531,11 +524,12 @@ textarea {
         <select id="bog-discipline" name="bog-discipline" required>
           <option value="">Select one</option>
      <optgroup label="Construction">
-          <option value="Blockage Repair - Construction">Blockage Repair - Construction</option>
-          <option value="ACM Removal">ACM Removal</option>
+          <option value="RRP">Rod, Rope & Prove</option>
+          <option value="Blockage Repair">Blockage Repair</option>
           <option value="Plough">Plough</option>
           <option value="Horizontal Directional Drilling">Horizontal Directional Drilling</option>
           <option value="Trenching">Trenching</option>
+          <option value="ACM Removal">ACM Removal</option>
           <option value="Pit Installation/Remediation">Pit Installation/Remediation</option>
           <option value="Reinstatement">Reinstatement</option>
           <option value="Cable Hauling">Cable Hauling</option>
@@ -544,56 +538,8 @@ textarea {
      </optgroup>
         </select>
 
-        <label for="bog-Location">Location</label>
-        <select id="bog-Location" name="bog-Location" required>
-          <option value="">Select one</option>
-     <optgroup label="Gascoyne">
-          <option value="K-6CVN-20">K-6CVN-20</option>
-          <option value="K-6DNH-20">K-6DNH-20</option>
-          <option value="K-6EXM-01">K-6EXM-01</option>
-     </optgroup>
-     <optgroup label="Goldfields-Esperance">
-          <option value="K-6CGD-20">K-6CGD-20</option>
-          <option value="K-6ESP-20">K-6ESP-20</option>
-          <option value="K-6ESP-21">K-6ESP-21</option>
-          <option value="K-6ESP-40">K-6ESP-40</option>
-          <option value="K-6HOP-01">K-6HOP-01</option>
-          <option value="K-6KAM-20">K-6KAM-20</option>
-     </optgroup>
-     <optgroup label="Great Southern">
-          <option value="K-6ALN-22">K-6ALN-22</option>
-          <option value="L-6ALN-05">L-6ALN-05</option>
-          <option value="L-6ALN-20">L-6ALN-20</option>
-          <option value="L-6ALN-21">L-6ALN-21</option>
-          <option value="L-6ALN-23">L-6ALN-23</option>
-          <option value="X-6ALN-05">X-6ALN-05</option>
-          <option value="K-6DNK-20">K-6DNK-20</option>
-          <option value="K-6KAT-20">K-6KAT-20</option>
-     </optgroup>
-     <optgroup label="Mid West">
-          <option value="K-6KLB-01">K-6KLB-01</option>
-          <option value="K-6LEA-20">K-6LEA-20</option>
-     </optgroup>
-     <optgroup label="Pilbara">
-          <option value="K-6NWM-01">K-6NWM-01</option>
-          <option value="K-6NWM-20">K-6NWM-20</option>
-          <option value="K-6PDO-20">K-6PDO-20</option>
-          <option value="K-6TPC-20">K-6TPC-20</option>
-          <option value="X-6TPC-20">K-6TPC-20</option>
-     </optgroup>
-     <optgroup label="South West">
-          <option value="K-6AUU-20">K-6AUU-20</option>
-          <option value="K-6BGT-20">K-6BGT-20</option>
-          <option value="X-6BGT-20">X-6BGT-20</option>
-          <option value="X-6COI-01">X-6COI-01</option>
-          <option value="K-6MJM-01">K-6MJM-01</option>
-     </optgroup>
-     <optgroup label="Wheatbelt">
-          <option value="K-6CND-20">K-6CND-20</option>
-          <option value="K-6NRG-20">K-6NRG-20</option>
-          <option value="K-6SCR-20">K-6SCR-20</option>
-     </optgroup>
-        </select>
+            <label for="bog-Location">Location</label>
+        <textarea id="bog-Location" name="bog-Location" placeholder="Enter sheet number and grid reference" required></textarea>
 
     <label for="bog-site-contact">Onsite Crew Lead Name</label>
     <div id="bog-site-contact" class="crew-checkbox"></div>
@@ -602,7 +548,7 @@ textarea {
         <label for="bog-onsite-crew-lead-mobile">Onsite Crew Lead Mobile</label>
         <input type="tel" id="bog-onsite-crew-lead-mobile" name="bog-onsite-crew-lead-mobile" pattern="04\d{8}" maxlength="10" placeholder="Enter 10-digit number" oninvalid="this.setCustomValidity('Enter number as 04xxxxxxxx')" oninput="this.setCustomValidity('')" required />
 
-        <label for="bog-onsite-crew-lead-email">Onsite Crew Lead Email</label>
+        <label for="bog-onsite-crew-lead-email">Onsite Crew Lead Email (optional)</label>
         <input type="text" id="bog-onsite-crew-lead-email" name="bog-onsite-crew-lead-email" />
         
         <label for="bog-Number-of-People-at-Location">Number of People in Crew at Location</label>
@@ -618,7 +564,7 @@ textarea {
         <select id="bog-Genus-FCM" name="bog-Genus-FCM" required>
           <option value="">Select one</option>
           <option value="Alex McConville">Alex McConville</option>
-          <option value="Riaz Ejtahed">Riaz Ejtahed</option>
+          <option value="Damian Watson">Damian Watson</option>
         </select>
 <br><br>
 <div>
@@ -630,6 +576,7 @@ textarea {
     <p>All workers to have signed into Task SWMS being utilised with copy available - latest version.</p>
 
     <input type="checkbox" name="bog-SWMS[]" value="Scoping" /> Scoping (0017 Surveying & Scoping)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Ploughing" /> Ploughing (0026 Ploughing & Cable Laying)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Trenching" /> Trenching (0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Drilling" /> Drilling (0016 Directional Boring, 0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Pit Installation" /> Pit Installation (0002 Installing Replacing Repairing Pits Manholes)<br />
@@ -651,6 +598,32 @@ textarea {
     <input type="checkbox" id="bog-jha-uploaded" name="bog-jha-uploaded" required>
     Please induct all visitors to JHA and complete prior to starting at each site.
   </div>
+
+<div style="margin: 20px 0;">
+  <label for="bog-jha-photos">
+    Please provide a photo of the signed JHA (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Requires photo of front page and signed last page of the JHA
+    </small>
+  </label>
+
+  <input 
+    type="file" 
+    id="bog-jha-photos" 
+    name="bog_jha_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    required
+    style="margin-top: 10px; width: 100%; padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif;"
+  >
+
+  <!-- Optional hint for users -->
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
         <label for="bog-ACM">Will you be disturbing/modifying any possible ACM while onsite?</label>
         <select id="bog-ACM" name="bog-ACM" onchange="toggleACMField()" required>
@@ -678,7 +651,33 @@ textarea {
 <div id="bog-excavation">
   <label for="bog-excavation-checkbox">Is excavation work being conducted today?</label>
   <input type="checkbox" id="bog-excavation-checkbox" name="bog-excavation" /> Refer to HSE Guidance Note – Construction JHA and Excavation permit process
-</div>        
+</div>
+
+<div style="margin: 20px 0;">
+  <label for="bog-site-photos">
+    Please provide a photo of your first site set-up for today (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Requires photo of a safe site set-up
+    </small>
+  </label>
+
+  <input 
+    type="file" 
+    id="bog-site-photos" 
+    name="bog_site_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    required
+    style="margin-top: 10px; width: 100%; padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif;"
+  >
+
+  <!-- Optional hint for users -->
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
         <label for="bog-comments">Additional Comments? Escalate SHEQ concerns to your Genus FCM/Supervisor or SHEQ Advisor</label>
         <textarea id="bog-comments" name="bog-comments" placeholder="Track required actions in MyOsh with SHEQ support"></textarea>
@@ -690,159 +689,350 @@ textarea {
       </form>
     </div>
 
-    <div id="form-progress" class="form-section hidden">
-      <h3>Progress Register: Genus N2P project</h3>
-      <form id="progress-form" onsubmit="return validateGenericForm('progress-form')">
+<div id="form-progress" class="form-section hidden">
+  <h3>Progress Register: Genus Aura project</h3>
+  <form id="progress-form" onsubmit="return validateProgressForm()">
 
-<label for="progress-note-id-search">Search Pit Note ID</label>
-<div style="display: flex; gap: 0.5rem; align-items: center;">
-  <input type="text" id="progress-note-id-search" placeholder="Enter Note ID" />
-  <button type="button" id="progress-search-btn" class="search-btn">Search</button>
-</div>
+    <label for="progress-project">Project</label>
+    <select id="progress-project" name="progress-project" required>
+      <option value="Kalgoorlie-Wallaroo" selected>Kalgoorlie - Wallaroo</option>
+    </select>
 
-<!-- Optional read-only summary or error display -->
-<div id="progress-note-summary" style="margin-top: 1rem; font-weight: bold;"></div>
+    <label for="progress-date">Date</label>
+    <input type="date" id="progress-date" name="progress-date" required />
 
-<!-- OR Divider -->
-<div class="or-divider">
-  <hr class="line" />
-  <span class="or-text">OR</span>
-  <hr class="line" />
-</div>
+    <label for="progress-company-name">Your Company Name</label>
+    <select id="progress-company-name" name="progress-company-name" required>
+      <option value="">Select one</option>
+      <option value="Genus Services">Genus Services</option>
+      <option value="JNJTech Services">JNJTech Services</option>
+      <option value="MNC Drilling">MNC Drilling</option>
+    </select>
 
-	<!-- Hidden input hardcoded to 'Progress Register' -->
-	<input type="hidden" id="progress-type" name="progress-type" value="Progress Register">
+    <label for="progress-site-contact">Onsite Crew Lead Name</label>
+    <div id="progress-site-contact" class="crew-checkbox"></div>
+    <input type="hidden" id="progress-site-contact-hidden" name="progress-site-contact" required />
 
-        <label for="progress-company-name">Your Company Name</label>
-          <select id="progress-company-name" name="progress-company-name" required>
-          <option value="">Select one</option>
-          <option value="Across Aus Boring">Across Aus Boring</option>
-          <option value="Boretech Contracting">Boretech Contracting</option>
-          <option value="Connectit Communications">Connectit Communications</option>
-          <option value="Dawn Techcomms">Dawn Techcomms</option>
-          <option value="DDS Underground">DDS Underground</option>
-          <option value="Dizza Communications">Dizza Communications</option>
-          <option value="Djara Network Service">Djara Network Service</option>
-          <option value="Feverpitch Enterprises">Feverpitch Enterprises</option>
-          <option value="JNJTech Services">JNJTech Services</option>
-          <option value="Lightsource">Lightsource</option>
-          <option value="MNC Drilling">MNC Drilling</option>
-          <option value="Netline Services">Netline Services</option>
-          <option value="Syndicate Communications">Syndicate Communications</option>
-          <option value="TAT Communications">TAT Communications</option>
-          <option value="Versatile Services">Versatile Services</option>
-        </select>
-        
+    <label for="progress-onsite-crew-lead-mobile">Onsite Crew Lead Mobile</label>
+    <input type="tel" id="progress-onsite-crew-lead-mobile" name="progress-onsite-crew-lead-mobile" pattern="04\d{8}" maxlength="10" placeholder="Enter 10-digit number" oninvalid="this.setCustomValidity('Enter number as 04xxxxxxxx')" oninput="this.setCustomValidity('')" required />
 
-        <label for="progress-date">Date Idendified</label>
-        <input type="date" id="progress-date" name="progress-date" required />
+    <label for="progress-Location">Location</label>
+    <textarea id="progress-Location" name="progress-Location" placeholder="Add sheet numbers for work completed" required></textarea>
 
-        <label for="progress-SAM">SAM ID</label>
-        <select id="progress-SAM" name="progress-SAM" required>
-          <option value="">Select one</option>
-     <optgroup label="Gascoyne">
-          <option value="K-6CVN-20">K-6CVN-20</option>
-          <option value="K-6DNH-20">K-6DNH-20</option>
-          <option value="K-6EXM-01">K-6EXM-01</option>
-     </optgroup>
-     <optgroup label="Goldfields-Esperance">
-          <option value="K-6CGD-20">K-6CGD-20</option>
-          <option value="K-6ESP-20">K-6ESP-20</option>
-          <option value="K-6ESP-21">K-6ESP-21</option>
-          <option value="K-6ESP-40">K-6ESP-40</option>
-          <option value="K-6HOP-01">K-6HOP-01</option>
-          <option value="K-6KAM-20">K-6KAM-20</option>
-     </optgroup>
-     <optgroup label="Great Southern">
-          <option value="K-6ALN-22">K-6ALN-22</option>
-          <option value="L-6ALN-05">L-6ALN-05</option>
-          <option value="L-6ALN-20">L-6ALN-20</option>
-          <option value="L-6ALN-21">L-6ALN-21</option>
-          <option value="L-6ALN-23">L-6ALN-23</option>
-          <option value="X-6ALN-05">X-6ALN-05</option>
-          <option value="K-6DNK-20">K-6DNK-20</option>
-          <option value="K-6KAT-20">K-6KAT-20</option>
-     </optgroup>
-     <optgroup label="Mid West">
-          <option value="K-6KLB-01">K-6KLB-01</option>
-          <option value="K-6LEA-20">K-6LEA-20</option>
-     </optgroup>
-     <optgroup label="Pilbara">
-          <option value="K-6NWM-01">K-6NWM-01</option>
-          <option value="K-6NWM-20">K-6NWM-20</option>
-          <option value="K-6PDO-20">K-6PDO-20</option>
-          <option value="K-6TPC-20">K-6TPC-20</option>
-          <option value="X-6TPC-20">K-6TPC-20</option>
-     </optgroup>
-     <optgroup label="South West">
-          <option value="K-6AUU-20">K-6AUU-20</option>
-          <option value="K-6BGT-20">K-6BGT-20</option>
-          <option value="X-6BGT-20">X-6BGT-20</option>
-          <option value="X-6COI-01">X-6COI-01</option>
-          <option value="K-6MJM-01">K-6MJM-01</option>
-     </optgroup>
-     <optgroup label="Wheatbelt">
-          <option value="K-6CND-20">K-6CND-20</option>
-          <option value="K-6NRG-20">K-6NRG-20</option>
-          <option value="K-6SCR-20">K-6SCR-20</option>
-     </optgroup>
-        </select>
-
-        <label for="progress-ADA">ADA ID</label>
-        <select id="progress-ADA" name="progress-ADA" required>
-          <option value="">Select one</option>
-          <option value="01" data-sams="K-6AUU-20,K-6BGT-20,K-6CGD-20,K-6CND-20,K-6CVN-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6KAT-20,K-6KLB-01,K-6LEA-20,K-6MJM-01,K-6NRG-20,K-6NWM-01,K-6NWM-20,K-6PDO-20,K-6SCR-20,L-6ALN-20,X-6BGT-20,X-6TPC-20">01</option>
-  <option value="02" data-sams="K-6AUU-20,K-6CGD-20,K-6CND-20,K-6CVN-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAT-20,K-6KLB-01,K-6LEA-20,K-6NRG-20,K-6NWM-20,K-6PDO-20,K-6SCR-20,K-6TPC-20,L-6ALN-20,L-6ALN-23,X-6BGT-20">02</option>
-  <option value="03" data-sams="K-6AUU-20,K-6BGT-20,K-6CND-20,K-6CVN-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6ESP-40,K-6EXM-01,K-6KAM-20,K-6KAT-20,K-6KLB-01,K-6LEA-20,K-6NRG-20,K-6NWM-01,K-6NWM-20,K-6PDO-20,K-6SCR-20,K-6TPC-20,L-6ALN-21">03</option>
-  <option value="04" data-sams="K-6ALN-22,K-6AUU-20,K-6BGT-20,K-6CND-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAM-20,K-6KLB-01,K-6LEA-20,K-6NWM-20,K-6PDO-20,K-6TPC-20,L-6ALN-21">04</option>
-  <option value="05" data-sams="K-6AUU-20,K-6BGT-20,K-6CND-20,K-6CVN-20,K-6DNH-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAM-20,K-6KLB-01,K-6LEA-20,K-6NWM-01,K-6TPC-20">05</option>
-  <option value="06" data-sams="K-6ALN-22,K-6AUU-20,K-6BGT-20,K-6CVN-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAT-20,K-6KLB-01,K-6LEA-20,K-6MJM-01,K-6TPC-20,L-6ALN-21,X-6COI-01">06</option>
-  <option value="07" data-sams="K-6BGT-20,K-6CVN-20,K-6DNH-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAM-20,K-6KLB-01,K-6LEA-20,K-6NRG-20,K-6TPC-20">07</option>
-  <option value="08" data-sams="K-6BGT-20,K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAM-20,K-6KAT-20,K-6KLB-01,K-6NRG-20,L-6ALN-05,X-6TPC-20">08</option>
-  <option value="09" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6HOP-01,K-6KAT-20,K-6KLB-01,L-6ALN-20,X-6TPC-20">09</option>
-  <option value="10" data-sams="K-6ALN-22,K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6HOP-01,K-6KAM-20,K-6KAT-20,K-6KLB-01,K-6NWM-01,L-6ALN-20">10</option>
-  <option value="11" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6KAM-20,K-6KAT-20,K-6KLB-01,K-6MJM-01,K-6NRG-20,K-6NWM-01,L-6ALN-21">11</option>
-  <option value="12" data-sams="K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6NRG-20,K-6NWM-01,L-6ALN-20">12</option>
-  <option value="13" data-sams="K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6NRG-20,K-6NWM-01,L-6ALN-05">13</option>
-  <option value="14" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6EXM-01,K-6NWM-01,L-6ALN-20,L-6ALN-21,X-6ALN-05">14</option>
-  <option value="15" data-sams="K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6HOP-01,L-6ALN-23">15</option>
-  <option value="16" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6HOP-01,K-6MJM-01,K-6NWM-01,L-6ALN-21,X-6COI-01">16</option>
-  <option value="17" data-sams="K-6ALN-22,K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6HOP-01,K-6MJM-01,K-6NWM-01,L-6ALN-23,X-6COI-01">17</option>
-  <option value="18" data-sams="K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6HOP-01,K-6MJM-01,K-6NWM-01">18</option>
-  <option value="19" data-sams="K-6CVN-20,K-6ESP-20,K-6ESP-21,K-6NWM-01,X-6COI-01">19</option>
-  <option value="20" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-20,K-6ESP-21,K-6NWM-01">20</option>
-  <option value="21" data-sams="K-6CVN-20,K-6DNK-20,K-6ESP-21,K-6NWM-01">21</option>
-  <option value="22" data-sams="K-6CVN-20,K-6DNK-20,K-6MJM-01,K-6NWM-01">22</option>
-  <option value="23" data-sams="K-6DNK-20,X-6COI-01">23</option>
-  <option value="24" data-sams="K-6CVN-20,K-6DNK-20">24</option>
-  <option value="25" data-sams="L-6ALN-20,L-6ALN-23">25</option>
-  <option value="27" data-sams="L-6ALN-20">27</option>
-  <option value="28" data-sams="L-6ALN-20">28</option>
-  <option value="30" data-sams="L-6ALN-20">30</option>
-  <option value="31" data-sams="L-6ALN-20">31</option>
-        </select>
-
-        <label for="progress-Pit-Note-ID">Pit Note ID:</label>
-        <input type="text" id="progress-Pit-Note-ID" name="progress-Pit-Note-ID" required />
-
-        <label for="progress-comments">Any additional comments? Escalate SHEQ concerns to your Genus FCM/Supervisor or SHEQ Advisor</label>
-        <textarea id="progress-comments" name="progress-comments" placeholder="If there are no additional comments, there is no need to enter anything here"></textarea>
-                
-	<label>
-	<input type="checkbox" id="progress-completed" name="progress-completed" />
-	Pit Cleanout Completed
-	</label>
-
-        <div class="form-footer">
-          <button type="button" class="btn-back" onclick="confirmReset('progress')">Back</button>
-          <button type="submit" id="progress-submit-btn">Submit Progress Register</button>
+    <fieldset>
+      <legend>Select the activity type(s) your company has completed today:</legend>
+      <div class="discipline-checkbox-group">
+        <!-- Plough - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-plough-progress" name="discipline[]" value="plough-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-plough-progress">Plough</label>
         </div>
-      </form>
+
+        <div id="discipline-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="plough-progress-qty">Metres Completed:</label>
+          <input type="number" id="plough-progress-qty" name="plough-progress-qty" min="0" step="0.1" />
+        </div>
+
+        <!-- Bore - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-bore-progress" name="discipline[]" value="bore-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-bore-progress">Bore</label>
+        </div>
+
+        <div id="discipline-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <!-- PE63 Size -->
+          <div>
+            <input type="checkbox" id="discipline-bore-pe63-progress" name="bore-size[]" value="bore-pe63-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-bore-pe63-progress">Size - PE63</label>
+          </div>
+
+          <div id="discipline-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            <label for="bore-pe63-progress-qty">Metres Completed:</label>
+            <input type="number" id="bore-pe63-progress-qty" name="bore-pe63-progress-qty" min="0" step="0.1" />
+          </div>
+
+          <!-- PE110 Size -->
+          <div>
+            <input type="checkbox" id="discipline-bore-pe110-progress" name="bore-size[]" value="bore-pe110-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-bore-pe110-progress">Size - PE110</label>
+          </div>
+
+          <div id="discipline-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            <label for="bore-pe110-progress-qty">Metres Completed:</label>
+            <input type="number" id="bore-pe110-progress-qty" name="bore-pe110-progress-qty" min="0" step="0.1" />
+          </div>
+        </div>
+
+        <!-- Trench - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-trench-progress" name="discipline[]" value="trench-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-trench-progress">Trench</label>
+        </div>
+
+        <div id="discipline-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <!-- P50 Size -->
+          <div>
+            <input type="checkbox" id="discipline-trench-p50-progress" name="trench-size[]" value="trench-p50-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-trench-p50-progress">Size - P50</label>
+          </div>
+
+          <div id="discipline-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            <label for="trench-p50-progress-qty">Metres Completed:</label>
+            <input type="number" id="trench-p50-progress-qty" name="trench-p50-progress-qty" min="0" step="0.1" />
+          </div>
+
+          <!-- P100 Size -->
+          <div>
+            <input type="checkbox" id="discipline-trench-p100-progress" name="trench-size[]" value="trench-p100-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-trench-p100-progress">Size - P100</label>
+          </div>
+
+          <div id="discipline-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            <label for="trench-p100-progress-qty">Metres Completed:</label>
+            <input type="number" id="trench-p100-progress-qty" name="trench-p100-progress-qty" min="0" step="0.1" />
+          </div>
+        </div>
+
+        <!-- Hauling - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-hauling-progress" name="discipline[]" value="hauling-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-hauling-progress">Hauling (per cable)</label>
+        </div>
+
+        <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="hauling-progress-qty">Metres Completed:</label>
+          <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
+        </div>
+
+        <!-- RRP - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-rrp-progress" name="discipline[]" value="rrp-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rrp-progress">Rod, Rope & Prove</label>
+        </div>
+
+        <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rrp-progress-qty">Metres Completed:</label>
+          <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
+        </div>
+
+        <!-- Blockages - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-blockages-progress" name="discipline[]" value="blockages-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-blockages-progress">Blockages</label>
+        </div>
+
+        <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="blockages-progress-qty">Blockages Cleared:</label>
+          <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
+        </div>
+
+        <!-- Pits - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-pit-progress" name="discipline[]" value="pit-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-pit-progress">Pits</label>
+        </div>
+
+        <div id="discipline-pit-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          
+          <!-- New Pits -->
+          <div>
+            <input type="checkbox" id="discipline-pit-new-progress" name="pit-type[]" value="pit-new-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-pit-new-progress">New</label>
+          </div>
+
+          <div id="discipline-pit-new-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            
+            <!-- C8 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-c8-progress" name="pit-new-size[]" value="pit-new-c8-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-c8-progress">C8</label>
+            </div>
+
+            <div id="discipline-pit-new-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-c8-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-c8-progress-qty" name="pit-new-c8-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- C9 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-c9-progress" name="pit-new-size[]" value="pit-new-c9-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-c9-progress">C9</label>
+            </div>
+
+            <div id="discipline-pit-new-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-c9-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-c9-progress-qty" name="pit-new-c9-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- Manhole Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-manhole-progress" name="pit-new-size[]" value="pit-new-manhole-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-manhole-progress">Manhole</label>
+            </div>
+
+            <div id="discipline-pit-new-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-manhole-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-manhole-progress-qty" name="pit-new-manhole-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P5 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-p5-progress" name="pit-new-size[]" value="pit-new-p5-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-p5-progress">P5</label>
+            </div>
+
+            <div id="discipline-pit-new-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-p5-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-p5-progress-qty" name="pit-new-p5-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P6 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-p6-progress" name="pit-new-size[]" value="pit-new-p6-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-p6-progress">P6</label>
+            </div>
+
+            <div id="discipline-pit-new-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-p6-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-p6-progress-qty" name="pit-new-p6-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P8 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-p8-progress" name="pit-new-size[]" value="pit-new-p8-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-p8-progress">P8</label>
+            </div>
+
+            <div id="discipline-pit-new-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-p8-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-p8-progress-qty" name="pit-new-p8-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P9 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-new-p9-progress" name="pit-new-size[]" value="pit-new-p9-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-new-p9-progress">P9</label>
+            </div>
+
+            <div id="discipline-pit-new-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-new-p9-progress-qty">Quantity:</label>
+              <input type="number" id="pit-new-p9-progress-qty" name="pit-new-p9-progress-qty" min="0" step="1" />
+            </div>
+          </div>
+
+          <!-- Replaced Pits -->
+          <div>
+            <input type="checkbox" id="discipline-pit-replaced-progress" name="pit-type[]" value="pit-replaced-progress" onchange="toggleDisciplineFields(this)" />
+            <label for="discipline-pit-replaced-progress">Replaced With</label>
+          </div>
+
+          <div id="discipline-pit-replaced-progress-fields" class="discipline-conditional-fields" style="display: none;">
+            
+            <!-- C8 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-c8-progress" name="pit-replaced-size[]" value="pit-replaced-c8-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-c8-progress">C8</label>
+            </div>
+
+            <div id="discipline-pit-replaced-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-c8-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-c8-progress-qty" name="pit-replaced-c8-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- C9 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-c9-progress" name="pit-replaced-size[]" value="pit-replaced-c9-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-c9-progress">C9</label>
+            </div>
+
+            <div id="discipline-pit-replaced-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-c9-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-c9-progress-qty" name="pit-replaced-c9-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- Manhole Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-manhole-progress" name="pit-replaced-size[]" value="pit-replaced-manhole-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-manhole-progress">Manhole</label>
+            </div>
+
+            <div id="discipline-pit-replaced-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-manhole-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-manhole-progress-qty" name="pit-replaced-manhole-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P5 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-p5-progress" name="pit-replaced-size[]" value="pit-replaced-p5-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-p5-progress">P5</label>
+            </div>
+
+            <div id="discipline-pit-replaced-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-p5-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-p5-progress-qty" name="pit-replaced-p5-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P6 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-p6-progress" name="pit-replaced-size[]" value="pit-replaced-p6-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-p6-progress">P6</label>
+            </div>
+
+            <div id="discipline-pit-replaced-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-p6-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-p6-progress-qty" name="pit-replaced-p6-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P8 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-p8-progress" name="pit-replaced-size[]" value="pit-replaced-p8-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-p8-progress">P8</label>
+            </div>
+
+            <div id="discipline-pit-replaced-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-p8-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-p8-progress-qty" name="pit-replaced-p8-progress-qty" min="0" step="1" />
+            </div>
+
+            <!-- P9 Size -->
+            <div>
+              <input type="checkbox" id="discipline-pit-replaced-p9-progress" name="pit-replaced-size[]" value="pit-replaced-p9-progress" onchange="toggleDisciplineFields(this)" />
+              <label for="discipline-pit-replaced-p9-progress">P9</label>
+            </div>
+
+            <div id="discipline-pit-replaced-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+              <label for="pit-replaced-p9-progress-qty">Quantity:</label>
+              <input type="number" id="pit-replaced-p9-progress-qty" name="pit-replaced-p9-progress-qty" min="0" step="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Marker Posts - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-markers-progress" name="discipline[]" value="markers-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-markers-progress">Marker Posts</label>
+        </div>
+
+        <div id="discipline-markers-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="markers-progress-qty">Number Installed:</label>
+          <input type="number" id="markers-progress-qty" name="markers-progress-qty" min="0" step="1" />
+        </div>
+      </div>
+    </fieldset>
+
+    <label for="progress-comments">Additional Comments? Escalate SHEQ concerns to your Genus FCM/Supervisor or SHEQ Advisor</label>
+    <textarea id="progress-comments" name="progress-comments" placeholder="Track required actions in MyOsh with SHEQ support"></textarea>
+
+    <div class="form-footer">
+      <button type="button" class="btn-back" onclick="confirmReset('progress')">Back</button>
+      <button type="submit">Submit Progress Register</button>
     </div>
-  </main>
+  </form>
+</div>
+</main>
 
   <script>
-function confirmReset(formType) {
+  function confirmReset(formType) {
             const isConfirmed = confirm("Are you sure you want to reset this form and return to the form selection screen?");
             
             if (isConfirmed) {
@@ -852,10 +1042,10 @@ function confirmReset(formType) {
         }
 
 function toggleDisciplineFields(checkbox) {
-    const discipline = checkbox.value.toLowerCase().replace(/\s/g, '-').replace(/--+/g, '-'); // Handle multiple dashes
+    const discipline = checkbox.value.toLowerCase().replace(/\s/g, '-').replace(/--+/g, '-');
     const fieldsDiv = document.getElementById(`discipline-${discipline}-fields`);
     
-    if (fieldsDiv) { // Add null check
+    if (fieldsDiv) {
         if (checkbox.checked) {
             fieldsDiv.style.display = 'block';
             // Set crews to 1 by default, if empty
@@ -865,16 +1055,43 @@ function toggleDisciplineFields(checkbox) {
             }
         } else {
             fieldsDiv.style.display = 'none';
+            
             // Clear values when unchecked
             const crewsInput = document.getElementById(`${discipline}-crews`);
             if (crewsInput) {
                 crewsInput.value = '';
             }
+            
+            // Clear quantity fields
+            const qtyInput = document.getElementById(`${discipline}-qty`);
+            if (qtyInput) {
+                qtyInput.value = '';
+            }
+            
+            // Uncheck and clear all sub-checkboxes within this discipline
+            const subCheckboxes = fieldsDiv.querySelectorAll('input[type="checkbox"]');
+            subCheckboxes.forEach(subCheckbox => {
+                if (subCheckbox.checked) {
+                    subCheckbox.checked = false;
+                    // Recursively call toggleDisciplineFields to hide nested fields
+                    toggleDisciplineFields(subCheckbox);
+                }
+            });
+            
+            // Clear all number inputs within this discipline
+            const numberInputs = fieldsDiv.querySelectorAll('input[type="number"]');
+            numberInputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Clear day checkboxes
             const daysCheckboxes = fieldsDiv.querySelectorAll(`input[name="${discipline}-days[]"]`);
-            daysCheckboxes.forEach(dayCheckbox => (dayCheckbox.checked = false));
+            daysCheckboxes.forEach(dayCheckbox => {
+                dayCheckbox.checked = false;
+            });
             
             const daysError = document.getElementById(`${discipline}-days-error`);
-            if (daysError) { // Add null check
+            if (daysError) {
                 daysError.style.display = 'none';
             }
         }
@@ -895,77 +1112,17 @@ function toggleDisciplineFields(checkbox) {
   }
 }
 
-    function toggleSurfaceTypeField() {
-      const surfacetypeSelect = document.getElementById("reinstatement-surface-type");
-      const surfacetypeField = document.getElementById("reinstatement-surface-type-notification-field");
-      const surfacetypeInput = document.getElementById("reinstatement-surface-type-other");
-
-      if (surfacetypeSelect.value === "Other") {
-        surfacetypeField.style.display = "block";
-        surfacetypeInput.required = true;
-      } else {
-        surfacetypeField.style.display = "none";
-        surfacetypeInput.required = false;
-        surfacetypeInput.value = ""; // clear the input if hidden
-      }
-    }
-
-    function toggleLocationTypeField() {
-      const locationtypeSelect = document.getElementById("reinstatement-location-type");
-      const locationtypeField = document.getElementById("reinstatement-location-type-notification-field");
-      const locationtypeInput = document.getElementById("reinstatement-location-type-other");
-
-      if (locationtypeSelect.value === "Other") {
-        locationtypeField.style.display = "block";
-        locationtypeInput.required = true;
-      } else {
-       locationtypeField.style.display = "none";
-        locationtypeInput.required = false;
-        locationtypeInput.value = ""; // clear the input if hidden
-      }
-    }
-
-    function toggleMaterialTypeField() {
-      const materialtypeSelect = document.getElementById("reinstatement-material-type");
-      const materialtypeField = document.getElementById("reinstatement-material-type-notification-field");
-      const materialtypeInput = document.getElementById("reinstatement-material-type-other");
-
-      if (materialtypeSelect.value === "Other") {
-        materialtypeField.style.display = "block";
-        materialtypeInput.required = true;
-      } else {
-       materialtypeField.style.display = "none";
-        materialtypeInput.required = false;
-        materialtypeInput.value = ""; // clear the input if hidden
-      }
-    }
-
-    function togglePermMaterialTypeField() {
-      const permmaterialtypeSelect = document.getElementById("reinstatement-perm-material");
-      const permmaterialtypeField = document.getElementById("reinstatement-perm-material-notification-field");
-      const permmaterialtypeInput = document.getElementById("reinstatement-perm-material-other");
-
-      if (permmaterialtypeSelect.value === "Other") {
-        permmaterialtypeField.style.display = "block";
-        permmaterialtypeInput.required = true;
-      } else {
-       permmaterialtypeField.style.display = "none";
-        permmaterialtypeInput.required = false;
-        permmaterialtypeInput.value = ""; // clear the input if hidden
-      }
-    }
-
 // Airtable configuration - Replace with your actual values
         const AIRTABLE_CONFIG = {
             bog: {
-                baseId: 'appegmSLEvbJSkRvd',
+                baseId: 'appShjxvRISfybCBh',
                 tableId: 'BOG',
-                apiKey: 'patHwUeS1KtSAEshe.fbfaf206fded22941c87960a4a9b5c2992b69a3a86c8e23592d550905a42d936'
+                apiKey: 'patVqRGBoFq3KitRq.eb7e0b3d1bfb79012bdd2e2ea39e0cf3ebf73adc748d9311714d5c6863fa21cd'
             },
             progress: {
-                baseId: 'appegmSLEvbJSkRvd',
+                baseId: 'appShjxvRISfybCBh',
                 tableId: 'Progress Register',
-                apiKey: 'patHwUeS1KtSAEshe.fbfaf206fded22941c87960a4a9b5c2992b69a3a86c8e23592d550905a42d936'
+                apiKey: 'patVqRGBoFq3KitRq.eb7e0b3d1bfb79012bdd2e2ea39e0cf3ebf73adc748d9311714d5c6863fa21cd'
             }
         };
 
@@ -989,6 +1146,59 @@ function toggleDisciplineFields(checkbox) {
             });
         }
 
+        // Helper: Upload multiple files to Airtable and return attachment array
+async function uploadFilesToAirtable(files, fieldName) {
+    const attachments = [];
+
+    for (const file of files) {
+        try {
+            // Step 1: Request upload URL from Airtable
+            const uploadRequest = await fetch(
+                `https://api.airtable.com/v0/meta/attachments/upload`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${config.apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        filename: file.name,
+                        size: file.size,
+                        type: file.type
+                    })
+                }
+            );
+
+            if (!uploadRequest.ok) throw new Error("Failed to get upload URL");
+
+            const { url, id } = await uploadRequest.json();
+
+            // Step 2: Upload the actual file to the pre-signed URL
+            await fetch(url, {
+                method: 'PUT',
+                body: file,
+                headers: {
+                    'Content-Type': file.type
+                }
+            });
+
+            // Step 3: Return attachment object for Airtable record
+            attachments.push({
+                url: url.split('?')[0], // remove query params
+                filename: file.name,
+                size: file.size,
+                type: file.type
+            });
+
+        } catch (err) {
+            console.error(`Error uploading ${file.name} for ${fieldName}:`, err);
+            alert(`Failed to upload ${file.name}. Continuing without it.`);
+        }
+    }
+
+    return attachments;
+}
+
 
     // Set default date to today in Western Standard Time (Australia/Perth)
     function setDefaultDate() {
@@ -1006,79 +1216,12 @@ function toggleDisciplineFields(checkbox) {
       if (bogDateField) bogDateField.value = todayString;
       if (progressDateField) progressDateField.value = todayString;
     }
-
-
-
-// Function to calculate and update week commencing/ending dates
-function updateForecastWeekDates() {
-  const today = new Date();
-  const cutoffDate = new Date('2025-12-25T23:59:59'); // Use hard-coded dates up to end of 25 Dec 2025
-
-  let weekCommencing;
-  let weekEnding;
-
-  if (today <= cutoffDate) {
-    // Temporary override during Christmas/New Year shutdown period
-    weekCommencing = new Date('2026-01-05T00:00:00'); // Monday 5 January 2026
-    weekEnding = new Date('2026-01-11T23:59:59');     // Sunday 11 January 2026
-  } else {
-    // Original dynamic calculation (active from 26 Dec 2025 onwards)
-    const dayOfWeek = today.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
-    const currentHour = today.getHours(); // 0–23
-
-    let daysToAddForCommencing = 0;
-    switch (dayOfWeek) {
-      case 1: // Monday
-        daysToAddForCommencing = 7;
-        break;
-      case 2: // Tuesday
-        daysToAddForCommencing = 6;
-        break;
-      case 3: // Wednesday
-        daysToAddForCommencing = 5;
-        break;
-      case 4: // Thursday
-        if (currentHour < 17) { // Before 5 PM
-          daysToAddForCommencing = 4;
-        } else { // 5 PM or later
-          daysToAddForCommencing = 11;
-        }
-        break;
-      case 5: // Friday
-        daysToAddForCommencing = 10;
-        break;
-      case 6: // Saturday
-        daysToAddForCommencing = 9;
-        break;
-      case 0: // Sunday
-        daysToAddForCommencing = 8;
-        break;
-    }
-
-    weekCommencing = new Date(today);
-    weekCommencing.setDate(today.getDate() + daysToAddForCommencing);
-    weekCommencing.setHours(0, 0, 0, 0); // Start of day
-
-    weekEnding = new Date(weekCommencing);
-    weekEnding.setDate(weekCommencing.getDate() + 6); // 6 days later = Sunday
-  }
-
-  // Format as Australian DD/MM/YYYY
-  const formatter = new Intl.DateTimeFormat('en-AU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
-
-  document.getElementById('weekCommencingDate').innerText = formatter.format(weekCommencing);
-  document.getElementById('weekEndingDate').innerText = formatter.format(weekEnding);
-}
 </script>
 
 <script>
-// Add this function to handle forecast form validation
-function validateForecastForm() {
-    const form = document.getElementById('forecast-form');
+// Add this function to handle progress form validation
+function validateProgressForm() {
+    const form = document.getElementById('progress-form');
     let isValid = true;
     
     // Clear previous error styling
@@ -1106,22 +1249,57 @@ function validateForecastForm() {
     disciplineCheckboxes.forEach(checkbox => {
         const discipline = checkbox.value.toLowerCase().replace(/[^a-z]/g, '-');
         
-        // Check crews field
-        const crewsInput = document.getElementById(`${discipline}-crews`);
-        if (crewsInput && (!crewsInput.value || crewsInput.value < 1)) {
-            crewsInput.classList.add('error-field');
-            isValid = false;
+        // For Plough - only validate metres completed
+        if (discipline === 'plough-progress') {
+            const qtyInput = document.getElementById('plough-progress-qty');
+            if (qtyInput && (!qtyInput.value || qtyInput.value <= 0)) {
+                qtyInput.classList.add('error-field');
+                isValid = false;
+            }
         }
-        
-        // Check days selection
-        const daysCheckboxes = form.querySelectorAll(`input[name="${discipline}-days[]"]:checked`);
-        const daysError = document.getElementById(`${discipline}-days-error`);
-        
-        if (daysCheckboxes.length === 0) {
-            daysError.style.display = 'block';
-            isValid = false;
-        } else {
-            daysError.style.display = 'none';
+        // For Bore - validate that at least one size is selected
+        else if (discipline === 'bore-progress') {
+            const boreSizeCheckboxes = form.querySelectorAll('input[name="bore-size[]"]:checked');
+            
+            if (boreSizeCheckboxes.length === 0) {
+                // Show error that at least one bore size must be selected
+                isValid = false;
+            } else {
+                // Validate metres for each selected bore size
+                boreSizeCheckboxes.forEach(sizeCheckbox => {
+                    const sizeValue = sizeCheckbox.value.toLowerCase(); // 'pe63' or 'pe110'
+                    const qtyInput = document.getElementById(`bore-${sizeValue}-progress-qty`);
+                    
+                    if (qtyInput && (!qtyInput.value || qtyInput.value <= 0)) {
+                        qtyInput.classList.add('error-field');
+                        isValid = false;
+                    }
+                });
+            }
+        }
+        // For other disciplines with crews and days
+        else {
+            // Check crews field
+            const crewsInput = document.getElementById(`${discipline}-crews`);
+            if (crewsInput && (!crewsInput.value || crewsInput.value < 1)) {
+                crewsInput.classList.add('error-field');
+                isValid = false;
+            }
+            
+            // Check days selection
+            const daysCheckboxes = form.querySelectorAll(`input[name="${discipline}-days[]"]:checked`);
+            const daysError = document.getElementById(`${discipline}-days-error`);
+            
+            if (daysCheckboxes.length === 0) {
+                if (daysError) {
+                    daysError.style.display = 'block';
+                }
+                isValid = false;
+            } else {
+                if (daysError) {
+                    daysError.style.display = 'none';
+                }
+            }
         }
     });
     
@@ -1305,137 +1483,83 @@ function hideMessage() {
     document.addEventListener('DOMContentLoaded', function() {
       setDefaultDate();
 
-document.getElementById('forecast-form').addEventListener('submit', async function(e) {
+       // Add event listeners for each form
+document.getElementById('bog-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Validate the form (assuming validateForecastForm() works correctly)
-    if (!validateForecastForm()) {
-        return;
-    }
+    // Your existing validation
+    if (!validateBogForm()) return;
 
-    // Collect selected disciplines (e.g., ["Scoping", "Blockages"])
-    const selectedDisciplines = Array.from(document.querySelectorAll('input[name="discipline[]"]:checked'))
-                                     .map(checkbox => checkbox.value);
-
-    // Collect main form data (general fields)
-    const formData = {
-        'Week Commencing': document.getElementById('weekCommencingDate').textContent,
-        'Week Ending': document.getElementById('weekEndingDate').textContent,
-        'Construction Partner Company Name': document.getElementById('forecast-company-name').value,
-        'SAM': document.getElementById('forecast-sam-id').value,
-        'DP Field Supervisor': document.getElementById('forecast-Genus-FCM').value,
-        'Construction Partner Technician Name': document.getElementById('forecast-site-contact-hidden').value,
-        'Construction Partner Technician Number missing 0': document.getElementById('forecast-onsite-crew-lead-mobile').value,
-        'Construction Partner Technician Email': document.getElementById('forecast-onsite-crew-lead-email').value,
-        'Enable ID (if applicable)': document.getElementById('forecast-onsite-crew-lead-EnableID').value,
-        'Build Phase': document.getElementById('forecast-build-phase').value,
-        'Activity raw': selectedDisciplines
-        // These fields are computed in Airtable and should not be sent directly.
-    };
-
-    // Collect and merge discipline-specific data (crews and days)
-    // This loop ensures that crew numbers and selected days are added ONLY for
-    // the disciplines that have been selected by the user.
-    selectedDisciplines.forEach(discipline => {
-        const disciplineKey = discipline.toLowerCase().replace(/\s/g, '-'); // e.g., "scoping", "blockages"
-
-        // Get crew number value
-        const crewsInput = document.getElementById(`${disciplineKey}-crews`);
-        if (crewsInput) {
-            formData[`${discipline}-Crews`] = crewsInput.value;
-        } else {
-            formData[`${discipline}-Crews`] = '';
-        }
-
-        // Get selected days for this discipline
-        const daysCheckboxes = document.querySelectorAll(`input[name="${disciplineKey}-days[]"]:checked`);
-        const days = Array.from(daysCheckboxes).map(checkbox => checkbox.value);
-        formData[`${discipline}-Workdays`] = days.join(', '); // Format as comma-separated string
-    });
+    // Disable button during submission
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
 
     try {
-        const response = await submitToAirtable('forecast', formData);
-        const result = await response.json();
+        // Step 1: Collect all non-file form data
+        const checkedSWMS = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
+            .map(cb => cb.value);
 
-        if (!response.ok) {
-            console.error('Airtable error:', result);
-            alert(`Submission failed: ${result.error?.message || 'Unknown error'}`);
-            return;
+        const formData = {
+            "Project": document.getElementById('bog-project')?.value || "Kalgoorlie - Wallaroo",
+            "Form Date": document.getElementById('bog-date').value,
+            "Is Mobilisation Day": document.getElementById('bog-mob').checked,
+            "Is Demobilisation Day": document.getElementById('bog-demob').checked,
+            "Company Name": document.getElementById('bog-company-name').value,
+            "Discipline": document.getElementById('bog-discipline').value,
+            "Estimated Start Time2": document.getElementById('bog-estimated-start-timestamp').value || "",
+            "Estimated Finish Time2": document.getElementById('bog-estimated-finish-timestamp').value || "",
+            "Location / Grid Reference": document.getElementById('bog-Location').value,
+            "Onsite Crew Lead Name": document.getElementById('bog-site-contact-hidden').value,
+            "Onsite Crew Lead Mobile": document.getElementById('bog-onsite-crew-lead-mobile').value,
+            "Onsite Crew Lead Email": document.getElementById('bog-onsite-crew-lead-email').value || "",
+            "Number of People at Location": Number(document.getElementById('bog-Number-of-People-at-Location').value) || 0,
+            "Selected Crew Members": document.getElementById('bog-crews-names-hidden').value,
+            "Genus FCM": document.getElementById('bog-Genus-FCM').value,
+            "SWMS Selected": checkedSWMS,
+            "JHA Signed & Inducted": document.getElementById('bog-jha-uploaded').checked,
+            "ACM Disturbance Planned?": document.getElementById('bog-ACM').value,
+            "ACM Notification Received & on JHA": document.getElementById('bog-acm-yes')?.value === "Yes",
+            "Gas Monitoring & Trench Guards in Place": document.getElementById('bog-guards-checkbox')?.checked || false,
+            "Excavation Work Today": document.getElementById('bog-excavation-checkbox')?.checked || false,
+            "Additional Comments": document.getElementById('bog-comments').value || "",
+            "Number of Crew vehicles": Number(document.getElementById('bog-crew-vehicles')?.value) || 0,
+            "Number of heavy vehicles": Number(document.getElementById('bog-heavy-vehicles')?.value) || 0,
+        };
+
+        // Step 2: Handle file uploads (JHA Photos + Site Setup Photos)
+        const jhaFiles = document.getElementById('bog-jha-photos').files;
+        const siteFiles = document.getElementById('bog-site-photos').files;
+
+        const jhaAttachments = await uploadFilesToAirtable(jhaFiles, "JHA Photos");
+        const siteAttachments = await uploadFilesToAirtable(siteFiles, "Site Setup Photos");
+
+        if (jhaAttachments.length > 0) {
+            formData["JHA Photos"] = jhaAttachments;
+        }
+        if (siteAttachments.length > 0) {
+            formData["Site Setup Photos"] = siteAttachments;
         }
 
-        showSuccessMessage();
-    } catch (error) {
-        console.error('Error submitting Forecast form:', error);
-        alert('Error submitting form. Please try again.');
-    }
-});
-      
-       // Add event listeners for each form
-        document.getElementById('bog-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-const submitButton = this.querySelector('button[type="submit"]');
-if (submitButton) {
-  submitButton.disabled = true;
-  submitButton.textContent = "Submitting...";
-  setTimeout(() => {
-    submitButton.disabled = false;
-    submitButton.textContent = "Submit BOG";
-  }, 7000);
-}
-
-  // Initial check in case checkbox is pre-checked
-  // toggleBogSiteLocation();
-
-            // Collect checkbox values for SWMS
-            const checkedSWMS = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
-                                     .map(checkbox => checkbox.value);
-            
-            // Collect form data - modify this based on your actual form fields
-            const formData = {
-                'Date On-Site': document.getElementById('bog-date').value,
-		'Mobilisation': document.getElementById('bog-mob').checked,
-		'De-Mobilisation': document.getElementById('bog-demob').checked,
-                'First Site Location2': document.getElementById('bog-site-location').value,
-                'Estimated Start Time2': document.getElementById('bog-estimated-start-timestamp').value,
-                'Estimated Finish Time2': document.getElementById('bog-estimated-finish-timestamp').value,
-                'Onsite Crew Lead': document.getElementById('bog-site-contact-hidden').value,
-                'Onsite Crew Lead Mobile_original': document.getElementById('bog-onsite-crew-lead-mobile').value,
-                'Construction Partner Technician Email': document.getElementById('bog-onsite-crew-lead-email').value,
-                'Enable ID (if applicable)': document.getElementById('bog-onsite-crew-lead-EnableID').value,
-                'Your Company Name': document.getElementById('bog-company-name').value,
-                'Discipline': document.getElementById('bog-discipline').value,
-                'Number of People at Location?': document.getElementById('bog-Number-of-People-at-Location').value,
-                'List Names of Workers in field.': document.getElementById('bog-crews-names-hidden').value,
-                'SAM ID (WA)': document.getElementById('bog-SAM').value,
-                'ADA ID': document.getElementById('bog-ADA').value,
-                'Your Genus FCM': document.getElementById('bog-Genus-FCM').value,
-                'I confirm all workers have been inducted and have signed onto the JHA.': document.getElementById('bog-jha-uploaded').checked,
-                'Discipline with task Specific SWMS (SWMS-SHEQ-CMS-0011 Site Establishment, SWMS-SHEQ-CMS-0001 Access to Pits & Manholes - required on all sites, SWMS-SHEQ-CMS-0006 Asbestos (ACM) required for all ACM sites)': checkedSWMS,
-                'Will you be disturbing/modifying any possible ACM while onsite?': document.getElementById('bog-ACM').value,
-                'Genus ACM Removal Notification Code and placed on your Construction JHA.': document.getElementById('bog-acm-yes').value,
-                'Ensure Telstra guards are fully locked around all open manholes.  Calibrated gas detector required for spot sampling manhole access and ongoing monitoring.': document.getElementById('bog-guards').checked,
-                'Excavation work- have you follow the 5Ps  with a competent locator onsite?': document.getElementById('bog-excavation').checked,
-                'Additional Comments': document.getElementById('bog-comments').value,
-                'Number of Crew vehicles': document.getElementById('bog-crew-vehicles')?.value || '',
-                'Number of heavy vehicles': document.getElementById('bog-heavy-vehicles')?.value || '',
-            };
-            
-            try {
-                const response = await submitToAirtable('bog', formData);
+        // Step 3: Submit the record (including attachments)
+        const response = await submitToAirtable('bog', formData);
 const result = await response.json();
 
 if (!response.ok) {
-  console.error('Airtable error:', result);
-  alert(`Submission failed: ${result.error?.message || 'Unknown error'}`);
-  return;
+    throw new Error(result.error?.message || 'Airtable submission failed');
 }
 
-showSuccessMessage();
-            } catch (error) {
-                console.error('Error submitting BOG form:', error);
-                alert('Error submitting form. Please try again.');
-            }
-        });
+        showSuccessMessage();
+        console.log("BOG record created successfully with photos");
+
+    } catch (err) {
+        console.error("Submission error:", err);
+        alert("Error submitting form: " + err.message);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit BOG";
+    }
+});
 
         document.getElementById('progress-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1564,1043 +1688,16 @@ forms.forEach(id => {
       });
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EKPtC5W7fRHgiONVPIyGsVU7Ti_xjBc&libraries=places&callback=initAutocomplete" async defer></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  let existingRecordId = null;
-
-  const apiBase = 'https://airtable-api.richard-ociepa.workers.dev';
-  const tableKey = 'progress'; // must match your worker tableMap key
-
-  const fieldMap = {
-    "Contractor": "company-name",
-    "Submission Date": "date",
-    "SAM": "SAM",
-    "ADA ID": "ADA",
-    "Pit Note ID": "Pit-Note-ID",
-    "Additional Comments": "comments",
-    "Pit Cleanout Completed": "completed"
-  };
-
-  // Initialize form - lock completion checkbox by default
-  function initializeForm() {
-    document.getElementById('progress-completed').disabled = true;
-  }
-
-  async function searchprogressNoteID() {
-    const noteId = document.getElementById('progress-note-id-search').value.trim();
-    const summary = document.getElementById('progress-note-summary');
-    summary.textContent = '';
-
-    if (!noteId) {
-      alert('Please enter a Note ID to search.');
-      return;
-    }
-
-    try {
-      const response = await fetch(`${apiBase}/lookup/${tableKey}?noteId=${encodeURIComponent(noteId)}`);
-      const contentType = response.headers.get('Content-Type') || '';
-
-      if (!response.ok) {
-        const message = contentType.includes('application/json')
-          ? (await response.json()).error || 'Lookup failed'
-          : await response.text();
-        throw new Error(message);
-      }
-
-      const data = await response.json();
-      const submitBtn = document.getElementById('progress-submit-btn');
-
-      if (!data.record) {
-        summary.textContent = 'No record found. A new entry will need to be created.';
-        existingRecordId = null;
-        unlockForm();
-        // Keep completion checkbox locked when no record exists
-        document.getElementById('progress-completed').disabled = true;
-        submitBtn.textContent = 'Submit';
-      } else {
-        summary.textContent = 'Record found. All fields locked except completion checkbox.';
-        existingRecordId = data.record.id;
-        populateAndLockForm(data.record.fields);
-        submitBtn.textContent = 'Update';
-      }
-    } catch (err) {
-      console.error(err);
-      summary.textContent = 'Error looking up Note ID.';
-    }
-  }
-
-  function populateAndLockForm(fields) {
-    // First, unlock all fields to reset state
-    unlockForm();
-    
-    for (const [key, value] of Object.entries(fields)) {
-      const mappedId = fieldMap[key] || key;
-      const el = document.getElementById(`progress-${mappedId}`);
-      if (!el) continue;
-
-      // Populate the field
-      if (el.type === 'checkbox') {
-        el.checked = value === true;
-      } else if (el.tagName === 'SELECT') {
-        // Add missing option if not present
-        let optionExists = [...el.options].some(opt => opt.value === value);
-        if (!optionExists && value !== undefined && value !== null) {
-          const newOption = document.createElement('option');
-          newOption.value = value;
-          newOption.textContent = value;
-          newOption.selected = true;
-          el.appendChild(newOption);
-        }
-        el.value = value;
-      } else {
-        el.value = value;
-      }
-
-      // Lock populated fields, leave non-populated fields unlocked
-      if (value !== undefined && value !== null && value !== '') {
-        el.disabled = true;
-        // Remove required attribute for populated fields and store it
-        if (el.hasAttribute('required')) {
-          el.removeAttribute('required');
-          el.setAttribute('data-was-required', 'true');
-        }
-      } else {
-        // Restore required attribute for non-populated fields if it was previously required
-        if (el.hasAttribute('data-was-required')) {
-          el.setAttribute('required', '');
-          el.removeAttribute('data-was-required');
-        }
-      }
-    }
-
-    // Special handling for completion checkbox - always unlock it for existing records
-    const completedCheckbox = document.getElementById('progress-completed');
-    if (completedCheckbox) {
-      completedCheckbox.disabled = false;
-    }
-  }
-
-  function unlockForm() {
-    document.querySelectorAll('#progress-form input, #progress-form select, #progress-form textarea')
-      .forEach(el => {
-        el.disabled = false;
-        // Restore required attribute if it was previously required
-        if (el.hasAttribute('data-was-required')) {
-          el.setAttribute('required', '');
-          el.removeAttribute('data-was-required');
-        }
-      });
-  }
-
-  // Initialize form on page load
-  initializeForm();
-  
-  document.getElementById('progress-search-btn').addEventListener('click', searchprogressNoteID);
-
-  document.getElementById('progress-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const noteIdEntered = document.getElementById('progress-note-id-search').value.trim();
-    const completedCheckbox = document.getElementById('progress-completed');
-    const isChecked = completedCheckbox.checked;
-
-    console.log('Form submission debug:', {
-      noteIdEntered,
-      existingRecordId,
-      isChecked
-    });
-
-    // For new records, get Note ID from the form field instead of search field
-    let noteIdForSubmission = noteIdEntered;
-    if (!existingRecordId) {
-      const noteIdFormField = document.getElementById('progress-Pit-Note-ID');
-      if (noteIdFormField && noteIdFormField.value.trim()) {
-        noteIdForSubmission = noteIdFormField.value.trim();
-      }
-    }
-
-    if (!noteIdForSubmission) {
-      alert('Note ID is required.');
-      return;
-    }
-
-    // If there's an existing record, require completion checkbox
-    if (existingRecordId && !isChecked) {
-      alert("Please check 'Pit Cleanout Completed' before submitting.");
-      return;
-    }
-
-    // Collect form data
-    let data = {};
-
-    // For existing records, only update completion status and add timestamp
-    if (existingRecordId) {
-      data["Pit Cleanout Completed"] = true;
-      
-      // Add timestamp
-      const now = new Date();
-      const perthTime = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Perth" }));
-      const year = perthTime.getFullYear();
-      const month = String(perthTime.getMonth() + 1).padStart(2, '0');
-      const day = String(perthTime.getDate()).padStart(2, '0');
-      data["Pit Cleanout Datestamp"] = `${year}-${month}-${day}`;
-
-      // Collect data from unlocked fields
-      for (const [airtableField, formFieldId] of Object.entries(fieldMap)) {
-        const el = document.getElementById(`progress-${formFieldId}`);
-        if (el && !el.disabled && airtableField !== "Pit Cleanout Completed") {
-          if (el.type === 'checkbox') {
-            data[airtableField] = el.checked;
-          } else if (el.value && el.value.trim() !== '') {
-            data[airtableField] = el.value.trim();
-          }
-        }
-      }
-    } else {
-      // For new records, collect all form data
-      for (const [airtableField, formFieldId] of Object.entries(fieldMap)) {
-        const el = document.getElementById(`progress-${formFieldId}`);
-        if (el) {
-          if (el.type === 'checkbox') {
-            data[airtableField] = el.checked;
-          } else if (el.value && el.value.trim() !== '') {
-            data[airtableField] = el.value.trim();
-          }
-        }
-      }
-
-      // Set Note ID from form field or search field for new records
-      data["Pit Note ID"] = noteIdForSubmission;
-
-      // Add submission date for new records
-      const now = new Date();
-      const perthTime = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Perth" }));
-      const year = perthTime.getFullYear();
-      const month = String(perthTime.getMonth() + 1).padStart(2, '0');
-      const day = String(perthTime.getDate()).padStart(2, '0');
-      data["Submission Date"] = `${year}-${month}-${day}`;
-    }
-
-    console.log('Submission data:', data);
-
-    try {
-      let url, method;
-      
-      if (existingRecordId) {
-        // Update existing record
-        url = `${apiBase}/update/${tableKey}/${existingRecordId}`;
-        method = 'PATCH';
-      } else {
-        // Create new record
-        url = `${apiBase}/create/${tableKey}`;
-        method = 'POST';
-      }
-      
-      console.log('Request URL:', url);
-      console.log('Request method:', method);
-      
-      const response = await fetch(url, {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fields: data })
-      });
-
-      const result = await response.json();
-      console.log('Response:', result);
-      
-      if (!response.ok) {
-        alert(`${existingRecordId ? 'Update' : 'Submission'} failed: ${result.error || 'Unknown error'}`);
-        return;
-      }
-
-      alert(`Record ${existingRecordId ? 'updated' : 'created'} successfully!`);
-      location.reload();
-
-    } catch (err) {
-      console.error('Submission error:', err);
-      alert(`There was an error ${existingRecordId ? 'updating' : 'creating'} the record.`);
-    }
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  let existingRecordId = null;
-
-  const apiBase = 'https://airtable-api.richard-ociepa.workers.dev';
-  const tableKey = 'reinstatement'; // must match your worker tableMap key
-
-  const fieldMap = {
-    "Temp Reinstatement Date": "date",
-    "Your Name": "site-contact",
-    "Address": "address",
-    "SAM": "SAM",
-    "ADA ID": "ADA",
-    "Pit Note ID": "Pit-Note-ID",
-    "Asset Type": "asset-type",
-    "Surface Type": "surface-type",
-    "Surface Type - Other": "surface-type-other",
-    "Location Type": "location-type",
-    "Location Type - Other": "location-type-other",
-    "Temp Material Used": "material-type",
-    "Temp Material Used - Other": "material-type-other",
-    "Temp Contractor Company Name": "company-name",
-    "Proposed Permanent Reinstatement Date": "perm-date",
-    "Permanent Reinstatement Area (m2)": "area",
-    "Full Panel Required?": "panel",
-    "Permanent Material": "perm-material",
-    "Permanent Material - Other": "perm-material-other",
-    "Permanent Contractor Company Name": "perm-company-name",
-    "Non-Standard Reinstatement": "Non-Standard",
-    "Additional Comments": "comments",
-    "Permanent Reinstatement Completed": "completed"
-  };
-
-  // Function to collect all form data
-  function collectFormData() {
-    const data = {};
-    
-    // Iterate through all form fields
-    for (const [airtableField, elementId] of Object.entries(fieldMap)) {
-      const element = document.getElementById(`reinstatement-${elementId}`);
-      if (!element) continue;
-
-      let value;
-      if (element.type === 'checkbox') {
-        value = element.checked;
-      } else if (element.value && element.value.trim() !== '') {
-        value = element.value.trim();
-      }
-
-      // Only add non-empty values to data
-      if (value !== undefined && value !== null && value !== '') {
-        data[airtableField] = value;
-      }
-    }
-
-    return data;
-  }
-
-  async function searchreinstatementNoteID() {
-    const noteId = document.getElementById('reinstatement-note-id-search').value.trim();
-    const summary = document.getElementById('reinstatement-note-summary');
-    summary.textContent = '';
-
-    if (!noteId) {
-      alert('Please enter a Note ID to search.');
-      return;
-    }
-
-    try {
-      const response = await fetch(`${apiBase}/lookup/${tableKey}?noteId=${encodeURIComponent(noteId)}`);
-      const contentType = response.headers.get('Content-Type') || '';
-
-      if (!response.ok) {
-        const message = contentType.includes('application/json')
-          ? (await response.json()).error || 'Lookup failed'
-          : await response.text();
-        throw new Error(message);
-      }
-
-      const data = await response.json();
-      const submitBtn = document.getElementById('reinstatement-submit-btn');
-
-      if (!data.record) {
-        summary.textContent = 'No record found. A new entry will need to be created.';
-        existingRecordId = null;
-        unlockForm();
-        // Lock the specific completion fields for new records
-        lockCompletionFields();
-        submitBtn.textContent = 'Submit';
-      } else {
-        summary.textContent = 'Record found. Populated fields locked, unpopulated fields available for editing.';
-        existingRecordId = data.record.id;
-        populateAndLockForm(data.record.fields);
-        submitBtn.textContent = 'Update';
-      }
-    } catch (err) {
-      console.error(err);
-      summary.textContent = 'Error looking up Note ID.';
-    }
-  }
-
-function populateAndLockForm(fields) {
-  const completionFields = [
-    'reinstatement-perm-material',
-    'reinstatement-perm-material-other',
-    'reinstatement-perm-company-name',
-    'reinstatement-Non-Standard',
-    'reinstatement-comments',
-    'reinstatement-completed'
-  ];
-
-  // First unlock all fields
-  unlockForm();
-
-  for (const [key, value] of Object.entries(fields)) {
-    const mappedId = fieldMap[key] || key;
-    const el = document.getElementById(`reinstatement-${mappedId}`);
-    if (!el) continue;
-
-    if (el.type === 'checkbox') {
-      el.checked = value === true;
-    } else if (el.tagName === 'SELECT') {
-      // Add missing option if not present
-      let optionExists = [...el.options].some(opt => opt.value === value);
-      if (!optionExists && value !== undefined && value !== null) {
-        const newOption = document.createElement('option');
-        newOption.value = value;
-        newOption.textContent = value;
-        newOption.selected = true;
-        el.appendChild(newOption);
-      }
-      el.value = value;
-    } else {
-      el.value = value;
-    }
-
-    // If field has a value (is populated), lock it
-    if (value !== undefined && value !== null && value !== '') {
-      el.disabled = true;
-    }
-  }
-}
-
-  function unlockForm() {
-    document.querySelectorAll('#reinstatement-form input, #reinstatement-form select, #reinstatement-form textarea')
-      .forEach(el => el.disabled = false);
-  }
-
-  function lockCompletionFields() {
-    const completionFields = [
-      'reinstatement-perm-material',
-      'reinstatement-perm-material-other',
-      'reinstatement-perm-company-name',
-      'reinstatement-Non-Standard',
-      'reinstatement-comments',
-      'reinstatement-completed'
-    ];
-    
-    completionFields.forEach(fieldId => {
-      const element = document.getElementById(fieldId);
-      if (element) {
-        element.disabled = true;
-      }
-    });
-  }
-
-  // Initially lock the completion fields
-  lockCompletionFields();
-
-  document.getElementById('reinstatement-search-btn').addEventListener('click', searchreinstatementNoteID);
-
-  document.getElementById('reinstatement-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-const submitButton = document.getElementById('reinstatement-submit-btn');
-  if (submitButton) {
-    submitButton.disabled = true;
-    submitButton.textContent = "Submitting...";
-    setTimeout(() => {
-      submitButton.disabled = false;
-      submitButton.textContent = "Submit Reinstatement";
-    }, 7000);
-  }
-
-    const noteIdEntered = document.getElementById('reinstatement-note-id-search').value.trim();
-    const completedCheckbox = document.getElementById('reinstatement-completed');
-    const isChecked = completedCheckbox.checked;
-
-    // Handle existing record updates
-    if (existingRecordId) {
-      if (!noteIdEntered) return;
-
-      if (!isChecked) {
-        alert("Please check 'Permanent Reinstatement Completed' before submitting.");
-        return;
-      }
-
-      // Collect all the unlocked completion fields for update
-      let data = {
-        "Permanent Reinstatement Completed": isChecked
-      };
-
-      // Add timestamp only if checkbox is checked
-      if (isChecked) {
-        const now = new Date();
-        const perthTime = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Perth" }));
-        const year = perthTime.getFullYear();
-        const month = String(perthTime.getMonth() + 1).padStart(2, '0');
-        const day = String(perthTime.getDate()).padStart(2, '0');
-        data["Permanent Reinstatement Timestamp"] = `${year}-${month}-${day}`;
-      }
-
-      // Collect other completion field values
-      const permMaterial = document.getElementById('reinstatement-perm-material').value;
-      const permMaterialOther = document.getElementById('reinstatement-perm-material-other').value;
-      const permCompanyName = document.getElementById('reinstatement-perm-company-name').value;
-      const nonStandard = document.getElementById('reinstatement-Non-Standard').checked;
-      const comments = document.getElementById('reinstatement-comments').value;
-
-      if (permMaterial) data["Permanent Material"] = permMaterial;
-      if (permMaterialOther) data["Permanent Material - Other"] = permMaterialOther;
-      if (permCompanyName) data["Permanent Contractor Company Name"] = permCompanyName;
-      data["Non-Standard Reinstatement"] = nonStandard;
-      if (comments) data["Additional Comments"] = comments;
-
-      try {
-        const url = `${apiBase}/update/${tableKey}/${existingRecordId}`;
-        const response = await fetch(url, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fields: data })
-        });
-
-        const result = await response.json();
-        if (!response.ok) {
-          alert('Update failed.');
-          return;
-        }
-
-        alert('Record updated successfully!');
-        location.reload();
-
-      } catch (err) {
-        console.error(err);
-        alert('There was an error updating the record.');
-      }
-    } 
-    // Handle new record creation
-    else {
-      // Collect all form data for new record
-      const data = collectFormData();
-
-      try {
-        const url = `${apiBase}/create/${tableKey}`;
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fields: data })
-        });
-
-        const result = await response.json();
-        if (!response.ok) {
-          alert('Failed to create new record.');
-          console.error('Create error:', result);
-          return;
-        }
-
-        alert('New record created successfully!');
-        location.reload();
-
-      } catch (err) {
-        console.error(err);
-        alert('There was an error creating the record.');
-      }
-    }
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  function generateTimeOptions(selectId) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-
-    for (let hour = 0; hour < 24; hour++) {
-      for (let min = 0; min < 60; min += 30) {
-        const hourStr = hour.toString().padStart(2, '0');
-        const minStr = min.toString().padStart(2, '0');
-        const time24 = `${hourStr}:${minStr}`; // 24-hour format for value
-
-        // Convert to 12-hour format for display
-        let displayHour = hour % 12;
-        displayHour = displayHour === 0 ? 12 : displayHour;
-        const ampm = hour < 12 ? 'AM' : 'PM';
-        const displayStr = `${displayHour}:${minStr} ${ampm}`;
-
-        const option = document.createElement('option');
-        option.value = time24;       // 24-hour format value
-        option.textContent = displayStr; // 12-hour format display
-        select.appendChild(option);
-      }
-    }
-  }
-
-  generateTimeOptions('bog-estimated-start-time');
-  generateTimeOptions('bog-estimated-finish-time');
-
-  function updateBogTimestamps() {
-    const dateEl = document.getElementById('bog-date');
-    const startEl = document.getElementById('bog-estimated-start-time');
-    const finishEl = document.getElementById('bog-estimated-finish-time');
-    const outStart = document.getElementById('bog-estimated-start-timestamp');
-    const outFinish = document.getElementById('bog-estimated-finish-timestamp');
-
-    if (dateEl && startEl && finishEl && outStart && outFinish) {
-      const date = dateEl.value;
-      const start = startEl.value;
-      const finish = finishEl.value;
-      if (date && start && finish) {
-        outStart.value = date + 'T' + start + ':00';
-        outFinish.value = date + 'T' + finish + ':00';
-      }
-    }
-  }
-
-  document.getElementById('bog-estimated-start-time')?.addEventListener('change', updateBogTimestamps);
-  document.getElementById('bog-estimated-finish-time')?.addEventListener('change', updateBogTimestamps);
-  document.getElementById('bog-date')?.addEventListener('change', updateBogTimestamps);
-  document.getElementById('bog-form')?.addEventListener('submit', updateBogTimestamps);
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const crewNumberInput = document.getElementById("bog-Number-of-People-at-Location");
-  const crewNamesTextarea = document.getElementById("bog-crews-names");
-  
-  // Check if elements exist
-  if (!crewNumberInput || !crewNamesTextarea) {
-    return;
-  }
-  
-  // Create validation message element
-  const validationMessage = document.createElement("div");
-  validationMessage.id = "bog-crews-names-validation";
-  validationMessage.style.color = "red";
-  validationMessage.style.fontSize = "14px";
-  validationMessage.style.marginTop = "5px";
-  validationMessage.style.display = "none";
-  
-  // Insert message element after the textarea
-  if (crewNamesTextarea.nextSibling) {
-    crewNamesTextarea.parentNode.insertBefore(validationMessage, crewNamesTextarea.nextSibling);
-  } else {
-    crewNamesTextarea.parentNode.appendChild(validationMessage);
-  }
-  
-  // Function to capitalize names properly
-  function capitalizeName(name) {
-    return name
-      .toLowerCase()
-      .split(' ')
-      .map(word => {
-        // Handle common prefixes and special cases
-        if (word.includes('-')) {
-          // Handle hyphenated names like "Mary-Jane"
-          return word.split('-').map(part => 
-            part.charAt(0).toUpperCase() + part.slice(1)
-          ).join('-');
-        } else if (word.includes("'")) {
-          // Handle names with apostrophes like "O'Connor"
-          return word.split("'").map((part, index) => {
-            if (index === 0) {
-              return part.charAt(0).toUpperCase() + part.slice(1);
-            } else {
-              // For parts after apostrophe, capitalize first letter
-              return part.charAt(0).toUpperCase() + part.slice(1);
-            }
-          }).join("'");
-        } else {
-          // Regular capitalization
-          return word.charAt(0).toUpperCase() + word.slice(1);
-        }
-      })
-      .join(' ');
-  }
-  
-  function normalizeAndValidateCrewNames(event = null) {
-    const expectedCount = parseInt(crewNumberInput.value, 10);
-    let namesRaw = crewNamesTextarea.value;
-    
-    // Clear previous validation
-    crewNamesTextarea.setCustomValidity("");
-    crewNamesTextarea.classList.remove("field-error-names");
-    validationMessage.style.display = "none";
-    validationMessage.textContent = "";
-    
-    // Only process if there's actual content
-    if (!namesRaw.trim()) {
-      return;
-    }
-    
-    // Split by comma, process each name
-    let nameEntries = namesRaw
-      .split(",")
-      .map(name => name.trim().replace(/\s+/g, " ")) // collapse internal spaces
-      .filter(name => name.length > 0); // remove empty entries
-    
-    // Only auto-capitalize and reformat on blur
-    if (event && event.type === 'blur') {
-      // Apply capitalization
-      nameEntries = nameEntries.map(name => capitalizeName(name));
-      // Update textarea with cleaned, normalized, and capitalized names
-      crewNamesTextarea.value = nameEntries.join(", ");
-    }
-    
-    const actualCount = nameEntries.length;
-    let validationErrors = [];
-    
-    // Check count mismatch
-    if (!isNaN(expectedCount) && expectedCount > 0 && expectedCount !== actualCount) {
-      validationErrors.push(`You entered ${actualCount} names but expected ${expectedCount}.`);
-    }
-    
-    // Check name format (First Last required)
-    const invalidNames = nameEntries.filter(name => {
-      const nameParts = name.trim().split(' ');
-      // Must have at least 2 parts (First Last)
-      return nameParts.length < 2 || nameParts.some(part => part.length === 0);
-    });
-    
-    if (invalidNames.length > 0) {
-      validationErrors.push(`Names must include both first and last name. Name format should be such as: John Smith, Jane Doe, Sam Lee. Check: ${invalidNames.join(', ')}`);
-    }
-    
-    // Apply validation if there are errors
-    if (validationErrors.length > 0) {
-      const fullMessage = validationErrors.join(' ');
-      crewNamesTextarea.setCustomValidity(fullMessage);
-      crewNamesTextarea.classList.add("field-error-names");
-      validationMessage.textContent = fullMessage;
-      validationMessage.style.display = "block";
-    }
-  }
-  
-  // Add event listeners
-  crewNumberInput.addEventListener("input", normalizeAndValidateCrewNames);
-  crewNamesTextarea.addEventListener("input", normalizeAndValidateCrewNames);
-  crewNamesTextarea.addEventListener("blur", normalizeAndValidateCrewNames);
-});
-</script>
-
-<script>
-function showBuildPhaseContent() {
-  const buildPhase = document.getElementById('forecast-build-phase').value;
-  const designContent = document.getElementById('design-content');
-  const constructionContent = document.getElementById('construction-content');
-
-  // Hide all content first
-  if (designContent) designContent.style.display = 'none';
-  if (constructionContent) constructionContent.style.display = 'none';
-
-  // Show relevant content based on selection
-  if (buildPhase === 'Design') {
-    if (designContent) designContent.style.display = 'block';
-  } else if (buildPhase === 'Construction') {
-    if (constructionContent) constructionContent.style.display = 'block';
-  }
-
-  // Reset all discipline checkboxes and fields
-  resetAllDisciplineFields();
-}
-
-function toggleDisciplineFields(checkbox) {
-  const disciplineValue = checkbox.value.toLowerCase().replace(/[^a-z]/g, '-');
-  const fieldsId = 'discipline-' + disciplineValue + '-fields';
-  const fields = document.getElementById(fieldsId);
-
-  if (fields) {
-    if (checkbox.checked) {
-      fields.style.display = 'block';
-    } else {
-      fields.style.display = 'none';
-      clearDisciplineFields(fieldsId);
-    }
-  }
-}
-
-function clearDisciplineFields(fieldsId) {
-  const fields = document.getElementById(fieldsId);
-  if (fields) {
-    const numberInputs = fields.querySelectorAll('input[type="number"]');
-    numberInputs.forEach(input => input.value = '');
-
-    const checkboxes = fields.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => checkbox.checked = false);
-
-    const errorMessages = fields.querySelectorAll('.discipline-days-error');
-    errorMessages.forEach(error => error.style.display = 'none');
-  }
-}
-
-function resetAllDisciplineFields() {
-  const disciplineCheckboxes = document.querySelectorAll('input[name="discipline[]"]');
-  disciplineCheckboxes.forEach(checkbox => {
-    checkbox.checked = false;
-    const disciplineValue = checkbox.value.toLowerCase().replace(/[^a-z]/g, '-');
-    const fieldsId = 'discipline-' + disciplineValue + '-fields';
-    const fields = document.getElementById(fieldsId);
-    if (fields) {
-      fields.style.display = 'none';
-      clearDisciplineFields(fieldsId);
-    }
-  });
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const mobCheckbox = document.getElementById("bog-mob");
-  const demobCheckbox = document.getElementById("bog-demob");
-  const bogForm = document.getElementById("bog-form");
-
-  const conditionalIds = [
-    "bog-estimated-start-time",
-    "bog-estimated-finish-time",
-    "bog-site-contact",
-    "bog-onsite-crew-lead-mobile",
-    "bog-onsite-crew-lead-email",
-    "bog-onsite-crew-lead-EnableID",
-    "bog-Genus-FCM",
-    "bog-ACM",
-    "bog-acm-yes",
-    "bog-guards",
-    "bog-excavation",
-    "bog-jha-uploaded",
-    "bog-comments"
-  ];
-
-  const additionalMobOnlyBlocks = [
-    "bog-ACM",
-    "bog-comments"
-  ];
-
-  const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
-  const crewNamesLabel = document.querySelector('label[for="bog-crews-names"]');
-  const enableIDField = document.getElementById("bog-onsite-crew-lead-EnableID");
-  const siteLocationLabel = document.querySelector('label[for="bog-site-location"]');
-
-  const crewVehiclesFieldId = "bog-crew-vehicles";
-  const crewVehiclesLabelId = "label-bog-crew-vehicles";
-  const heavyVehiclesFieldId = "bog-heavy-vehicles";
-  const heavyVehiclesLabelId = "label-bog-heavy-vehicles";
-
-  function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
-
-  function hideById(id, hide) {
-    const el = document.getElementById(id);
-    const label = document.querySelector(`label[for="${id}"]`);
-    if (el) {
-      el.style.display = hide ? "none" : "";
-      if (hide) {
-        el.removeAttribute("required");
-      } else if (
-  ["INPUT", "SELECT", "TEXTAREA"].includes(el.tagName) &&
-  id !== "bog-comments" &&
-  id !== "bog-onsite-crew-lead-EnableID"
-) {
-  el.setAttribute("required", "required");
-}
-    }
-    if (label) label.style.display = hide ? "none" : "";
-  }
-
-  function updateMobDemobState() {
-    const isMob = mobCheckbox.checked;
-    const isDemob = demobCheckbox.checked;
-
-    // Mutually exclusive toggle
-    if (isMob && isDemob) {
-      mobCheckbox.checked = false;
-      demobCheckbox.checked = false;
-      return updateMobDemobState();
-    }
-
-    // Hide/show conditionals (excluding bog-site-location now)
-    conditionalIds.forEach(id => hideById(id, isMob));
-    additionalMobOnlyBlocks.forEach(id => hideById(id, isMob));
-
-    // Handle bog-site-location separately - always show it
-    const siteLocationField = document.getElementById("bog-site-location");
-    if (siteLocationField) {
-      siteLocationField.style.display = "";
-      siteLocationField.setAttribute("required", "required");
-    }
-
-    // Update the label for bog-site-location
-    if (siteLocationLabel) {
-      if (isMob) {
-        siteLocationLabel.textContent = "Departure Address";
-      } else {
-        siteLocationLabel.textContent = "First Site Address";
-      }
-    }
-
-    const swmsSection = document.getElementById("bog-swms-section");
-    if (swmsSection) swmsSection.style.display = isMob ? "none" : "";
-
-    const swmsFieldset = document.getElementById("bog-swms-fieldset");
-    if (swmsFieldset) swmsFieldset.style.display = isMob ? "none" : "";
-
-    const hseReminder = Array.from(document.querySelectorAll("p")).find(p =>
-      p.textContent.includes("Construction JHA and Excavation permit process")
-    );
-    if (hseReminder) hseReminder.style.display = isMob ? "none" : "";
-
-    if (crewNumberLabel) {
-      crewNumberLabel.textContent = isMob
-        ? "Number of people mobilising today for this discipline in this SAM"
-        : isDemob
-        ? "Number of people de-mobilising today for this discipline in this SAM"
-        : "Number of People in Crew at Location";
-    }
-
-    if (crewNamesLabel) {
-      crewNamesLabel.textContent = isMob
-        ? "List Names of Workers Mobilising"
-        : isDemob
-        ? "List Names of Workers Demobilising"
-        : "List Names of Workers in Crew";
-    }
-
-    const vehicleLabelText = isMob
-      ? "Number of crew vehicles being mobilised"
-      : "Number of crew vehicles being de-mobilised";
-
-    const heavyVehicleLabelText = isMob
-      ? "Number of heavy vehicles being mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)"
-      : "Number of heavy vehicles being de-mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)";
-
-    // Remove old if exists
-    [crewVehiclesLabelId, crewVehiclesFieldId, heavyVehiclesLabelId, heavyVehiclesFieldId].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    });
-
-    if (isMob || isDemob) {
-      // --- Heavy Vehicles ---
-      const heavyLabel = document.createElement("label");
-      heavyLabel.id = heavyVehiclesLabelId;
-      heavyLabel.htmlFor = heavyVehiclesFieldId;
-      heavyLabel.textContent = heavyVehicleLabelText;
-
-      const heavyInput = document.createElement("input");
-      heavyInput.type = "number";
-      heavyInput.id = heavyVehiclesFieldId;
-      heavyInput.name = "Number of heavy vehicles";
-      heavyInput.step = "1";
-      heavyInput.required = true;
-
-      insertAfter(heavyLabel, enableIDField);
-      insertAfter(heavyInput, heavyLabel);
-
-      // --- Crew Vehicles ---
-      const crewLabel = document.createElement("label");
-      crewLabel.id = crewVehiclesLabelId;
-      crewLabel.htmlFor = crewVehiclesFieldId;
-      crewLabel.textContent = vehicleLabelText;
-
-      const crewInput = document.createElement("input");
-      crewInput.type = "number";
-      crewInput.id = crewVehiclesFieldId;
-      crewInput.name = "Number of Crew vehicles";
-      crewInput.step = "1";
-      crewInput.required = true;
-
-      insertAfter(crewLabel, heavyInput);
-      insertAfter(crewInput, crewLabel);
-    }
-  }
-
-  if (mobCheckbox && demobCheckbox) {
-    mobCheckbox.addEventListener("change", () => {
-      if (mobCheckbox.checked) demobCheckbox.checked = false;
-      updateMobDemobState();
-    });
-
-    demobCheckbox.addEventListener("change", () => {
-      if (demobCheckbox.checked) mobCheckbox.checked = false;
-      updateMobDemobState();
-    });
-
-    updateMobDemobState(); // Initial
-  } else {
-    console.warn("Mob/Demob checkboxes not found in the DOM.");
-  }
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const formTypes = ["pitlinkin", "bog", "reinstatement", "progress"]; // Add your form types here
-
-  formTypes.forEach(formType => {
-    const samSelect = document.getElementById(`${formType}-SAM`);
-    const adaSelect = document.getElementById(`${formType}-ADA`);
-
-    if (!samSelect || !adaSelect) return;
-
-    // Store original ADA options
-    const originalADAOptions = Array.from(adaSelect.options).map(opt => ({
-      value: opt.value,
-      text: opt.textContent,
-      sams: opt.getAttribute("data-sams")?.split(",") || [],
-    }));
-
-    samSelect.addEventListener("change", function () {
-      const selectedSAM = samSelect.value;
-
-      // Clear ADA options except first (placeholder)
-      adaSelect.innerHTML = "";
-      const defaultOption = document.createElement("option");
-      defaultOption.value = "";
-      defaultOption.textContent = "Select one";
-      adaSelect.appendChild(defaultOption);
-
-      // Filter and add matching ADA options
-      originalADAOptions.forEach(opt => {
-        if (opt.sams.includes(selectedSAM)) {
-          const option = document.createElement("option");
-          option.value = opt.value;
-          option.textContent = opt.text;
-          option.setAttribute("data-sams", opt.sams.join(","));
-          adaSelect.appendChild(option);
-        }
-      });
-    });
-  });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const targetForms = ['bog-form', 'progress-form'];
-
-  targetForms.forEach(formId => {
-    const form = document.getElementById(formId);
-    if (form) {
-      form.addEventListener("submit", function (event) {
-        const submitButton = form.querySelector('button[type="submit"]');
-        if (submitButton) {
-          submitButton.disabled = true;
-          submitButton.textContent = "Submitting...";
-          setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.textContent = "Submit";
-          }, 7000);
-        }
-      });
-    }
-  });
-});
-</script>
-
-<script>
+  <script>
 document.addEventListener("DOMContentLoaded", function () {
   const webAppUrl =
-    "https://script.google.com/macros/s/AKfycbyvuqOaLGTX27mWvzzDEhYLR1yXHpfP9Md3sT-aRnv_-_2pGpkZtANHjF67V-j5x8vf/exec";
+    "https://script.google.com/macros/s/AKfycbxTwTxPftHM_vTtyiAMz0m5TUJblS2PmcLAAOL2U0OLWx2gQqF7DaYM6aC3HZ8bIj1BcQ/exec";
 
   // Sections configuration
   const sections = [
     { crew: "bog-crews-names", lead: "bog-site-contact", multiCrew: true, companyField: "bog-company-name" },
-    { lead: "progress-site-contact", companyField: null },
+    { lead: "progress-site-contact", companyField: "progress-company-name" }
   ];
 
   async function fetchCrewNames(company) {
@@ -2688,5 +1785,60 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function generateTimeOptions(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+
+    for (let hour = 0; hour < 24; hour++) {
+      for (let min = 0; min < 60; min += 30) {
+        const hourStr = hour.toString().padStart(2, '0');
+        const minStr = min.toString().padStart(2, '0');
+        const time24 = `${hourStr}:${minStr}`; // 24-hour format for value
+
+        // Convert to 12-hour format for display
+        let displayHour = hour % 12;
+        displayHour = displayHour === 0 ? 12 : displayHour;
+        const ampm = hour < 12 ? 'AM' : 'PM';
+        const displayStr = `${displayHour}:${minStr} ${ampm}`;
+
+        const option = document.createElement('option');
+        option.value = time24;       // 24-hour format value
+        option.textContent = displayStr; // 12-hour format display
+        select.appendChild(option);
+      }
+    }
+  }
+
+  generateTimeOptions('bog-estimated-start-time');
+  generateTimeOptions('bog-estimated-finish-time');
+
+  function updateBogTimestamps() {
+    const dateEl = document.getElementById('bog-date');
+    const startEl = document.getElementById('bog-estimated-start-time');
+    const finishEl = document.getElementById('bog-estimated-finish-time');
+    const outStart = document.getElementById('bog-estimated-start-timestamp');
+    const outFinish = document.getElementById('bog-estimated-finish-timestamp');
+
+    if (dateEl && startEl && finishEl && outStart && outFinish) {
+      const date = dateEl.value;
+      const start = startEl.value;
+      const finish = finishEl.value;
+      if (date && start && finish) {
+        outStart.value = date + 'T' + start + ':00';
+        outFinish.value = date + 'T' + finish + ':00';
+      }
+    }
+  }
+
+  document.getElementById('bog-estimated-start-time')?.addEventListener('change', updateBogTimestamps);
+  document.getElementById('bog-estimated-finish-time')?.addEventListener('change', updateBogTimestamps);
+  document.getElementById('bog-date')?.addEventListener('change', updateBogTimestamps);
+  document.getElementById('bog-form')?.addEventListener('submit', updateBogTimestamps);
+});
+</script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EKPtC5W7fRHgiONVPIyGsVU7Ti_xjBc&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
