@@ -1382,11 +1382,9 @@ async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
 
             const result = await uploadRes.json();
 
+            // Airtable only accepts {url: "..."} format for attachments
             attachments.push({
-                url: result.url,
-                filename: result.filename,
-                size: result.size,
-                type: result.type
+                url: result.url
             });
 
             console.log(`Uploaded ${file.name} → ${result.url}`);
