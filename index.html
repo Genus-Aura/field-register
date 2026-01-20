@@ -1369,9 +1369,9 @@ async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    filename: file.name,
-                    contentType: file.type
-                })
+                filename: file.name,
+                contentType: file.type || "application/octet-stream"
+            })
             });
 
             if (!presignRes.ok) throw new Error(`Presign failed: ${presignRes.status}`);
@@ -1384,7 +1384,7 @@ async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
                 body: file,
                 headers: {
                     'Content-Type': file.type || 'application/octet-stream'
-                }
+                 }
             });
 
             if (!uploadRes.ok) throw new Error(`Upload failed: ${uploadRes.status}`);
