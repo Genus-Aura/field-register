@@ -1353,7 +1353,7 @@ async function submitToAirtable(formType, formData) {
   return res;
 }
 
-const PRESIGN_WORKER_URL = "bog-r2-presign.richard-ociepa.workers.dev"; // ← your Worker URL
+const PRESIGN_WORKER_URL = "https://bog-r2-presign.richard-ociepa.workers.dev"; // ← your Worker URL
 
 async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
     if (!files?.length) return [];
