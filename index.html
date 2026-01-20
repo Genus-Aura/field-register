@@ -728,10 +728,32 @@ textarea {
           <label for="discipline-plough-progress">Plough</label>
         </div>
 
-        <div id="discipline-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="plough-progress-qty">Metres Completed:</label>
-          <input type="number" id="plough-progress-qty" name="plough-progress-qty" min="0" step="0.1" />
-        </div>
+<div id="discipline-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
+  <label for="plough-progress-qty">Metres Completed:</label>
+  <input type="number" id="plough-progress-qty" name="plough-progress-qty" min="0" step="0.1" />
+
+  <div style="margin: 20px 0;">
+    <label for="plough-progress-cable-marking-photos">
+      Cable Marking Photos - Start and End of Day (GPS time/date enabled)
+      <br>
+      <small style="color: #666;">
+        Capture photos showing cable marking at start and end of day
+      </small>
+    </label>
+    <input 
+      type="file" 
+      id="plough-progress-cable-marking-photos" 
+      name="plough_progress_cable_marking_photos[]"
+      accept="image/*"
+      multiple
+      capture="environment"
+      style="margin-top: 10px; width: 100%; padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif;"
+    >
+    <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+      You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+  </div>
+</div>
 
         <!-- Bore - Progress -->
         <div>
@@ -1598,11 +1620,52 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Progress form submit
-  document.getElementById('progress-form')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    if (!validateProgressForm()) return;
-    alert('Progress form submission not yet implemented');
-  });
+document.getElementById('progress-form')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateProgressForm()) return;
+
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  try {
+    let data = {
+      "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
+      "Form Date": document.getElementById('progress-date')?.value || "",
+      "Company Name": document.getElementById('progress-company-name')?.value || "",
+      "Onsite Crew Lead Name": document.getElementById('progress-site-contact-hidden')?.value || "",
+      "Onsite Crew Lead Mobile": document.getElementById('progress-onsite-crew-lead-mobile')?.value || "",
+      "Location / Grid Reference": document.getElementById('progress-Location')?.value || "",
+      "Additional Comments": document.getElementById('progress-comments')?.value || ""
+    };
+
+    // Check if Plough discipline is selected
+    const ploughChecked = document.getElementById('discipline-plough-progress')?.checked;
+    if (ploughChecked) {
+      data["Plough Metres Completed"] = Number(document.getElementById('plough-progress-qty')?.value) || 0;
+
+      // Upload cable marking photos
+      btn.textContent = 'Uploading cable marking photos...';
+      const cableMarkingPhotos = await uploadFilesToAirtable(
+        document.getElementById('plough-progress-cable-marking-photos')?.files || [],
+        'progress',
+        'Plough Cable Marking Photos'
+      );
+      if (cableMarkingPhotos.length) data['Plough Cable Marking Photos'] = cableMarkingPhotos;
+    }
+
+    btn.textContent = 'Submitting...';
+    await submitToAirtable('progress', data);
+
+    showSuccessMessage();
+
+  } catch (err) {
+    console.error('Progress submission failed:', err);
+    alert('Submission failed: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit Progress Register';
+  }
 });
 </script>
 
