@@ -1353,7 +1353,7 @@ async function submitToAirtable(formType, formData) {
   return res;
 }
 
-const PRESIGN_WORKER_URL = "https://bog-r2-presign.richard-ociepa.workers.dev"; // ← your Worker URL
+const PRESIGN_WORKER_URL = "https://bog-r2-presign.richard-ociepa.workers.dev";
 
 async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
     if (!files?.length) return [];
@@ -1364,42 +1364,32 @@ async function uploadFilesToAirtable(files, formType, fieldName = 'Photos') {
 
     for (const file of files) {
         try {
-            // 1. Ask Worker for pre-signed PUT URL
-            const presignRes = await fetch(PRESIGN_WORKER_URL, {
+            // Create FormData with the file
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('filename', file.name);
+
+            // Upload directly to Worker
+            const uploadRes = await fetch(PRESIGN_WORKER_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                filename: file.name,
-                contentType: file.type || "application/octet-stream"
-            })
+                body: formData
             });
 
-            if (!presignRes.ok) throw new Error(`Presign failed: ${presignRes.status}`);
+            if (!uploadRes.ok) {
+                const errorText = await uploadRes.text();
+                throw new Error(`Upload failed: ${uploadRes.status} - ${errorText}`);
+            }
 
-            const { signedUrl } = await presignRes.json();
-
-            // 2. Upload file directly to R2 using the signed URL
-            const uploadRes = await fetch(signedUrl, {
-                method: 'PUT',
-                body: file,
-                headers: {
-                    'Content-Type': file.type || 'application/octet-stream'
-                 }
-            });
-
-            if (!uploadRes.ok) throw new Error(`Upload failed: ${uploadRes.status}`);
-
-            // 3. Construct public URL (adjust if you use custom domain)
-            const publicUrl = signedUrl.split('?')[0]; // R2 public URL without signature
+            const result = await uploadRes.json();
 
             attachments.push({
-                url: publicUrl,
-                filename: file.name,
-                size: file.size,
-                type: file.type
+                url: result.url,
+                filename: result.filename,
+                size: result.size,
+                type: result.type
             });
 
-            console.log(`Uploaded ${file.name} → ${publicUrl}`);
+            console.log(`Uploaded ${file.name} → ${result.url}`);
 
         } catch (err) {
             console.error(`Failed ${file.name} (${fieldName}):`, err);
