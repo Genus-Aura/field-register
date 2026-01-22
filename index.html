@@ -732,27 +732,25 @@ textarea {
   <label for="plough-progress-qty">Metres Completed:</label>
   <input type="number" id="plough-progress-qty" name="plough-progress-qty" min="0" step="0.1" />
 
-  <div style="margin: 20px 0;">
-    <label for="plough-progress-cable-marking-photos">
-      Cable Marking Photos - Start and End of Day (GPS time/date enabled)
-      <br>
-      <small style="color: #666;">
-        Capture photos showing cable marking at start and end of day
-      </small>
-    </label>
-    <input 
-      type="file" 
-      id="plough-progress-cable-marking-photos" 
-      name="plough_progress_cable_marking_photos[]"
-      accept="image/*"
-      multiple
-      capture="environment"
-      style="margin-top: 10px; width: 100%; padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif;"
-    >
-    <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-      You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-    </p>
-  </div>
+  <label for="plough-progress-cable-marking-photos" style="margin-top: 15px;">
+    Cable Marker Photos - Start and End of Day (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing cable markers at start and end of day
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="plough-progress-cable-marking-photos" 
+    name="plough_progress_cable_marking_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
 </div>
 
         <!-- Bore - Progress -->
@@ -771,6 +769,26 @@ textarea {
           <div id="discipline-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
             <label for="bore-pe63-progress-qty">Metres Completed:</label>
             <input type="number" id="bore-pe63-progress-qty" name="bore-pe63-progress-qty" min="0" step="0.1" />
+
+              <label for="bore-pe63-progress-photos" style="margin-top: 15px;">
+    Before and After - PE63 (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after boring section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="bore-pe63-progress-photos" 
+    name="bore_pe63_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
           </div>
 
           <!-- PE110 Size -->
@@ -782,6 +800,26 @@ textarea {
           <div id="discipline-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
             <label for="bore-pe110-progress-qty">Metres Completed:</label>
             <input type="number" id="bore-pe110-progress-qty" name="bore-pe110-progress-qty" min="0" step="0.1" />
+
+              <label for="bore-pe110-progress-photos" style="margin-top: 15px;">
+    Before and After - PE110 (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after boring section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="bore-pe110-progress-photos" 
+    name="bore_pe110_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
           </div>
         </div>
 
@@ -801,6 +839,26 @@ textarea {
           <div id="discipline-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
             <label for="trench-p50-progress-qty">Metres Completed:</label>
             <input type="number" id="trench-p50-progress-qty" name="trench-p50-progress-qty" min="0" step="0.1" />
+
+              <label for="trench-p50-progress-photos" style="margin-top: 15px;">
+    Before and After - P50 (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after trenching section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="trench-p50-progress-photos" 
+    name="trench_p50_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
           </div>
 
           <!-- P100 Size -->
@@ -812,6 +870,26 @@ textarea {
           <div id="discipline-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
             <label for="trench-p100-progress-qty">Metres Completed:</label>
             <input type="number" id="trench-p100-progress-qty" name="trench-p100-progress-qty" min="0" step="0.1" />
+
+              <label for="trench-p100-progress-photos" style="margin-top: 15px;">
+    Before and After - P100 (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after trenching section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="trench-p100-progress-photos" 
+    name="trench_p100_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
           </div>
         </div>
 
@@ -824,7 +902,27 @@ textarea {
         <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
           <label for="hauling-progress-qty">Metres Completed:</label>
           <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
-        </div>
+
+  <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">
+    Cable Marker Photos - Start and End hauled section (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing cable markers at start and end of hauled section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="hauling-progress-cable-marking-photos" 
+    name="hauling_progress_cable_marking_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
         <!-- RRP - Progress -->
         <div>
@@ -835,7 +933,27 @@ textarea {
         <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
           <label for="rrp-progress-qty">Metres Completed:</label>
           <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
-        </div>
+
+  <label for="rrp-progress-tag-photos" style="margin-top: 15px;">
+    RRP Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing mandrel and tagged rope in duct
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="rrp-progress-tag-photos" 
+    name="rrp_progress_tag_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
         <!-- Blockages - Progress -->
         <div>
@@ -846,7 +964,27 @@ textarea {
         <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
           <label for="blockages-progress-qty">Blockages Cleared:</label>
           <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
-        </div>
+
+  <label for="blockages-progress-tag-photos" style="margin-top: 15px;">
+    Duct Blockage Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing blockage location, exposed duct, repaired duct and rope in duct
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="blockages-progress-tag-photos" 
+    name="blockages_progress_tag_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
         <!-- Pits - Progress -->
         <div>
@@ -873,7 +1011,27 @@ textarea {
             <div id="discipline-pit-new-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-c8-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-c8-progress-qty" name="pit-new-c8-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-c8-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-c8-progress-photos" 
+    name="pit_new_c8_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- C9 Size -->
             <div>
@@ -884,7 +1042,27 @@ textarea {
             <div id="discipline-pit-new-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-c9-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-c9-progress-qty" name="pit-new-c9-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-c9-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-c9-progress-photos" 
+    name="pit_new_c9_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- Manhole Size -->
             <div>
@@ -895,7 +1073,27 @@ textarea {
             <div id="discipline-pit-new-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-manhole-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-manhole-progress-qty" name="pit-new-manhole-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-manhole-progress-photos" style="margin-top: 15px;">
+    New Manhole Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after manhole installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-manhole-progress-photos" 
+    name="pit_new_manhole_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- P5 Size -->
             <div>
@@ -906,7 +1104,27 @@ textarea {
             <div id="discipline-pit-new-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-p5-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-p5-progress-qty" name="pit-new-p5-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-p5-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-p5-progress-photos" 
+    name="pit_new_p5_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- P6 Size -->
             <div>
@@ -917,7 +1135,27 @@ textarea {
             <div id="discipline-pit-new-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-p6-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-p6-progress-qty" name="pit-new-p6-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-p6-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-p6-progress-photos" 
+    name="pit_new_p6_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- P8 Size -->
             <div>
@@ -928,7 +1166,27 @@ textarea {
             <div id="discipline-pit-new-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-p8-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-p8-progress-qty" name="pit-new-p8-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-p8-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-p8-progress-photos" 
+    name="pit_new_p8_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- P9 Size -->
             <div>
@@ -939,7 +1197,27 @@ textarea {
             <div id="discipline-pit-new-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-new-p9-progress-qty">Quantity:</label>
               <input type="number" id="pit-new-p9-progress-qty" name="pit-new-p9-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-new-p9-progress-photos" style="margin-top: 15px;">
+    New Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-new-p9-progress-photos" 
+    name="pit_new_p9_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
           </div>
 
           <!-- Replaced Pits -->
@@ -959,7 +1237,27 @@ textarea {
             <div id="discipline-pit-replaced-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-c8-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-c8-progress-qty" name="pit-replaced-c8-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-c8-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-c8-progress-photos" 
+    name="pit_replaced_c8_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
 
             <!-- C9 Size -->
             <div>
@@ -970,7 +1268,27 @@ textarea {
             <div id="discipline-pit-replaced-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-c9-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-c9-progress-qty" name="pit-replaced-c9-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-c9-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-c9-progress-photos" 
+    name="pit_replaced_c9_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
 
             <!-- Manhole Size -->
             <div>
@@ -981,7 +1299,27 @@ textarea {
             <div id="discipline-pit-replaced-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-manhole-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-manhole-progress-qty" name="pit-replaced-manhole-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-manhole-progress-photos" style="margin-top: 15px;">
+    Replaced Manhole Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after manhole installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-manhole-progress-photos" 
+    name="pit_replaced_manhole_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
 
             <!-- P5 Size -->
             <div>
@@ -992,7 +1330,27 @@ textarea {
             <div id="discipline-pit-replaced-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-p5-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-p5-progress-qty" name="pit-replaced-p5-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-p5-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-p5-progress-photos" 
+    name="pit_replaced_p5_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
 
             <!-- P6 Size -->
             <div>
@@ -1003,7 +1361,27 @@ textarea {
             <div id="discipline-pit-replaced-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-p6-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-p6-progress-qty" name="pit-replaced-p6-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-p6-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-p6-progress-photos" 
+    name="pit_replaced_p6_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
 
             <!-- P8 Size -->
             <div>
@@ -1014,7 +1392,27 @@ textarea {
             <div id="discipline-pit-replaced-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-p8-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-p8-progress-qty" name="pit-replaced-p8-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-p8-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-p8-progress-photos" 
+    name="pit_replaced_p8_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
 
             <!-- P9 Size -->
             <div>
@@ -1025,7 +1423,27 @@ textarea {
             <div id="discipline-pit-replaced-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
               <label for="pit-replaced-p9-progress-qty">Quantity:</label>
               <input type="number" id="pit-replaced-p9-progress-qty" name="pit-replaced-p9-progress-qty" min="0" step="1" />
-            </div>
+
+  <label for="pit-replaced-p9-progress-photos" style="margin-top: 15px;">
+    Replaced Pit Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after pit installation
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="pit-replaced-p9-progress-photos" 
+    name="pit_replaced_p9_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
           </div>
         </div>
 
@@ -1038,7 +1456,27 @@ textarea {
         <div id="discipline-markers-progress-fields" class="discipline-conditional-fields" style="display: none;">
           <label for="markers-progress-qty">Number Installed:</label>
           <input type="number" id="markers-progress-qty" name="markers-progress-qty" min="0" step="1" />
-        </div>
+
+  <label for="markers-progress-photos" style="margin-top: 15px;">
+    Marker Post installations (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing before and after marker post installs
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="markers-progress-photos" 
+    name="markers_progress_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+    </p>
+</div>
       </div>
     </fieldset>
 
@@ -1346,6 +1784,16 @@ const AIRTABLE_CONFIG = {
     baseId: 'appShjxvRISfybCBh',
     tableId: 'Progress Register',
     apiKey: 'patVqRGBoFq3KitRq.eb7e0b3d1bfb79012bdd2e2ea39e0cf3ebf73adc748d9311714d5c6863fa21cd'
+  },
+  progressRegister: {
+    baseId: 'appShjxvRISfybCBh',
+    tableId: 'Progress Register',
+    apiKey: 'patVqRGBoFq3KitRq.eb7e0b3d1bfb79012bdd2e2ea39e0cf3ebf73adc748d9311714d5c6863fa21cd'
+  },
+  progressActivities: {
+    baseId: 'appShjxvRISfybCBh',
+    tableId: 'Progress Activities',
+    apiKey: 'patVqRGBoFq3KitRq.eb7e0b3d1bfb79012bdd2e2ea39e0cf3ebf73adc748d9311714d5c6863fa21cd'
   }
 };
 
@@ -1629,7 +2077,8 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
   btn.textContent = 'Processing...';
 
   try {
-    let data = {
+    // Step 1: Create parent submission record
+    const submissionData = {
       "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
       "Form Date": document.getElementById('progress-date')?.value || "",
       "Company Name": document.getElementById('progress-company-name')?.value || "",
@@ -1639,23 +2088,394 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       "Additional Comments": document.getElementById('progress-comments')?.value || ""
     };
 
-    // Check if Plough discipline is selected
-    const ploughChecked = document.getElementById('discipline-plough-progress')?.checked;
-    if (ploughChecked) {
-      data["Plough Metres Completed"] = Number(document.getElementById('plough-progress-qty')?.value) || 0;
-
-      // Upload cable marking photos
-      btn.textContent = 'Uploading cable marking photos...';
-      const cableMarkingPhotos = await uploadFilesToAirtable(
-        document.getElementById('plough-progress-cable-marking-photos')?.files || [],
-        'progress',
-        'Plough Cable Marking Photos'
-      );
-      if (cableMarkingPhotos.length) data['Plough Cable Marking Photos'] = cableMarkingPhotos;
+    btn.textContent = 'Creating submission record...';
+    const submissionResponse = await submitToAirtable('progressSubmissions', submissionData);
+    const submissionResult = await submissionResponse.json();
+    
+    if (!submissionResponse.ok) {
+      throw new Error(submissionResult.error?.message || 'Failed to create submission');
     }
 
-    btn.textContent = 'Submitting...';
-    await submitToAirtable('progress', data);
+    const submissionId = submissionResult.records[0].id;
+    console.log('Created submission:', submissionId);
+
+    // Step 2: Collect all activities
+    const activities = [];
+
+    // Plough
+    if (document.getElementById('discipline-plough-progress')?.checked) {
+      btn.textContent = 'Uploading Plough photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('plough-progress-cable-marking-photos')?.files || [],
+        'progressActivities',
+        'Plough Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Plough",
+        "Quantity/Metres": Number(document.getElementById('plough-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Bore PE63
+    if (document.getElementById('discipline-bore-pe63-progress')?.checked) {
+      btn.textContent = 'Uploading Bore PE63 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('bore-pe63-progress-photos')?.files || [],
+        'progressActivities',
+        'Bore PE63 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Bore - PE63",
+        "Quantity/Metres": Number(document.getElementById('bore-pe63-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Bore PE110
+    if (document.getElementById('discipline-bore-pe110-progress')?.checked) {
+      btn.textContent = 'Uploading Bore PE110 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('bore-pe110-progress-photos')?.files || [],
+        'progressActivities',
+        'Bore PE110 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Bore - PE110",
+        "Quantity/Metres": Number(document.getElementById('bore-pe110-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Trench P50
+    if (document.getElementById('discipline-trench-p50-progress')?.checked) {
+      btn.textContent = 'Uploading Trench P50 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('trench-p50-progress-photos')?.files || [],
+        'progressActivities',
+        'Trench P50 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Trench - P50",
+        "Quantity/Metres": Number(document.getElementById('trench-p50-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Trench P100
+    if (document.getElementById('discipline-trench-p100-progress')?.checked) {
+      btn.textContent = 'Uploading Trench P100 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('trench-p100-progress-photos')?.files || [],
+        'progressActivities',
+        'Trench P100 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Trench - P100",
+        "Quantity/Metres": Number(document.getElementById('trench-p100-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Hauling
+    if (document.getElementById('discipline-hauling-progress')?.checked) {
+      btn.textContent = 'Uploading Hauling photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('hauling-progress-cable-marking-photos')?.files || [],
+        'progressActivities',
+        'Hauling Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Hauling",
+        "Quantity/Metres": Number(document.getElementById('hauling-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // RRP
+    if (document.getElementById('discipline-rrp-progress')?.checked) {
+      btn.textContent = 'Uploading RRP photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('rrp-progress-tag-photos')?.files || [],
+        'progressActivities',
+        'RRP Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "RRP (Rod, Rope & Prove)",
+        "Quantity/Metres": Number(document.getElementById('rrp-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Blockages
+    if (document.getElementById('discipline-blockages-progress')?.checked) {
+      btn.textContent = 'Uploading Blockages photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('blockages-progress-tag-photos')?.files || [],
+        'progressActivities',
+        'Blockages Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Blockages",
+        "Quantity/Metres": Number(document.getElementById('blockages-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - C8
+    if (document.getElementById('discipline-pit-new-c8-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit C8 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-c8-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit C8 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - C8",
+        "Quantity/Metres": Number(document.getElementById('pit-new-c8-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - C9
+    if (document.getElementById('discipline-pit-new-c9-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit C9 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-c9-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit C9 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - C9",
+        "Quantity/Metres": Number(document.getElementById('pit-new-c9-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - Manhole
+    if (document.getElementById('discipline-pit-new-manhole-progress')?.checked) {
+      btn.textContent = 'Uploading New Manhole photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-manhole-progress-photos')?.files || [],
+        'progressActivities',
+        'New Manhole Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - Manhole",
+        "Quantity/Metres": Number(document.getElementById('pit-new-manhole-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - P5
+    if (document.getElementById('discipline-pit-new-p5-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit P5 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-p5-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit P5 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - P5",
+        "Quantity/Metres": Number(document.getElementById('pit-new-p5-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - P6
+    if (document.getElementById('discipline-pit-new-p6-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit P6 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-p6-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit P6 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - P6",
+        "Quantity/Metres": Number(document.getElementById('pit-new-p6-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - P8
+    if (document.getElementById('discipline-pit-new-p8-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit P8 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-p8-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit P8 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - P8",
+        "Quantity/Metres": Number(document.getElementById('pit-new-p8-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // New Pits - P9
+    if (document.getElementById('discipline-pit-new-p9-progress')?.checked) {
+      btn.textContent = 'Uploading New Pit P9 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-new-p9-progress-photos')?.files || [],
+        'progressActivities',
+        'New Pit P9 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - New - P9",
+        "Quantity/Metres": Number(document.getElementById('pit-new-p9-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - C8
+    if (document.getElementById('discipline-pit-replaced-c8-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit C8 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-c8-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit C8 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - C8",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-c8-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - C9
+    if (document.getElementById('discipline-pit-replaced-c9-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit C9 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-c9-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit C9 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - C9",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-c9-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - Manhole
+    if (document.getElementById('discipline-pit-replaced-manhole-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Manhole photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-manhole-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Manhole Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - Manhole",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-manhole-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - P5
+    if (document.getElementById('discipline-pit-replaced-p5-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit P5 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-p5-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit P5 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - P5",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-p5-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - P6
+    if (document.getElementById('discipline-pit-replaced-p6-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit P6 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-p6-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit P6 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - P6",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-p6-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - P8
+    if (document.getElementById('discipline-pit-replaced-p8-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit P8 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-p8-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit P8 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - P8",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-p8-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Replaced Pits - P9
+    if (document.getElementById('discipline-pit-replaced-p9-progress')?.checked) {
+      btn.textContent = 'Uploading Replaced Pit P9 photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('pit-replaced-p9-progress-photos')?.files || [],
+        'progressActivities',
+        'Replaced Pit P9 Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Pits - Replaced - P9",
+        "Quantity/Metres": Number(document.getElementById('pit-replaced-p9-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Marker Posts
+    if (document.getElementById('discipline-markers-progress')?.checked) {
+      btn.textContent = 'Uploading Marker Posts photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('markers-progress-photos')?.files || [],
+        'progressActivities',
+        'Marker Posts Photos'
+      );
+      activities.push({
+        "Submission ID": [submissionId],
+        "Activity": "Marker Posts",
+        "Quantity/Metres": Number(document.getElementById('markers-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
+    // Step 3: Submit each activity as a separate record
+    btn.textContent = `Submitting activities (0/${activities.length})...`;
+    for (let i = 0; i < activities.length; i++) {
+      btn.textContent = `Submitting activities (${i + 1}/${activities.length})...`;
+      await submitToAirtable('progressActivities', activities[i]);
+    }
 
     showSuccessMessage();
 
@@ -1666,6 +2486,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     btn.disabled = false;
     btn.textContent = 'Submit Progress Register';
   }
+});
 });
 </script>
 
