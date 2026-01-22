@@ -1496,6 +1496,12 @@ textarea {
 // GLOBAL FUNCTIONS - Mob/Demob State Management
 // ============================================================
 
+let autocomplete; // Global variable for Google Maps autocomplete
+
+function insertAfter(newNode, referenceNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 function updateMobDemobState() {
   const mobCheckbox = document.getElementById("bog-mob");
   const demobCheckbox = document.getElementById("bog-demob");
@@ -1531,25 +1537,140 @@ function updateMobDemobState() {
     if (label) label.style.display = hide ? "none" : "";
   }
 
-  conditionalIds.forEach(id => hideById(id, isMob));
+  conditionalIds.forEach(id => hideById(id, isMob || isDemob));
 
   const swmsSection = document.getElementById("bog-swms-section");
-  if (swmsSection) swmsSection.style.display = isMob ? "none" : "";
+  if (swmsSection) swmsSection.style.display = (isMob || isDemob) ? "none" : "";
 
   const swmsFieldset = document.getElementById("bog-swms-fieldset");
-  if (swmsFieldset) swmsFieldset.style.display = isMob ? "none" : "";
+  if (swmsFieldset) swmsFieldset.style.display = (isMob || isDemob) ? "none" : "";
 
-  // Hide the helper text paragraphs when Mobilisation is selected
+  // Hide the helper text paragraphs when Mobilisation/Demobilisation is selected
   const jhaPhotoLabel = document.querySelector('label[for="bog-jha-photos"]');
   if (jhaPhotoLabel) {
     const jhaHelpText = jhaPhotoLabel.parentElement.querySelector('p');
-    if (jhaHelpText) jhaHelpText.style.display = isMob ? "none" : "";
+    if (jhaHelpText) jhaHelpText.style.display = (isMob || isDemob) ? "none" : "";
   }
 
   const sitePhotoLabel = document.querySelector('label[for="bog-site-photos"]');
   if (sitePhotoLabel) {
     const siteHelpText = sitePhotoLabel.parentElement.querySelector('p');
-    if (siteHelpText) siteHelpText.style.display = isMob ? "none" : "";
+    if (siteHelpText) siteHelpText.style.display = (isMob || isDemob) ? "none" : "";
+  }
+
+  // Update labels based on mob/demob state
+  const locationLabel = document.querySelector('label[for="bog-Location"]');
+  const locationField = document.getElementById('bog-Location');
+  const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
+
+  if (isMob) {
+    // Mobilisation mode
+    if (locationLabel) locationLabel.textContent = "Departure Address";
+    if (locationField) locationField.placeholder = "Enter in the address you and your crew have departed from";
+    if (crewNumberLabel) crewNumberLabel.textContent = "Number of people mobilising today for this discipline";
+    
+    // Initialize Google Maps autocomplete for mobilisation
+    if (locationField && typeof google !== 'undefined') {
+      autocomplete = new google.maps.places.Autocomplete(locationField, {
+        componentRestrictions: { country: 'au' }
+      });
+    }
+  } else if (isDemob) {
+    // Demobilisation mode
+    if (locationLabel) locationLabel.textContent = "Location";
+    if (locationField) locationField.placeholder = "Enter sheet number and grid reference";
+    if (crewNumberLabel) crewNumberLabel.textContent = "Number of people de-mobilising today for this discipline";
+    
+    // Remove autocomplete for demobilisation
+    if (autocomplete) {
+      google.maps.event.clearInstanceListeners(locationField);
+      autocomplete = null;
+    }
+  } else {
+    // Normal mode
+    if (locationLabel) locationLabel.textContent = "Location";
+    if (locationField) locationField.placeholder = "Enter sheet number and grid reference";
+    if (crewNumberLabel) crewNumberLabel.textContent = "Number of People in Crew at Location";
+    
+    // Remove autocomplete for normal mode
+    if (autocomplete) {
+      google.maps.event.clearInstanceListeners(locationField);
+      autocomplete = null;
+    }
+  }
+
+  // Handle dynamic vehicle fields
+  const crewVehiclesFieldId = "bog-crew-vehicles";
+  const crewVehiclesLabelId = "label-bog-crew-vehicles";
+  const heavyVehiclesFieldId = "bog-heavy-vehicles";
+  const heavyVehiclesLabelId = "label-bog-heavy-vehicles";
+
+  // Remove old fields if they exist
+  [crewVehiclesLabelId, crewVehiclesFieldId, heavyVehiclesLabelId, heavyVehiclesFieldId].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  });
+
+  // Add vehicle fields for mob/demob
+  if (isMob || isDemob) {
+    const crewNamesHidden = document.getElementById('bog-crews-names-hidden');
+    
+    const vehicleLabelText = isMob
+      ? "Number of crew vehicles being mobilised"
+      : "Number of crew vehicles being de-mobilised";
+
+    const heavyVehicleLabelText = isMob
+      ? "Number of heavy vehicles being mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)"
+      : "Number of heavy vehicles being de-mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)";
+
+    // Create Heavy Vehicles field
+    const heavyLabel = document.createElement("label");
+    heavyLabel.id = heavyVehiclesLabelId;
+    heavyLabel.htmlFor = heavyVehiclesFieldId;
+    heavyLabel.textContent = heavyVehicleLabelText;
+
+    const heavyInput = document.createElement("input");
+    heavyInput.type = "number";
+    heavyInput.id = heavyVehiclesFieldId;
+    heavyInput.name = "Number of heavy vehicles";
+    heavyInput.step = "1";
+    heavyInput.min = "0";
+    heavyInput.required = true;
+    heavyInput.style.width = "100%";
+    heavyInput.style.padding = "0.75rem";
+    heavyInput.style.border = "1px solid var(--dark-20)";
+    heavyInput.style.borderRadius = "0.5rem";
+    heavyInput.style.fontSize = "1rem";
+    heavyInput.style.fontFamily = "'Exo', sans-serif";
+
+    insertAfter(heavyLabel, crewNamesHidden);
+    insertAfter(heavyInput, heavyLabel);
+
+    // Create Crew Vehicles field
+    const crewLabel = document.createElement("label");
+    crewLabel.id = crewVehiclesLabelId;
+    crewLabel.htmlFor = crewVehiclesFieldId;
+    crewLabel.textContent = vehicleLabelText;
+    crewLabel.style.display = "block";
+    crewLabel.style.margin = "1rem 0 0.5rem";
+    crewLabel.style.fontWeight = "600";
+
+    const crewInput = document.createElement("input");
+    crewInput.type = "number";
+    crewInput.id = crewVehiclesFieldId;
+    crewInput.name = "Number of Crew vehicles";
+    crewInput.step = "1";
+    crewInput.min = "0";
+    crewInput.required = true;
+    crewInput.style.width = "100%";
+    crewInput.style.padding = "0.75rem";
+    crewInput.style.border = "1px solid var(--dark-20)";
+    crewInput.style.borderRadius = "0.5rem";
+    crewInput.style.fontSize = "1rem";
+    crewInput.style.fontFamily = "'Exo', sans-serif";
+
+    insertAfter(crewLabel, heavyInput);
+    insertAfter(crewInput, crewLabel);
   }
 }
 
@@ -2034,7 +2155,9 @@ document.addEventListener('DOMContentLoaded', function () {
         "ACM Notification Received & on JHA": document.getElementById('bog-acm-yes')?.value === "Yes",
         "Gas Monitoring & Trench Guards in Place": document.getElementById('bog-guards-checkbox')?.checked || false,
         "Excavation Work Today": document.getElementById('bog-excavation-checkbox')?.checked || false,
-        "Additional Comments": document.getElementById('bog-comments')?.value || ""
+        "Additional Comments": document.getElementById('bog-comments')?.value || "",
+        'Number of Crew vehicles': document.getElementById('bog-crew-vehicles')?.value || '',
+        'Number of heavy vehicles': document.getElementById('bog-heavy-vehicles')?.value || ''
       };
 
       btn.textContent = 'Uploading JHA photos...';
