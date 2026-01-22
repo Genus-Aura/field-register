@@ -2077,8 +2077,8 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
   btn.textContent = 'Processing...';
 
   try {
-    // Step 1: Create parent submission record
-    const submissionData = {
+    // Collect common submission data (used for all activity records)
+    const commonData = {
       "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
       "Form Date": document.getElementById('progress-date')?.value || "",
       "Company Name": document.getElementById('progress-company-name')?.value || "",
@@ -2088,18 +2088,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       "Additional Comments": document.getElementById('progress-comments')?.value || ""
     };
 
-    btn.textContent = 'Creating submission record...';
-    const submissionResponse = await submitToAirtable('progressActivities', submissionData);
-    const submissionResult = await submissionResponse.json();
-    
-    if (!submissionResponse.ok) {
-      throw new Error(submissionResult.error?.message || 'Failed to create submission');
-    }
-
-    const submissionId = submissionResult.records[0].id;
-    console.log('Created submission:', submissionId);
-
-    // Step 2: Collect all activities
+    // Collect all activities with their complete data
     const activities = [];
 
     // Plough
@@ -2107,11 +2096,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Plough photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('plough-progress-cable-marking-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Plough Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Plough",
         "Quantity/Metres": Number(document.getElementById('plough-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2123,11 +2112,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Bore PE63 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('bore-pe63-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Bore PE63 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Bore - PE63",
         "Quantity/Metres": Number(document.getElementById('bore-pe63-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2139,11 +2128,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Bore PE110 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('bore-pe110-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Bore PE110 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Bore - PE110",
         "Quantity/Metres": Number(document.getElementById('bore-pe110-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2155,11 +2144,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Trench P50 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('trench-p50-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Trench P50 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Trench - P50",
         "Quantity/Metres": Number(document.getElementById('trench-p50-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2171,11 +2160,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Trench P100 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('trench-p100-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Trench P100 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Trench - P100",
         "Quantity/Metres": Number(document.getElementById('trench-p100-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2187,11 +2176,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Hauling photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('hauling-progress-cable-marking-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Hauling Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Hauling",
         "Quantity/Metres": Number(document.getElementById('hauling-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2203,11 +2192,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading RRP photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rrp-progress-tag-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'RRP Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "RRP (Rod, Rope & Prove)",
         "Quantity/Metres": Number(document.getElementById('rrp-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2219,11 +2208,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Blockages photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('blockages-progress-tag-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Blockages Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Blockages",
         "Quantity/Metres": Number(document.getElementById('blockages-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2235,11 +2224,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit C8 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-c8-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit C8 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - C8",
         "Quantity/Metres": Number(document.getElementById('pit-new-c8-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2251,11 +2240,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit C9 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-c9-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit C9 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - C9",
         "Quantity/Metres": Number(document.getElementById('pit-new-c9-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2267,11 +2256,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Manhole photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-manhole-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Manhole Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - Manhole",
         "Quantity/Metres": Number(document.getElementById('pit-new-manhole-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2283,11 +2272,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit P5 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-p5-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit P5 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - P5",
         "Quantity/Metres": Number(document.getElementById('pit-new-p5-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2299,11 +2288,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit P6 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-p6-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit P6 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - P6",
         "Quantity/Metres": Number(document.getElementById('pit-new-p6-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2315,11 +2304,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit P8 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-p8-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit P8 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - P8",
         "Quantity/Metres": Number(document.getElementById('pit-new-p8-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2331,11 +2320,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading New Pit P9 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-new-p9-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'New Pit P9 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - New - P9",
         "Quantity/Metres": Number(document.getElementById('pit-new-p9-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2347,11 +2336,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit C8 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-c8-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit C8 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - C8",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-c8-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2363,11 +2352,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit C9 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-c9-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit C9 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - C9",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-c9-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2379,11 +2368,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Manhole photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-manhole-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Manhole Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - Manhole",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-manhole-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2395,11 +2384,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit P5 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-p5-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit P5 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - P5",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-p5-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2411,11 +2400,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit P6 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-p6-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit P6 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - P6",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-p6-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2427,11 +2416,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit P8 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-p8-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit P8 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - P8",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-p8-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2443,11 +2432,11 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Replaced Pit P9 photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-replaced-p9-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Replaced Pit P9 Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Pits - Replaced - P9",
         "Quantity/Metres": Number(document.getElementById('pit-replaced-p9-progress-qty')?.value) || 0,
         "Activity Photos": photos
@@ -2459,21 +2448,21 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
       btn.textContent = 'Uploading Marker Posts photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('markers-progress-photos')?.files || [],
-        'progressActivities',
+        'progressRegister',
         'Marker Posts Photos'
       );
       activities.push({
-        "Submission ID": [submissionId],
+        ...commonData,
         "Activity": "Marker Posts",
         "Quantity/Metres": Number(document.getElementById('markers-progress-qty')?.value) || 0,
         "Activity Photos": photos
       });
     }
 
-    // Step 3: Submit each activity as a separate record
-    btn.textContent = `Submitting activities (0/${activities.length})...`;
+    // Submit all activity records to Progress Register
+    btn.textContent = `Submitting records (0/${activities.length})...`;
     for (let i = 0; i < activities.length; i++) {
-      btn.textContent = `Submitting activities (${i + 1}/${activities.length})...`;
+      btn.textContent = `Submitting records (${i + 1}/${activities.length})...`;
       await submitToAirtable('progressRegister', activities[i]);
     }
 
