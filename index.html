@@ -2089,7 +2089,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     };
 
     btn.textContent = 'Creating submission record...';
-    const submissionResponse = await submitToAirtable('progressRegister', submissionData);
+    const submissionResponse = await submitToAirtable('progressActivities', submissionData);
     const submissionResult = await submissionResponse.json();
     
     if (!submissionResponse.ok) {
@@ -2474,7 +2474,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     btn.textContent = `Submitting activities (0/${activities.length})...`;
     for (let i = 0; i < activities.length; i++) {
       btn.textContent = `Submitting activities (${i + 1}/${activities.length})...`;
-      await submitToAirtable('progressActivities', activities[i]);
+      await submitToAirtable('progressRegister', activities[i]);
     }
 
     showSuccessMessage();
