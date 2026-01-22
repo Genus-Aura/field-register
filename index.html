@@ -2089,7 +2089,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     };
 
     btn.textContent = 'Creating submission record...';
-    const submissionResponse = await submitToAirtable('progressSubmissions', submissionData);
+    const submissionResponse = await submitToAirtable('progressRegister', submissionData);
     const submissionResult = await submissionResponse.json();
     
     if (!submissionResponse.ok) {
