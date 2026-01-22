@@ -1520,7 +1520,7 @@ function updateMobDemobState() {
     "bog-estimated-start-time", "bog-estimated-finish-time", "bog-site-contact",
     "bog-onsite-crew-lead-mobile", "bog-onsite-crew-lead-email", "bog-Genus-FCM",
     "bog-ACM", "bog-acm-yes", "bog-guards", "bog-excavation",
-    "bog-jha-uploaded", "bog-jha-photos", "bog-site-photos", "bog-comments"
+    "bog-jha-uploaded", "bog-jha-photos", "bog-site-photos"
   ];
 
   function hideById(id, hide) {
@@ -1538,6 +1538,16 @@ function updateMobDemobState() {
   }
 
   conditionalIds.forEach(id => hideById(id, isMob || isDemob));
+
+  // Special handling for the hidden crew lead field
+  const leadHidden = document.getElementById('bog-site-contact-hidden');
+  if (leadHidden) {
+    if (isMob || isDemob) {
+      leadHidden.removeAttribute('required');
+    } else {
+      leadHidden.setAttribute('required', 'required');
+    }
+  }
 
   const swmsSection = document.getElementById("bog-swms-section");
   if (swmsSection) swmsSection.style.display = (isMob || isDemob) ? "none" : "";
@@ -1620,8 +1630,8 @@ function updateMobDemobState() {
       : "Number of crew vehicles being de-mobilised";
 
     const heavyVehicleLabelText = isMob
-      ? "Number of heavy vehicles being mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)"
-      : "Number of heavy vehicles being de-mobilised (please note, this is claimable once per SAM or as agreed in writing with FCM)";
+      ? "Number of heavy vehicles being mobilised"
+      : "Number of heavy vehicles being de-mobilised";
 
     // Create Heavy Vehicles field
     const heavyLabel = document.createElement("label");
@@ -1805,7 +1815,10 @@ function validateSWMS() {
 function validateBogForm() {
   const form = document.querySelector('#bog-form');
   const isValid = form.checkValidity();
-  const swmsValid = validateSWMS();
+  
+  const isMob = document.getElementById('bog-mob').checked;
+  const isDemob = document.getElementById('bog-demob').checked;
+  const swmsValid = (isMob || isDemob) ? true : validateSWMS();
   
   if (!isValid || !swmsValid) {
     showErrorMessage();
