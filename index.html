@@ -1600,12 +1600,14 @@ function updateMobDemobState() {
   const gridContainer = document.getElementById('bog-location-grid');
   const mobContainer = document.getElementById('bog-location-mob');
   const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
+  const locationLabel = document.querySelector('label[for="bog-Location"]');
 
   if (isMob) {
     // Mobilisation: single address field
     gridContainer.style.display = 'none';
     mobContainer.style.display = 'block';
     locationLabel.textContent = "Departure Address";
+
     // Initialize autocomplete for mobilisation
     const mobField = document.getElementById('bog-Location-mob');
     if (mobField && typeof google !== 'undefined') {
@@ -1618,6 +1620,7 @@ function updateMobDemobState() {
     gridContainer.style.display = 'block';
     mobContainer.style.display = 'none';
     locationLabel.textContent = "Location";
+
     // Remove autocomplete if present
     if (autocomplete) {
       google.maps.event.clearInstanceListeners(mobContainer.querySelector('input'));
