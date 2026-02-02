@@ -2061,6 +2061,7 @@ const sections = [
   { lead: "progress-site-contact", companyField: "progress-company-name" }
 ];
 
+// 1. Fetch function (your updated safe version)
 async function fetchCrewNames(company) {
   if (!company) return [];
 
@@ -2069,7 +2070,7 @@ async function fetchCrewNames(company) {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'cors',           // Ensures CORS is handled (Google Script supports it for public apps)
+      mode: 'cors',
       redirect: 'follow'
     });
 
@@ -2079,8 +2080,6 @@ async function fetchCrewNames(company) {
     }
 
     const crewList = await res.json();
-
-    // Safety: ensure it's always an array
     return Array.isArray(crewList) ? crewList : [];
   } catch (err) {
     console.error("Failed to fetch crew names:", err);
@@ -2088,8 +2087,48 @@ async function fetchCrewNames(company) {
   }
 }
 
-// Your createRadioList and createCheckboxList functions remain exactly the same
+// 2. Radio list creator (must be here)
+function createRadioList(containerEl, hiddenInput, crewList) {
+  containerEl.innerHTML = "";
+  if (!Array.isArray(crewList)) return;
 
+  crewList.forEach(name => {
+    const label = document.createElement("label");
+    label.style.display = "block";
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = containerEl.id + "-radio";
+    radio.value = name;
+    radio.addEventListener("change", () => hiddenInput.value = name);
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(name));
+    containerEl.appendChild(label);
+  });
+}
+
+// 3. Checkbox list creator (must be here – this is the missing one)
+function createCheckboxList(containerEl, hiddenInput, crewList) {
+  containerEl.innerHTML = "";
+  if (!Array.isArray(crewList)) return;
+
+  crewList.forEach(name => {
+    const label = document.createElement("label");
+    label.style.display = "block";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = name;
+    checkbox.addEventListener("change", () => {
+      const selected = Array.from(containerEl.querySelectorAll("input[type=checkbox]:checked"))
+        .map(cb => cb.value);
+      hiddenInput.value = selected.join(", ");
+    });
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(name));
+    containerEl.appendChild(label);
+  });
+}
+
+// 4. Initialization function (calls the above)
 async function initSections() {
   for (const section of sections) {
     const hiddenLead = section.lead ? document.getElementById(section.lead + "-hidden") : null;
@@ -2103,7 +2142,7 @@ async function initSections() {
     const crewList = await fetchCrewNames(companyName);
 
     if (crewEl && hiddenCrew && section.multiCrew) {
-      createCheckboxList(crewEl, hiddenCrew, crewList);
+      createCheckboxList(crewEl, hiddenCrew, crewList);  // ← This line needs createCheckboxList defined above
     }
 
     if (leadEl && hiddenLead) {
@@ -2124,7 +2163,7 @@ async function initSections() {
   }
 }
 
-// Make sure this runs when the page loads
+// Run when page loads
 document.addEventListener('DOMContentLoaded', initSections);
 
 // ============================================================
