@@ -546,17 +546,17 @@ textarea {
     <div style="display: flex; gap: 1rem;">
       <div style="flex: 1;">
         <label for="bog-sheet-number">Sheet Number (e.g., 01)</label>
-        <input type="text" id="bog-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100" required>
+        <input type="text" id="bog-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100">
       </div>
       <div style="flex: 1;">
         <label for="bog-grid-reference">Grid Reference (e.g., A1)</label>
-        <input type="text" id="bog-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6" required>
+        <input type="text" id="bog-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6">
       </div>
     </div>
   </div>
   <!-- Mobilisation single field (hidden unless mobilisation checked) -->
   <div id="bog-location-mob" style="display: none;">
-    <input type="text" id="bog-Location-mob" name="Mobilisation Address" placeholder="Enter the address you and your crew have departed from" required>
+    <input type="text" id="bog-Location-mob" name="Mobilisation Address" placeholder="Enter the address you and your crew have departed from">
   </div>
 </div>
 
@@ -2219,17 +2219,50 @@ document.addEventListener('DOMContentLoaded', function () {
   btn.textContent = 'Processing...';  // Change text
 
   try {
+    // Get mobilisation state
+    const isMob = document.getElementById('bog-mob')?.checked || false;
+
+    // Dynamic required validation for location fields
+    if (isMob) {
+      const mobField = document.getElementById('bog-Location-mob');
+      if (mobField && !mobField.value.trim()) {
+        mobField.setCustomValidity("Please enter the departure address.");
+        mobField.reportValidity();
+        mobField.focus();
+        return;  // Stop submission
+      }
+      mobField.setCustomValidity("");  // Clear if valid
+    } else {
+      const sheetField = document.getElementById('bog-sheet-number');
+      const gridField = document.getElementById('bog-grid-reference');
+
+      if (sheetField && !sheetField.value.trim()) {
+        sheetField.setCustomValidity("Please enter the Sheet Number.");
+        sheetField.reportValidity();
+        sheetField.focus();
+        return;
+      }
+      if (gridField && !gridField.value.trim()) {
+        gridField.setCustomValidity("Please enter the Grid Reference.");
+        gridField.reportValidity();
+        gridField.focus();
+        return;
+      }
+      sheetField.setCustomValidity("");
+      gridField.setCustomValidity("");
+    }
+
     const swms = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
       .map(el => el.value);
 
     let data = {
       "Project": document.getElementById('bog-project')?.value || "Kalgoorlie - Wallaroo",
       "Form Date": document.getElementById('bog-date')?.value || "",
-      "Is Mobilisation Day": document.getElementById('bog-mob')?.checked || false,
+      "Is Mobilisation Day": isMob,
       "Is Demobilisation Day": document.getElementById('bog-demob')?.checked || false,
-      "Sheet Number": !isMob ? document.getElementById('bog-sheet-number')?.value || "" : "",
-      "Grid Reference": !isMob ? document.getElementById('bog-grid-reference')?.value || "" : "",
-      "Mobilisation Address": isMob ? document.getElementById('bog-Location-mob')?.value || "" : "",
+      "Sheet Number": !isMob ? document.getElementById('bog-sheet-number')?.value?.trim() || "" : "",
+      "Grid Reference": !isMob ? document.getElementById('bog-grid-reference')?.value?.trim() || "" : "",
+      "Mobilisation Address": isMob ? document.getElementById('bog-Location-mob')?.value?.trim() || "" : "",
       "Company Name": document.getElementById('bog-company-name')?.value || "",
       "Discipline": document.getElementById('bog-discipline')?.value || "",
       "Estimated Start Time2": document.getElementById('bog-estimated-start-timestamp')?.value || "",
