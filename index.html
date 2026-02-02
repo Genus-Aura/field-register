@@ -1606,27 +1606,57 @@ function updateMobDemobState() {
     // Mobilisation: single address field
     gridContainer.style.display = 'none';
     mobContainer.style.display = 'block';
-    locationLabel.textContent = "Departure Address";
+      if (locationLabel) {
+      locationLabel.textContent = "Departure Address";
+    }
 
     // Initialize autocomplete for mobilisation
     const mobField = document.getElementById('bog-Location-mob');
-    if (mobField && typeof google !== 'undefined') {
+      if (mobField && typeof google !== 'undefined') {
       autocomplete = new google.maps.places.Autocomplete(mobField, {
-        componentRestrictions: { country: 'au' }
-      });
-    }
-  } else {
-    // Normal or Demob: sheet + grid fields
-    gridContainer.style.display = 'block';
-    mobContainer.style.display = 'none';
-    locationLabel.textContent = "Location";
+      componentRestrictions: { country: 'au' }
+    });
 
-    // Remove autocomplete if present
-    if (autocomplete) {
-      google.maps.event.clearInstanceListeners(mobContainer.querySelector('input'));
-      autocomplete = null;
-    }
+    // Listen for when user selects a place from dropdown
+autocomplete.addListener('place_changed', function() {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        mobField.dataset.valid = "true";
+        mobField.setCustomValidity("");  // Clear error
+      }
+    });
+
+    // Validate on blur (user leaves field)
+    mobField.addEventListener('blur', function() {
+      const place = autocomplete.getPlace();
+      if (!place || !place.formatted_address) {
+        mobField.setCustomValidity("Please select a full address from the dropdown.");
+        mobField.reportValidity();  // Show message immediately
+      } else {
+        mobField.setCustomValidity("");
+      }
+    });
+
+    // Clear error when user starts typing again
+    mobField.addEventListener('input', function() {
+      mobField.setCustomValidity("");
+    });
   }
+} else {
+  // Normal or Demob: sheet + grid fields
+  gridContainer.style.display = 'block';
+  mobContainer.style.display = 'none';
+  if (locationLabel) {
+    locationLabel.textContent = "Location";
+  }
+
+  // Safely remove autocomplete listeners
+  const mobField = document.getElementById('bog-Location-mob');
+  if (autocomplete && mobField) {
+    google.maps.event.clearInstanceListeners(mobField);
+    autocomplete = null;
+  }
+}
 
   // Handle dynamic vehicle fields
   const crewVehiclesFieldId = "bog-crew-vehicles";
