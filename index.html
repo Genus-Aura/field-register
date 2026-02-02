@@ -1598,48 +1598,47 @@ function updateMobDemobState() {
     if (siteHelpText) siteHelpText.style.display = (isMob || isDemob) ? "none" : "";
   }
 
-  // Update labels based on mob/demob state
-  const gridContainer = document.getElementById('bog-location-grid');
-  const mobContainer = document.getElementById('bog-location-mob');
-  const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
-  const locationLabel = document.querySelector('label[for="bog-Location"]');
+// Declare shared variables once (no duplicates)
+const locationLabel = document.querySelector('label[for="bog-Location"]');
+const gridContainer = document.getElementById('bog-location-grid');
+const mobContainer = document.getElementById('bog-location-mob');
 
 if (isMob) {
   // Mobilisation: single address field
   gridContainer.style.display = 'none';
   mobContainer.style.display = 'block';
+  if (locationLabel) {
+    locationLabel.textContent = "Departure Address";
+  }
 
-  // Initialize autocomplete for mobilisation
   const mobField = document.getElementById('bog-Location-mob');
   if (mobField && typeof google !== 'undefined') {
+    // Initialize autocomplete
     autocomplete = new google.maps.places.Autocomplete(mobField, {
       componentRestrictions: { country: 'au' }
     });
 
-    // Listen for when user selects a place from dropdown
+    // Mark as valid when user selects from dropdown
     autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
       if (place && place.formatted_address) {
-        // Valid selection → mark as valid (optional: add visual feedback)
         mobField.dataset.valid = "true";
-        mobField.setCustomValidity("");  // Clear any previous error
+        mobField.setCustomValidity("");
       }
     });
 
-    // On blur (when user leaves the field), check if a valid place was selected
+    // Validate on blur (user leaves field)
     mobField.addEventListener('blur', function() {
       const place = autocomplete.getPlace();
-      
       if (!place || !place.formatted_address) {
-        // No valid selection → show error
         mobField.setCustomValidity("Please select a full address from the dropdown.");
-        mobField.reportValidity();  // Show browser validation message immediately
+        mobField.reportValidity();
       } else {
-        mobField.setCustomValidity("");  // Clear error
+        mobField.setCustomValidity("");
       }
     });
 
-    // Optional: Clear validation when user starts typing again
+    // Clear error when user starts typing again
     mobField.addEventListener('input', function() {
       mobField.setCustomValidity("");
     });
@@ -1648,19 +1647,16 @@ if (isMob) {
   // Normal or Demob: sheet + grid fields
   gridContainer.style.display = 'block';
   mobContainer.style.display = 'none';
+  if (locationLabel) {
+    locationLabel.textContent = "Location";
+  }
 
-  // Safely remove autocomplete listeners
+  // Cleanup autocomplete safely
   const mobField = document.getElementById('bog-Location-mob');
   if (autocomplete && mobField) {
     google.maps.event.clearInstanceListeners(mobField);
     autocomplete = null;
   }
-}
-
-// Add this outside the if/else to define locationLabel
-const locationLabel = document.querySelector('label[for="bog-Location"]');
-if (locationLabel) {
-  locationLabel.textContent = isMob ? "Departure Address" : "Location";
 }
 
   // Handle dynamic vehicle fields
@@ -2760,4 +2756,4 @@ if (gridInput) {
 });
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EKPtC5W7fRHgiONVPIyGsVU7Ti_xjBc&libraries=places&loading=async&callback=initAutocomplete" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EKPtC5W7fRHgiONVPIyGsVU7Ti_xjBc&libraries=places&loading=async" async defer></script>
