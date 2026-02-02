@@ -526,6 +526,7 @@ textarea {
      <optgroup label="Construction">
           <option value="RRP">Rod, Rope & Prove</option>
           <option value="Blockage Repair">Blockage Repair</option>
+          <option value="Service Location">Service Location</option>    
           <option value="Plough">Plough</option>
           <option value="Horizontal Directional Drilling">Horizontal Directional Drilling</option>
           <option value="Trenching">Trenching</option>
@@ -539,7 +540,25 @@ textarea {
         </select>
 
             <label for="bog-Location">Location</label>
-        <textarea id="bog-Location" name="bog-Location" placeholder="Enter sheet number and grid reference" required></textarea>
+<div id="bog-location-container">
+  <!-- Default two fields (shown unless mobilisation) -->
+  <div id="bog-location-grid" style="display: block;">
+    <div style="display: flex; gap: 1rem;">
+      <div style="flex: 1;">
+        <label for="bog-sheet-number">Sheet Number (e.g., 01)</label>
+        <input type="text" id="bog-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100" required>
+      </div>
+      <div style="flex: 1;">
+        <label for="bog-grid-reference">Grid Reference (e.g., A1)</label>
+        <input type="text" id="bog-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6" required>
+      </div>
+    </div>
+  </div>
+  <!-- Mobilisation single field (hidden unless mobilisation checked) -->
+  <div id="bog-location-mob" style="display: none;">
+    <input type="text" id="bog-Location-mob" name="Mobilisation Address" placeholder="Enter the address you and your crew have departed from" required>
+  </div>
+</div>
 
     <label for="bog-site-contact">Onsite Crew Lead Name</label>
     <div id="bog-site-contact" class="crew-checkbox"></div>
@@ -576,13 +595,13 @@ textarea {
     <p>All workers to have signed into Task SWMS being utilised with copy available - latest version.</p>
 
     <input type="checkbox" name="bog-SWMS[]" value="Scoping" /> Scoping (0017 Surveying & Scoping)<br />
-    <input type="checkbox" name="bog-SWMS[]" value="Ploughing" /> Ploughing (0026 Ploughing & Cable Laying)<br />
-    <input type="checkbox" name="bog-SWMS[]" value="Trenching" /> Trenching (0012 Excavation & Trenching)<br />
-    <input type="checkbox" name="bog-SWMS[]" value="Drilling" /> Drilling (0016 Directional Boring, 0012 Excavation & Trenching)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Clear Blockage" /> Clear Blockage (0008 Rod Roping & Cable Hauling)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Pit Installation" /> Pit Installation (0002 Installing Replacing Repairing Pits Manholes)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Trenching" /> Trenching (0012 Excavation & Trenching)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Ploughing" /> Ploughing (0026 Ploughing & Cable Laying)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Drilling" /> Drilling (0016 Directional Boring, 0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Hauling" /> Hauling (0008 Rod Roping & Cable Hauling)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Splicing" /> Splicing (0007 Cable Jointing)<br />
-    <input type="checkbox" name="bog-SWMS[]" value="Clear Blockage" /> Clear Blockage (0008 Rod Roping & Cable Hauling)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Service Locator" /> Service Locator (0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Reinstatement" /> Reinstatement (0012 Excavation & Trenching)<br />
 
@@ -717,11 +736,82 @@ textarea {
     <input type="tel" id="progress-onsite-crew-lead-mobile" name="progress-onsite-crew-lead-mobile" pattern="04\d{8}" maxlength="10" placeholder="Enter 10-digit number" oninvalid="this.setCustomValidity('Enter number as 04xxxxxxxx')" oninput="this.setCustomValidity('')" required />
 
     <label for="progress-Location">Location</label>
-    <textarea id="progress-Location" name="progress-Location" placeholder="Add sheet numbers for work completed" required></textarea>
+<div style="display: flex; gap: 1rem;">
+  <div style="flex: 1;">
+    <label for="progress-sheet-number">Sheet Number (e.g., 01)</label>
+    <input type="text" id="progress-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100" required>
+  </div>
+  <div style="flex: 1;">
+    <label for="progress-grid-reference">Grid Reference (e.g., A1)</label>
+    <input type="text" id="progress-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6" required>
+  </div>
+</div>
 
     <fieldset>
       <legend>Select the activity type(s) your company has completed today:</legend>
       <div class="discipline-checkbox-group">
+        <!-- RRP - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-rrp-progress" name="discipline[]" value="rrp-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rrp-progress">Rod, Rope & Prove</label>
+        </div>
+
+        <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rrp-progress-qty">Metres Completed:</label>
+          <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
+
+  <label for="rrp-progress-tag-photos" style="margin-top: 15px;">
+    RRP Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing mandrel and tagged rope in duct
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="rrp-progress-tag-photos" 
+    name="rrp_progress_tag_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
+
+        <!-- Blockages - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-blockages-progress" name="discipline[]" value="blockages-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-blockages-progress">Blockages</label>
+        </div>
+
+        <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="blockages-progress-qty">Blockages Cleared:</label>
+          <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
+
+  <label for="blockages-progress-tag-photos" style="margin-top: 15px;">
+    Duct Blockage Photos (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing blockage location, exposed duct, repaired duct and rope in duct
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="blockages-progress-tag-photos" 
+    name="blockages_progress_tag_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
+
         <!-- Plough - Progress -->
         <div>
           <input type="checkbox" id="discipline-plough-progress" name="discipline[]" value="plough-progress" onchange="toggleDisciplineFields(this)" />
@@ -892,99 +982,6 @@ textarea {
   </p>
           </div>
         </div>
-
-        <!-- Hauling - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-hauling-progress" name="discipline[]" value="hauling-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-hauling-progress">Hauling (per cable)</label>
-        </div>
-
-        <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="hauling-progress-qty">Metres Completed:</label>
-          <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
-
-  <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">
-    Cable Marker Photos - Start and End hauled section (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing cable markers at start and end of hauled section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="hauling-progress-cable-marking-photos" 
-    name="hauling_progress_cable_marking_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-        <!-- RRP - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-rrp-progress" name="discipline[]" value="rrp-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-rrp-progress">Rod, Rope & Prove</label>
-        </div>
-
-        <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="rrp-progress-qty">Metres Completed:</label>
-          <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
-
-  <label for="rrp-progress-tag-photos" style="margin-top: 15px;">
-    RRP Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing mandrel and tagged rope in duct
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rrp-progress-tag-photos" 
-    name="rrp_progress_tag_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-        <!-- Blockages - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-blockages-progress" name="discipline[]" value="blockages-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-blockages-progress">Blockages</label>
-        </div>
-
-        <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="blockages-progress-qty">Blockages Cleared:</label>
-          <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
-
-  <label for="blockages-progress-tag-photos" style="margin-top: 15px;">
-    Duct Blockage Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing blockage location, exposed duct, repaired duct and rope in duct
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="blockages-progress-tag-photos" 
-    name="blockages_progress_tag_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
 
         <!-- Pits - Progress -->
         <div>
@@ -1447,6 +1444,37 @@ textarea {
           </div>
         </div>
 
+        <!-- Hauling - Progress -->
+        <div>
+          <input type="checkbox" id="discipline-hauling-progress" name="discipline[]" value="hauling-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-hauling-progress">Hauling (per cable)</label>
+        </div>
+
+        <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="hauling-progress-qty">Metres Completed:</label>
+          <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
+
+  <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">
+    Cable Marker Photos - Start and End hauled section (GPS time/date enabled)
+    <br>
+    <small style="color: #666;">
+      Capture photos showing cable markers at start and end of hauled section
+    </small>
+  </label>
+  <input 
+    type="file" 
+    id="hauling-progress-cable-marking-photos" 
+    name="hauling_progress_cable_marking_photos[]"
+    accept="image/*"
+    multiple
+    capture="environment"
+    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
+  >
+  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
+  </p>
+</div>
+
         <!-- Marker Posts - Progress -->
         <div>
           <input type="checkbox" id="discipline-markers-progress" name="discipline[]" value="markers-progress" onchange="toggleDisciplineFields(this)" />
@@ -1569,42 +1597,30 @@ function updateMobDemobState() {
   }
 
   // Update labels based on mob/demob state
-  const locationLabel = document.querySelector('label[for="bog-Location"]');
-  const locationField = document.getElementById('bog-Location');
+  const gridContainer = document.getElementById('bog-location-grid');
+  const mobContainer = document.getElementById('bog-location-mob');
   const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
 
   if (isMob) {
-    // Mobilisation mode
-    if (locationLabel) locationLabel.textContent = "Departure Address";
-    if (locationField) locationField.placeholder = "Enter in the address you and your crew have departed from";
-    if (crewNumberLabel) crewNumberLabel.textContent = "Number of people mobilising today for this discipline";
-    
-    // Initialize Google Maps autocomplete for mobilisation
-    if (locationField && typeof google !== 'undefined') {
-      autocomplete = new google.maps.places.Autocomplete(locationField, {
+    // Mobilisation: single address field
+    gridContainer.style.display = 'none';
+    mobContainer.style.display = 'block';
+    locationLabel.textContent = "Departure Address";
+    // Initialize autocomplete for mobilisation
+    const mobField = document.getElementById('bog-Location-mob');
+    if (mobField && typeof google !== 'undefined') {
+      autocomplete = new google.maps.places.Autocomplete(mobField, {
         componentRestrictions: { country: 'au' }
       });
     }
-  } else if (isDemob) {
-    // Demobilisation mode
-    if (locationLabel) locationLabel.textContent = "Location";
-    if (locationField) locationField.placeholder = "Enter sheet number and grid reference";
-    if (crewNumberLabel) crewNumberLabel.textContent = "Number of people de-mobilising today for this discipline";
-    
-    // Remove autocomplete for demobilisation
-    if (autocomplete) {
-      google.maps.event.clearInstanceListeners(locationField);
-      autocomplete = null;
-    }
   } else {
-    // Normal mode
-    if (locationLabel) locationLabel.textContent = "Location";
-    if (locationField) locationField.placeholder = "Enter sheet number and grid reference";
-    if (crewNumberLabel) crewNumberLabel.textContent = "Number of People in Crew at Location";
-    
-    // Remove autocomplete for normal mode
+    // Normal or Demob: sheet + grid fields
+    gridContainer.style.display = 'block';
+    mobContainer.style.display = 'none';
+    locationLabel.textContent = "Location";
+    // Remove autocomplete if present
     if (autocomplete) {
-      google.maps.event.clearInstanceListeners(locationField);
+      google.maps.event.clearInstanceListeners(mobContainer.querySelector('input'));
       autocomplete = null;
     }
   }
@@ -2135,73 +2151,75 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // BOG form submit
   document.getElementById('bog-form')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    if (!validateBogForm()) return;
+  e.preventDefault();
+  if (!validateBogForm()) return;
 
-    const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Processing...';
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;                // Disable immediately
+  btn.textContent = 'Processing...';  // Change text
 
-    try {
-      const swms = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
-        .map(el => el.value);
+  try {
+    const swms = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
+      .map(el => el.value);
 
-      let data = {
-        "Project": document.getElementById('bog-project')?.value || "Kalgoorlie - Wallaroo",
-        "Form Date": document.getElementById('bog-date')?.value || "",
-        "Is Mobilisation Day": document.getElementById('bog-mob')?.checked || false,
-        "Is Demobilisation Day": document.getElementById('bog-demob')?.checked || false,
-        "Company Name": document.getElementById('bog-company-name')?.value || "",
-        "Discipline": document.getElementById('bog-discipline')?.value || "",
-        "Estimated Start Time2": document.getElementById('bog-estimated-start-timestamp')?.value || "",
-        "Estimated Finish Time2": document.getElementById('bog-estimated-finish-timestamp')?.value || "",
-        "Location / Grid Reference": document.getElementById('bog-Location')?.value || "",
-        "Onsite Crew Lead Name": document.getElementById('bog-site-contact-hidden')?.value || "",
-        "Onsite Crew Lead Mobile2": document.getElementById('bog-onsite-crew-lead-mobile')?.value || "",
-        "Onsite Crew Lead Email": document.getElementById('bog-onsite-crew-lead-email')?.value || "",
-        "Number of People at Location": Number(document.getElementById('bog-Number-of-People-at-Location')?.value) || 0,
-        "Selected Crew Members": document.getElementById('bog-crews-names-hidden')?.value || "",
-        "Genus FCM": document.getElementById('bog-Genus-FCM')?.value || "",
-        "SWMS Selected": swms,
-        "JHA Signed & Inducted": document.getElementById('bog-jha-uploaded')?.checked || false,
-        "ACM Disturbance Planned?": document.getElementById('bog-ACM')?.value || "",
-        "ACM Notification Received & on JHA": document.getElementById('bog-acm-yes')?.value === "Yes",
-        "Gas Monitoring & Trench Guards in Place": document.getElementById('bog-guards-checkbox')?.checked || false,
-        "Excavation Work Today": document.getElementById('bog-excavation-checkbox')?.checked || false,
-        "Additional Comments": document.getElementById('bog-comments')?.value || "",
-        'Number of Crew vehicles': document.getElementById('bog-crew-vehicles')?.value || '',
-        'Number of heavy vehicles': document.getElementById('bog-heavy-vehicles')?.value || ''
-      };
+    let data = {
+      "Project": document.getElementById('bog-project')?.value || "Kalgoorlie - Wallaroo",
+      "Form Date": document.getElementById('bog-date')?.value || "",
+      "Is Mobilisation Day": document.getElementById('bog-mob')?.checked || false,
+      "Is Demobilisation Day": document.getElementById('bog-demob')?.checked || false,
+      "Sheet Number": !isMob ? document.getElementById('bog-sheet-number')?.value || "" : "",
+      "Grid Reference": !isMob ? document.getElementById('bog-grid-reference')?.value || "" : "",
+      "Mobilisation Address": isMob ? document.getElementById('bog-Location-mob')?.value || "" : "",
+      "Company Name": document.getElementById('bog-company-name')?.value || "",
+      "Discipline": document.getElementById('bog-discipline')?.value || "",
+      "Estimated Start Time2": document.getElementById('bog-estimated-start-timestamp')?.value || "",
+      "Estimated Finish Time2": document.getElementById('bog-estimated-finish-timestamp')?.value || "",
+      "Onsite Crew Lead Name": document.getElementById('bog-site-contact-hidden')?.value || "",
+      "Onsite Crew Lead Mobile2": document.getElementById('bog-onsite-crew-lead-mobile')?.value || "",
+      "Onsite Crew Lead Email": document.getElementById('bog-onsite-crew-lead-email')?.value || "",
+      "Number of People at Location": Number(document.getElementById('bog-Number-of-People-at-Location')?.value) || 0,
+      "Selected Crew Members": document.getElementById('bog-crews-names-hidden')?.value || "",
+      "Genus FCM": document.getElementById('bog-Genus-FCM')?.value || "",
+      "SWMS Selected": swms,
+      "JHA Signed & Inducted": document.getElementById('bog-jha-uploaded')?.checked || false,
+      "ACM Disturbance Planned?": document.getElementById('bog-ACM')?.value || "",
+      "ACM Notification Received & on JHA": document.getElementById('bog-acm-yes')?.value === "Yes",
+      "Gas Monitoring & Trench Guards in Place": document.getElementById('bog-guards-checkbox')?.checked || false,
+      "Excavation Work Today": document.getElementById('bog-excavation-checkbox')?.checked || false,
+      "Additional Comments": document.getElementById('bog-comments')?.value || "",
+      'Number of Crew vehicles': document.getElementById('bog-crew-vehicles')?.value || '',
+      'Number of heavy vehicles': document.getElementById('bog-heavy-vehicles')?.value || ''
+    };
 
-      btn.textContent = 'Uploading JHA photos...';
-      const jhaAtt = await uploadFilesToAirtable(
-        document.getElementById('bog-jha-photos')?.files || [],
-        'bog',
-        'JHA Photos'
-      );
-      if (jhaAtt.length) data['JHA Photos'] = jhaAtt;
+    btn.textContent = 'Uploading JHA photos...';
+    const jhaAtt = await uploadFilesToAirtable(
+      document.getElementById('bog-jha-photos')?.files || [],
+      'bog',
+      'JHA Photos'
+    );
+    if (jhaAtt.length) data['JHA Photos'] = jhaAtt;
 
-      btn.textContent = 'Uploading site photos...';
-      const siteAtt = await uploadFilesToAirtable(
-        document.getElementById('bog-site-photos')?.files || [],
-        'bog',
-        'Site Setup Photos'
-      );
-      if (siteAtt.length) data['Site Setup Photos'] = siteAtt;
+    btn.textContent = 'Uploading site photos...';
+    const siteAtt = await uploadFilesToAirtable(
+      document.getElementById('bog-site-photos')?.files || [],
+      'bog',
+      'Site Setup Photos'
+    );
+    if (siteAtt.length) data['Site Setup Photos'] = siteAtt;
 
-      btn.textContent = 'Submitting...';
-      await submitToAirtable('bog', data);
+    btn.textContent = 'Submitting...';
+    await submitToAirtable('bog', data);
 
-      showSuccessMessage();
+    showSuccessMessage();
 
-    } catch (err) {
-      console.error('BOG submission failed:', err);
-      alert('Submission failed: ' + err.message);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Submit BOG';
-    }
-  });
+  } catch (err) {
+    console.error('BOG submission failed:', err);
+    alert('Submission failed: ' + err.message);
+  } finally {
+    btn.disabled = false;          // Re-enable on success or error
+    btn.textContent = 'Submit BOG'; // Reset text
+  }
+});
 
   // Progress form submit
 document.getElementById('progress-form')?.addEventListener('submit', async function(e) {
@@ -2215,14 +2233,15 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
   try {
     // Collect common submission data (used for all activity records)
     const commonData = {
-      "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
-      "Form Date": document.getElementById('progress-date')?.value || "",
-      "Company Name": document.getElementById('progress-company-name')?.value || "",
-      "Onsite Crew Lead Name": document.getElementById('progress-site-contact-hidden')?.value || "",
-      "Onsite Crew Lead Mobile2": document.getElementById('progress-onsite-crew-lead-mobile')?.value || "",
-      "Location / Grid Reference": document.getElementById('progress-Location')?.value || "",
-      "Additional Comments": document.getElementById('progress-comments')?.value || ""
-    };
+  "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
+  "Form Date": document.getElementById('progress-date')?.value || "",
+  "Company Name": document.getElementById('progress-company-name')?.value || "",
+  "Onsite Crew Lead Name": document.getElementById('progress-site-contact-hidden')?.value || "",
+  "Onsite Crew Lead Mobile2": document.getElementById('progress-onsite-crew-lead-mobile')?.value || "",
+  "Sheet Number": document.getElementById('progress-sheet-number')?.value || "",
+  "Grid Reference": document.getElementById('progress-grid-reference')?.value || "",
+  "Additional Comments": document.getElementById('progress-comments')?.value || ""
+};
 
     // Collect all activities with their complete data
     const activities = [];
@@ -2608,8 +2627,8 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     console.error('Progress submission failed:', err);
     alert('Submission failed: ' + err.message);
   } finally {
-    btn.disabled = false;
-    btn.textContent = 'Submit Progress Register';
+    btn.disabled = false;                   // Re-enable on success or error
+    btn.textContent = 'Submit Progress Register'; // Reset text
   }
 });
 });
