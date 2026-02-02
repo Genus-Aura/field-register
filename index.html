@@ -605,6 +605,7 @@ textarea {
     <input type="checkbox" name="bog-SWMS[]" value="Service Locator" /> Service Locator (0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Reinstatement" /> Reinstatement (0012 Excavation & Trenching)<br />
     <input type="checkbox" name="bog-SWMS[]" value="Track Safety" /> Track Safety - Rail Corridor (0024 Track Safety - Rail Corridor)<br />
+    <input type="checkbox" name="bog-SWMS[]" value="Site Establishment" /> Site Establishment (0011 Site Establishment)<br />
 
     <p id="swms-error" style="color: red; display: none;">Please select at least one SWMS discipline.</p>
   </fieldset>
@@ -740,11 +741,11 @@ textarea {
 <div style="display: flex; gap: 1rem;">
   <div style="flex: 1;">
     <label for="progress-sheet-number">Sheet Number (e.g., 01)</label>
-    <input type="text" id="progress-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100" required>
+    <input type="text" id="progress-sheet-number" name="Sheet Number" maxlength="3" placeholder="01, 02, ..., 100">
   </div>
   <div style="flex: 1;">
     <label for="progress-grid-reference">Grid Reference (e.g., A1)</label>
-    <input type="text" id="progress-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6" required>
+    <input type="text" id="progress-grid-reference" name="Grid Reference" maxlength="3" placeholder="A1, A2, ..., F6">
   </div>
 </div>
 
@@ -1603,42 +1604,42 @@ function updateMobDemobState() {
   const crewNumberLabel = document.querySelector('label[for="bog-Number-of-People-at-Location"]');
   const locationLabel = document.querySelector('label[for="bog-Location"]');
 
-  if (isMob) {
-    // Mobilisation: single address field
-    gridContainer.style.display = 'none';
-    mobContainer.style.display = 'block';
-      if (locationLabel) {
-      locationLabel.textContent = "Departure Address";
-    }
+if (isMob) {
+  // Mobilisation: single address field
+  gridContainer.style.display = 'none';
+  mobContainer.style.display = 'block';
 
-    // Initialize autocomplete for mobilisation
-    const mobField = document.getElementById('bog-Location-mob');
-      if (mobField && typeof google !== 'undefined') {
-      autocomplete = new google.maps.places.Autocomplete(mobField, {
+  // Initialize autocomplete for mobilisation
+  const mobField = document.getElementById('bog-Location-mob');
+  if (mobField && typeof google !== 'undefined') {
+    autocomplete = new google.maps.places.Autocomplete(mobField, {
       componentRestrictions: { country: 'au' }
     });
 
     // Listen for when user selects a place from dropdown
-autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
       if (place && place.formatted_address) {
+        // Valid selection → mark as valid (optional: add visual feedback)
         mobField.dataset.valid = "true";
+        mobField.setCustomValidity("");  // Clear any previous error
+      }
+    });
+
+    // On blur (when user leaves the field), check if a valid place was selected
+    mobField.addEventListener('blur', function() {
+      const place = autocomplete.getPlace();
+      
+      if (!place || !place.formatted_address) {
+        // No valid selection → show error
+        mobField.setCustomValidity("Please select a full address from the dropdown.");
+        mobField.reportValidity();  // Show browser validation message immediately
+      } else {
         mobField.setCustomValidity("");  // Clear error
       }
     });
 
-    // Validate on blur (user leaves field)
-    mobField.addEventListener('blur', function() {
-      const place = autocomplete.getPlace();
-      if (!place || !place.formatted_address) {
-        mobField.setCustomValidity("Please select a full address from the dropdown.");
-        mobField.reportValidity();  // Show message immediately
-      } else {
-        mobField.setCustomValidity("");
-      }
-    });
-
-    // Clear error when user starts typing again
+    // Optional: Clear validation when user starts typing again
     mobField.addEventListener('input', function() {
       mobField.setCustomValidity("");
     });
@@ -1647,9 +1648,6 @@ autocomplete.addListener('place_changed', function() {
   // Normal or Demob: sheet + grid fields
   gridContainer.style.display = 'block';
   mobContainer.style.display = 'none';
-  if (locationLabel) {
-    locationLabel.textContent = "Location";
-  }
 
   // Safely remove autocomplete listeners
   const mobField = document.getElementById('bog-Location-mob');
@@ -1657,6 +1655,12 @@ autocomplete.addListener('place_changed', function() {
     google.maps.event.clearInstanceListeners(mobField);
     autocomplete = null;
   }
+}
+
+// Add this outside the if/else to define locationLabel
+const locationLabel = document.querySelector('label[for="bog-Location"]');
+if (locationLabel) {
+  locationLabel.textContent = isMob ? "Departure Address" : "Location";
 }
 
   // Handle dynamic vehicle fields
@@ -2323,17 +2327,45 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
   const btn = this.querySelector('button[type="submit"]');
   btn.disabled = true;
   btn.textContent = 'Processing...';
+  const sheetInput = document.getElementById('progress-sheet-number');
+const gridInput = document.getElementById('progress-grid-reference');
+
+if (sheetInput) {
+  let sheetVal = sheetInput.value.trim();
+  // Only allow numbers, force 2 digits (01–99), allow 100 as-is
+  if (/^\d+$/.test(sheetVal)) {
+    sheetVal = sheetVal.padStart(2, '0').slice(-3); // 1 → "01", 100 → "100"
+    sheetInput.value = sheetVal; // show cleaned value to user
+  } else if (sheetVal) {
+    sheetInput.setCustomValidity("Sheet Number must be a number (1–100).");
+    sheetInput.reportValidity();
+    sheetInput.focus();
+    return; // stop submission
+  }
+}
+
+if (gridInput) {
+  let gridVal = gridInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, ''); // only A-Z 0-9, uppercase
+  if (gridVal && /^[A-Z]\d+$/.test(gridVal)) {
+    gridInput.value = gridVal; // e.g. "a1" → "A1", "A-1" → "A1", "A 1" → "A1"
+  } else if (gridVal) {
+    gridInput.setCustomValidity("Grid Reference must be a capital letter followed by number (e.g. A1).");
+    gridInput.reportValidity();
+    gridInput.focus();
+    return; // stop submission
+  }
+}
 
   try {
     // Collect common submission data (used for all activity records)
-    const commonData = {
+ const commonData = {
   "Project": document.getElementById('progress-project')?.value || "Kalgoorlie - Wallaroo",
   "Form Date": document.getElementById('progress-date')?.value || "",
   "Company Name": document.getElementById('progress-company-name')?.value || "",
   "Onsite Crew Lead Name": document.getElementById('progress-site-contact-hidden')?.value || "",
   "Onsite Crew Lead Mobile2": document.getElementById('progress-onsite-crew-lead-mobile')?.value || "",
-  "Sheet Number": document.getElementById('progress-sheet-number')?.value || "",
-  "Grid Reference": document.getElementById('progress-grid-reference')?.value || "",
+  "Sheet Number": document.getElementById('progress-sheet-number')?.value?.trim() || "",
+  "Grid Reference": document.getElementById('progress-grid-reference')?.value?.trim().toUpperCase() || "",
   "Additional Comments": document.getElementById('progress-comments')?.value || ""
 };
 
