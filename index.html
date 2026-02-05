@@ -609,9 +609,15 @@ textarea {
     </select>
   </div>
   <!-- Mobilisation single field (hidden unless mobilisation checked) -->
-  <div id="bog-location-mob" style="display: none;">
-    <input type="text" id="bog-Location-mob" name="Mobilisation Address" placeholder="Enter the address you and your crew have departed from" required>
-  </div>
+<div id="bog-location-mob" style="display: none;">
+  <label for="bog-Location-mob">Departure Address</label>
+  <input 
+    type="text" 
+    id="bog-Location-mob" 
+    name="Mobilisation Address" 
+    placeholder="Enter the address you and your crew have departed from" 
+    required
+  >
 </div>
 
     <label for="bog-site-contact">Onsite Crew Lead Name</label>
@@ -1755,23 +1761,47 @@ function updateMobDemobState() {
   const mobCheckbox = document.getElementById("bog-mob");
   const demobCheckbox = document.getElementById("bog-demob");
   if (!mobCheckbox || !demobCheckbox) return;
-  
+
   const isMob = mobCheckbox.checked;
   const isDemob = demobCheckbox.checked;
 
+  // Prevent both being checked at the same time
   if (isMob && isDemob) {
     mobCheckbox.checked = false;
     demobCheckbox.checked = false;
-    return updateMobDemobState();
+    return updateMobDemobState(); // Re-run to apply changes
   }
 
+  // Toggle visibility of location inputs
+  const gridContainer = document.getElementById('bog-location-grid');
+  const mobContainer = document.getElementById('bog-location-mob');
+
+  if (gridContainer && mobContainer) {
+    if (isMob) {
+      gridContainer.style.display = 'none';
+      mobContainer.style.display = 'block';
+    } else {
+      gridContainer.style.display = 'block';
+      mobContainer.style.display = 'none';
+    }
+  }
+
+  // List of fields to hide when either mob or demob is checked
   const conditionalIds = [
     "bog-site-contact",
-    "bog-onsite-crew-lead-mobile", "bog-onsite-crew-lead-email", "bog-Genus-FCM",
-    "bog-ACM", "bog-acm-yes", "bog-guards", "bog-excavation",
-    "bog-jha-uploaded", "bog-jha-photos", "bog-site-photos"
+    "bog-onsite-crew-lead-mobile",
+    "bog-onsite-crew-lead-email",
+    "bog-Genus-FCM",
+    "bog-ACM",
+    "bog-acm-yes",
+    "bog-guards",
+    "bog-excavation",
+    "bog-jha-uploaded",
+    "bog-jha-photos",
+    "bog-site-photos"
   ];
 
+  // Hide/show helper
   function hideById(id, hide) {
     const el = document.getElementById(id);
     const label = document.querySelector(`label[for="${id}"]`);
@@ -1786,7 +1816,29 @@ function updateMobDemobState() {
     if (label) label.style.display = hide ? "none" : "";
   }
 
+  // Apply to other conditional fields
   conditionalIds.forEach(id => hideById(id, isMob || isDemob));
+
+  // Re-initialize Google Places Autocomplete ONLY when mobilisation field is visible
+  const mobField = document.getElementById('bog-Location-mob');
+  if (isMob && mobField && typeof google !== 'undefined' && !mobField.dataset.autocompleteInitialized) {
+    autocomplete = new google.maps.places.Autocomplete(mobField, {
+      componentRestrictions: { country: 'au' }
+    });
+
+    // Optional: Mark as valid when user selects from dropdown
+    autocomplete.addListener('place_changed', function() {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        mobField.dataset.valid = "true";
+        mobField.setCustomValidity("");
+      }
+    });
+
+    // Prevent re-initialization on next toggle
+    mobField.dataset.autocompleteInitialized = "true";
+  }
+}
 
   // Special handling for the hidden crew lead field
   const leadHidden = document.getElementById('bog-site-contact-hidden');
@@ -1951,7 +2003,6 @@ if (isMob) {
     insertAfter(crewLabel, heavyInput);
     insertAfter(crewInput, crewLabel);
   }
-}
 
 // ============================================================
 // UTILITY FUNCTIONS
