@@ -1751,7 +1751,7 @@ textarea {
 // GLOBAL FUNCTIONS - Mob/Demob State Management
 // ============================================================
 
-let autocomplete; // Global variable for Google Maps autocomplete
+let autocomplete; // Global variable for Google Maps Places Autocomplete
 
 function insertAfter(newNode, referenceNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -1819,72 +1819,9 @@ function updateMobDemobState() {
   // Apply to other conditional fields
   conditionalIds.forEach(id => hideById(id, isMob || isDemob));
 
-  // Re-initialize Google Places Autocomplete ONLY when mobilisation field is visible
+  // Google Places Autocomplete - only initialize when mobilisation is active
   const mobField = document.getElementById('bog-Location-mob');
   if (isMob && mobField && typeof google !== 'undefined' && !mobField.dataset.autocompleteInitialized) {
-    autocomplete = new google.maps.places.Autocomplete(mobField, {
-      componentRestrictions: { country: 'au' }
-    });
-
-    // Optional: Mark as valid when user selects from dropdown
-    autocomplete.addListener('place_changed', function() {
-      const place = autocomplete.getPlace();
-      if (place && place.formatted_address) {
-        mobField.dataset.valid = "true";
-        mobField.setCustomValidity("");
-      }
-    });
-
-    // Prevent re-initialization on next toggle
-    mobField.dataset.autocompleteInitialized = "true";
-  }
-}
-
-  // Special handling for the hidden crew lead field
-  const leadHidden = document.getElementById('bog-site-contact-hidden');
-  if (leadHidden) {
-    if (isMob || isDemob) {
-      leadHidden.removeAttribute('required');
-    } else {
-      leadHidden.setAttribute('required', 'required');
-    }
-  }
-
-  const swmsSection = document.getElementById("bog-swms-section");
-  if (swmsSection) swmsSection.style.display = (isMob || isDemob) ? "none" : "";
-
-  const swmsFieldset = document.getElementById("bog-swms-fieldset");
-  if (swmsFieldset) swmsFieldset.style.display = (isMob || isDemob) ? "none" : "";
-
-  // Hide the helper text paragraphs when Mobilisation/Demobilisation is selected
-  const jhaPhotoLabel = document.querySelector('label[for="bog-jha-photos"]');
-  if (jhaPhotoLabel) {
-    const jhaHelpText = jhaPhotoLabel.parentElement.querySelector('p');
-    if (jhaHelpText) jhaHelpText.style.display = (isMob || isDemob) ? "none" : "";
-  }
-
-  const sitePhotoLabel = document.querySelector('label[for="bog-site-photos"]');
-  if (sitePhotoLabel) {
-    const siteHelpText = sitePhotoLabel.parentElement.querySelector('p');
-    if (siteHelpText) siteHelpText.style.display = (isMob || isDemob) ? "none" : "";
-  }
-
-// Declare shared variables once (no duplicates)
-const locationLabel = document.querySelector('label[for="bog-Location"]');
-const gridContainer = document.getElementById('bog-location-grid');
-const mobContainer = document.getElementById('bog-location-mob');
-
-if (isMob) {
-  // Mobilisation: single address field
-  gridContainer.style.display = 'none';
-  mobContainer.style.display = 'block';
-  if (locationLabel) {
-    locationLabel.textContent = "Departure Address";
-  }
-
-  const mobField = document.getElementById('bog-Location-mob');
-  if (mobField && typeof google !== 'undefined') {
-    // Initialize autocomplete
     autocomplete = new google.maps.places.Autocomplete(mobField, {
       componentRestrictions: { country: 'au' }
     });
@@ -1913,22 +1850,17 @@ if (isMob) {
     mobField.addEventListener('input', function() {
       mobField.setCustomValidity("");
     });
-  }
-} else {
-  // Normal or Demob: sheet + grid fields
-  gridContainer.style.display = 'block';
-  mobContainer.style.display = 'none';
-  if (locationLabel) {
-    locationLabel.textContent = "Location";
+
+    // Prevent re-initialization on next toggle
+    mobField.dataset.autocompleteInitialized = "true";
   }
 
-  // Cleanup autocomplete safely
-  const mobField = document.getElementById('bog-Location-mob');
-  if (autocomplete && mobField) {
+  // Cleanup autocomplete when switching away from mobilisation
+  if (!isMob && autocomplete && mobField) {
     google.maps.event.clearInstanceListeners(mobField);
     autocomplete = null;
+    delete mobField.dataset.autocompleteInitialized;
   }
-}
 
   // Handle dynamic vehicle fields
   const crewVehiclesFieldId = "bog-crew-vehicles";
@@ -2003,6 +1935,7 @@ if (isMob) {
     insertAfter(crewLabel, heavyInput);
     insertAfter(crewInput, crewLabel);
   }
+}
 
 // ============================================================
 // UTILITY FUNCTIONS
