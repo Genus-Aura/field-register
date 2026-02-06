@@ -595,7 +595,7 @@ textarea {
   <!-- Default dropdown for Cable Section (shown unless mobilisation) -->
   <div id="bog-location-grid" style="display: block;">
     <label for="bog-cable-section">Cable Section (Asset ID)</label>
-    <select id="bog-cable-section" name="Cable Section" required>
+    <select id="bog-cable-section" name="Cable Section">
       <option value="">Select Cable Section</option>
       <option value="GOFD DY - GOFD DX">GOFD DY - GOFD DX</option>
       <option value="GOFD DZ - GOFD DY">GOFD DZ - GOFD DY</option>
@@ -621,7 +621,7 @@ textarea {
 
     <label for="bog-site-contact">Onsite Crew Lead Name</label>
     <div id="bog-site-contact" class="crew-checkbox"></div>
-    <input type="hidden" id="bog-site-contact-hidden" name="bog-site-contact" required />
+    <input type="hidden" id="bog-site-contact-hidden" name="bog-site-contact">
 
         <label for="bog-onsite-crew-lead-mobile">Onsite Crew Lead Mobile</label>
         <input type="tel" id="bog-onsite-crew-lead-mobile" name="bog-onsite-crew-lead-mobile" pattern="04\d{8}" maxlength="10" placeholder="Enter 10-digit number" oninvalid="this.setCustomValidity('Enter number as 04xxxxxxxx')" oninput="this.setCustomValidity('')" required />
@@ -671,6 +671,7 @@ textarea {
 </div>
                 
 <div id="bog-swms-section">
+
   <id="bog-jha-label">
     <label for="bog-jha-uploaded">
       I confirm all workers have been inducted and have signed onto the JHA.
@@ -706,7 +707,7 @@ textarea {
 </div>
 
         <label for="bog-ACM">Will you be disturbing/modifying any possible ACM while onsite?</label>
-        <select id="bog-ACM" name="bog-ACM" onchange="toggleACMField()" required>
+        <select id="bog-ACM" name="bog-ACM" onchange="toggleACMField()">
           <option value="">Select one</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
@@ -1768,10 +1769,10 @@ function updateMobDemobState() {
   if (isMob && isDemob) {
     mobCheckbox.checked = false;
     demobCheckbox.checked = false;
-    return updateMobDemobState(); // Re-run to apply changes
+    return updateMobDemobState(); // Re-run
   }
 
-  // Toggle visibility of location inputs
+  // Toggle location inputs
   const gridContainer = document.getElementById('bog-location-grid');
   const mobContainer = document.getElementById('bog-location-mob');
 
@@ -1785,7 +1786,7 @@ function updateMobDemobState() {
     }
   }
 
-  // List of fields to hide when either mob or demob is checked
+  // Fields/sections to hide when mob or demob is checked
   const conditionalIds = [
     "bog-site-contact",
     "bog-onsite-crew-lead-mobile",
@@ -1800,7 +1801,7 @@ function updateMobDemobState() {
     "bog-site-photos"
   ];
 
-  // Hide/show helper
+  // Hide/show helper for ID-based elements
   function hideById(id, hide) {
     const el = document.getElementById(id);
     const label = document.querySelector(`label[for="${id}"]`);
@@ -1815,17 +1816,36 @@ function updateMobDemobState() {
     if (label) label.style.display = hide ? "none" : "";
   }
 
-  // Apply to other conditional fields
+  // Apply to ID-based conditional fields
   conditionalIds.forEach(id => hideById(id, isMob || isDemob));
 
-  // Google Places Autocomplete - only initialize when mobilisation is active
+  // Hide SWMS fieldset and section
+  const swmsFieldset = document.getElementById("bog-swms-fieldset");
+  const swmsSection = document.getElementById("bog-swms-section");
+  if (swmsFieldset) swmsFieldset.style.display = (isMob || isDemob) ? "none" : "";
+  if (swmsSection) swmsSection.style.display = (isMob || isDemob) ? "none" : "";
+
+  // Hide JHA instruction text ("Please induct all visitors...")
+  const jhaInstructionText = document.querySelector('#bog-jha-label p');
+  if (jhaInstructionText) jhaInstructionText.style.display = (isMob || isDemob) ? "none" : "";
+
+  // Hide BOTH photo help paragraphs (reliable single selector)
+  const photoHelpParagraphs = document.querySelectorAll(
+    'p[style*="font-size: 0.9em; color: #555; margin-top: 8px;"]'
+  );
+
+  photoHelpParagraphs.forEach(p => {
+    // Hide if mob or demob is checked, show otherwise
+    p.style.display = (isMob || isDemob) ? "none" : "";
+  });
+
+  // Google Places Autocomplete for mobilisation address
   const mobField = document.getElementById('bog-Location-mob');
   if (isMob && mobField && typeof google !== 'undefined' && !mobField.dataset.autocompleteInitialized) {
     autocomplete = new google.maps.places.Autocomplete(mobField, {
       componentRestrictions: { country: 'au' }
     });
 
-    // Mark as valid when user selects from dropdown
     autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
       if (place && place.formatted_address) {
@@ -1834,7 +1854,6 @@ function updateMobDemobState() {
       }
     });
 
-    // Validate on blur (user leaves field)
     mobField.addEventListener('blur', function() {
       const place = autocomplete.getPlace();
       if (!place || !place.formatted_address) {
@@ -1845,35 +1864,31 @@ function updateMobDemobState() {
       }
     });
 
-    // Clear error when user starts typing again
     mobField.addEventListener('input', function() {
       mobField.setCustomValidity("");
     });
 
-    // Prevent re-initialization on next toggle
     mobField.dataset.autocompleteInitialized = "true";
   }
 
-  // Cleanup autocomplete when switching away from mobilisation
+  // Cleanup autocomplete when not mobilisation
   if (!isMob && autocomplete && mobField) {
     google.maps.event.clearInstanceListeners(mobField);
     autocomplete = null;
     delete mobField.dataset.autocompleteInitialized;
   }
 
-  // Handle dynamic vehicle fields
+  // Your existing dynamic vehicle fields code (unchanged)
   const crewVehiclesFieldId = "bog-crew-vehicles";
   const crewVehiclesLabelId = "label-bog-crew-vehicles";
   const heavyVehiclesFieldId = "bog-heavy-vehicles";
   const heavyVehiclesLabelId = "label-bog-heavy-vehicles";
 
-  // Remove old fields if they exist
   [crewVehiclesLabelId, crewVehiclesFieldId, heavyVehiclesLabelId, heavyVehiclesFieldId].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.remove();
   });
 
-  // Add vehicle fields for mob/demob
   if (isMob || isDemob) {
     const crewNamesHidden = document.getElementById('bog-crews-names-hidden');
     
@@ -1885,7 +1900,7 @@ function updateMobDemobState() {
       ? "Number of heavy vehicles being mobilised"
       : "Number of heavy vehicles being de-mobilised";
 
-    // Create Heavy Vehicles field
+    // Heavy Vehicles
     const heavyLabel = document.createElement("label");
     heavyLabel.id = heavyVehiclesLabelId;
     heavyLabel.htmlFor = heavyVehiclesFieldId;
@@ -1908,7 +1923,7 @@ function updateMobDemobState() {
     insertAfter(heavyLabel, crewNamesHidden);
     insertAfter(heavyInput, heavyLabel);
 
-    // Create Crew Vehicles field
+    // Crew Vehicles
     const crewLabel = document.createElement("label");
     crewLabel.id = crewVehiclesLabelId;
     crewLabel.htmlFor = crewVehiclesFieldId;
@@ -2394,30 +2409,40 @@ document.getElementById('bog-form')?.addEventListener('submit', async function(e
   btn.textContent = 'Processing...';  // Change text
 
   try {
-    // Get mobilisation state
-    const isMob = document.getElementById('bog-mob')?.checked || false;
+  // Define mobilisation/demob flags ONCE at the top
+  const isMob = document.getElementById('bog-mob')?.checked || false;
+  const isDemob = document.getElementById('bog-demob')?.checked || false;
 
-    // Dynamic required validation for location fields
-    if (isMob) {
-      const mobField = document.getElementById('bog-Location-mob');
-      if (mobField && !mobField.value.trim()) {
-        mobField.setCustomValidity("Please enter the departure address.");
-        mobField.reportValidity();
-        mobField.focus();
-        return;  // Stop submission
-      }
-      mobField.setCustomValidity("");  // Clear if valid
-    } else {
-      // Updated: validate Cable Section instead of sheet/grid
-      const cableField = document.getElementById('bog-cable-section');
-      if (cableField && !cableField.value.trim()) {
-        cableField.setCustomValidity("Please select a Cable Section (Asset ID).");
-        cableField.reportValidity();
-        cableField.focus();
-        return;
-      }
-      cableField.setCustomValidity("");
+  // Dynamic required validation for location fields
+  if (isMob) {
+    const mobField = document.getElementById('bog-Location-mob');
+    if (mobField && !mobField.value.trim()) {
+      mobField.setCustomValidity("Please enter the departure address.");
+      mobField.reportValidity();
+      mobField.focus();
+      return;  // Stop submission
     }
+    mobField.setCustomValidity("");  // Clear if valid
+  } else {
+    const cableField = document.getElementById('bog-cable-section');
+    if (cableField && !cableField.value.trim()) {
+      cableField.setCustomValidity("Please select a Cable Section (Asset ID).");
+      cableField.reportValidity();
+      cableField.focus();
+      return;
+    }
+    cableField.setCustomValidity("");
+  }
+
+  // Validate Onsite Crew Lead Name — ONLY when NOT mobilisation or demobilisation
+  if (!isMob && !isDemob) {
+    const crewLeadHidden = document.getElementById('bog-site-contact-hidden');
+    if (crewLeadHidden && !crewLeadHidden.value.trim()) {
+      alert("Please select an Onsite Crew Lead Name.");
+      document.getElementById('bog-site-contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;  // Stop submission
+    }
+  }
 
     const swms = Array.from(document.querySelectorAll('input[name="bog-SWMS[]"]:checked'))
       .map(el => el.value);
@@ -2431,6 +2456,20 @@ let formattedStartTime = "";
 if (startHour && startMinutes && startAmPm) {
   formattedStartTime = `${startHour}:${startMinutes} ${startAmPm}`;
 }  
+
+// Validate ACM Notification (only required when ACM disturbance is "Yes")
+const acmDisturbance = document.getElementById('bog-ACM')?.value;
+const acmNotification = document.getElementById('bog-acm-yes');
+
+if (acmDisturbance === "Yes" && acmNotification && !acmNotification.value) {
+  acmNotification.setCustomValidity("Please confirm whether you have received the ACM Notification Code.");
+  acmNotification.reportValidity();
+  acmNotification.focus();
+  // Scroll to the field so user sees it
+  document.getElementById('bog-acm-notification-field').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return; // Stop submission
+}
+acmNotification?.setCustomValidity(""); // Clear if valid
 
     let data = {
       "Project": document.getElementById('bog-project')?.value || "Kalgoorlie - Wallaroo",
