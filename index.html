@@ -325,7 +325,7 @@ textarea {
     font-weight: bold; /* Make these labels bold */
     color: var(--primary-dark); /* Use a darker color */
     display: inline; /* Keep them inline with their checkboxes */
-    margin-left: 5px; /* Add some space if the input is first */
+    margin-top: 5px;margin-left: 5px; /* Add some space if the input is first */
     /* Add any other styles specific to these main labels */
 }
 
@@ -453,12 +453,20 @@ textarea {
       margin: 0 0 0.5rem 0;
     }
 
-    .time-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+fieldset.time-group {
+  border: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+fieldset.time-group legend {
+  font-weight: bold;
+  padding: 0;
   font-size: 1rem;
+}
+
+#progress-location-container {
+  margin-bottom: 1rem;
 }
 
   </style>
@@ -519,10 +527,13 @@ textarea {
         </select>
 
 <!-- NEW: Estimated Start Time (Hour / Minutes / AM-PM) -->
-<div class="form-group time-group">
-  <label>Estimated Start Time</label>
+<fieldset class="form-group time-group">
+  <legend>Estimated Start Time</legend>
+
   <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <!-- Hour -->
     <div style="flex: 1; min-width: 100px;">
+      <label for="bog-start-hour">Hour</label>
       <select id="bog-start-hour" name="bog-start-hour" required>
         <option value="">Hour</option>
         <option value="1">01</option>
@@ -540,7 +551,9 @@ textarea {
       </select>
     </div>
 
+    <!-- Minutes -->
     <div style="flex: 1; min-width: 100px;">
+      <label for="bog-start-minutes">Minutes</label>
       <select id="bog-start-minutes" name="bog-start-minutes" required>
         <option value="">Minutes</option>
         <option value="00">00</option>
@@ -548,15 +561,17 @@ textarea {
       </select>
     </div>
 
+    <!-- AM/PM -->
     <div style="flex: 1; min-width: 100px;">
+      <label for="bog-start-ampm">AM/PM</label>
       <select id="bog-start-ampm" name="bog-start-ampm" required>
-        <option value="">Select AM or PM</option>
+        <option value="">AM/PM</option>
         <option value="AM">AM</option>
         <option value="PM">PM</option>
       </select>
     </div>
   </div>
-</div>
+</fieldset>
 
 <!-- NEW: Estimated Hours to be Worked Today -->
 <div class="form-group">
@@ -608,6 +623,8 @@ textarea {
       <option value="KGLE HM - GOFD EG">KGLE HM - GOFD EG</option>
     </select>
   </div>
+</div>
+
   <!-- Mobilisation single field (hidden unless mobilisation checked) -->
 <div id="bog-location-mob" style="display: none;">
   <label for="bog-Location-mob">Departure Address</label>
@@ -768,7 +785,7 @@ textarea {
           <button type="submit">Submit BOG</button>
         </div>
       </form>
-    </div>
+    </div>        
 
 <div id="form-progress" class="form-section hidden">
   <h3>Progress Register: Genus Aura project</h3>
@@ -797,7 +814,6 @@ textarea {
     <label for="progress-onsite-crew-lead-mobile">Onsite Crew Lead Mobile</label>
     <input type="tel" id="progress-onsite-crew-lead-mobile" name="progress-onsite-crew-lead-mobile" pattern="04\d{8}" maxlength="10" placeholder="Enter 10-digit number" oninvalid="this.setCustomValidity('Enter number as 04xxxxxxxx')" oninput="this.setCustomValidity('')" required />
 
-    <label for="progress-Location">Location</label>
 <div id="progress-location-container">
   <!-- Default dropdown for Cable Section -->
   <div id="progress-location-grid" style="display: block;">
@@ -815,925 +831,401 @@ textarea {
       <option value="KGLE HM - GOFD EG">KGLE HM - GOFD EG</option>
     </select>
   </div>
+ </div>
+ 
+<fieldset>
+  <legend>Select the activity type(s) your company has completed today:</legend>
+  <div class="discipline-checkbox-group">
 
-    <fieldset>
-      <legend>Select the activity type(s) your company has completed today:</legend>
-      <div class="discipline-checkbox-group">
-        <!-- RRP - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-rrp-progress" name="discipline[]" value="rrp-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-rrp-progress">Rod, Rope & Prove</label>
-        </div>
+    <!-- Rod, Rope & Prove -->
+    <div>
+      <input type="checkbox" id="discipline-rrp-progress" name="discipline[]" value="rrp-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-rrp-progress">Rod, Rope & Prove</label>
+    </div>
+    <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <label for="rrp-progress-qty">Metres Completed:</label>
+      <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
+      <label for="rrp-progress-tag-photos" style="margin-top: 15px;">Add RRP Checklist photo here</label>
+      <input type="file" id="rrp-progress-tag-photos" name="rrp_progress_tag_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+    </div>
 
-        <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="rrp-progress-qty">Metres Completed:</label>
-          <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
+    <!-- Blockages -->
+    <div>
+      <input type="checkbox" id="discipline-blockages-progress" name="discipline[]" value="blockages-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-blockages-progress">Blockages</label>
+    </div>
+    <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <label for="blockages-progress-qty">Blockages Cleared:</label>
+      <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
+      <label for="blockages-progress-tag-photos" style="margin-top: 15px;">Add Blockage Checklist photo here</label>
+      <input type="file" id="blockages-progress-tag-photos" name="blockages_progress_tag_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+    </div>
 
-  <label for="rrp-progress-tag-photos" style="margin-top: 15px;">
-    RRP Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing mandrel and tagged rope in duct
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rrp-progress-tag-photos" 
-    name="rrp_progress_tag_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-        <!-- Blockages - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-blockages-progress" name="discipline[]" value="blockages-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-blockages-progress">Blockages</label>
-        </div>
-
-        <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="blockages-progress-qty">Blockages Cleared:</label>
-          <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
-
-  <label for="blockages-progress-tag-photos" style="margin-top: 15px;">
-    Duct Blockage Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing blockage location, exposed duct, repaired duct and rope in duct
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="blockages-progress-tag-photos" 
-    name="blockages_progress_tag_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-        <!-- Route Preparation - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-route-progress" name="discipline[]" value="route-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-route-progress">Route Preparation</label>
-        </div>
-
-        <div id="discipline-route-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <!-- Clearing -->
-          <div>
-            <input type="checkbox" id="discipline-clearing-progress" name="clearing[]" value="clearing-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-clearing-progress">Clearing</label>
-          </div>
-
-          <div id="discipline-clearing-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="clearing-progress-qty">Metres Completed:</label>
-            <input type="number" id="clearing-progress-qty" name="clearing-progress-qty" min="0" step="0.1" />
-
-              <label for="clearing-progress-photos" style="margin-top: 15px;">
-    Before and After - Clearing (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after clearing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="clearing-progress-photos" 
-    name="clearing_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- OTR Ripping -->
-          <div>
-            <input type="checkbox" id="discipline-otr-ripping-progress" name="otr-ripping[]" value="otr-ripping-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-ripping-progress">OTR Ripping</label>
-          </div>
-
-          <div id="discipline-otr-ripping-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-ripping-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-ripping-progress-qty" name="otr-ripping-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-ripping-progress-photos" style="margin-top: 15px;">
-    Before and After - OTR Ripping (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after OTR ripping section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-ripping-progress-photos" 
-    name="otr-ripping_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- Rock Ripping -->
-          <div>
-            <input type="checkbox" id="discipline-rock-ripping-progress" name="rock-ripping[]" value="rock-ripping-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-ripping-progress">Rock Ripping</label>
-          </div>
-
-          <div id="discipline-rock-ripping-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-ripping-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-ripping-progress-qty" name="rock-ripping-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-ripping-progress-photos" style="margin-top: 15px;">
-    Before and After - Rock Ripping (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after rock ripping section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-ripping-progress-photos" 
-    name="rock-ripping_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- Rocksaw / Rock Hammer -->
-          <div>
-            <input type="checkbox" id="discipline-rocksaw-progress" name="rocksaw[]" value="rocksaw-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rocksaw-progress">Rocksaw / Rock Hammer</label>
-          </div>
-
-          <div id="discipline-rocksaw-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rocksaw-progress-qty">Metres Completed:</label>
-            <input type="number" id="rocksaw-progress-qty" name="rocksaw-progress-qty" min="0" step="0.1" />
-
-              <label for="rocksaw-progress-photos" style="margin-top: 15px;">
-    Before and After - Rocksaw / Rock Hammer (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after Rocksaw / Rock Hammer section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rocksaw-progress-photos" 
-    name="rocksaw_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-        </div>
-
-        <!-- Plough - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-plough-progress" name="discipline[]" value="plough-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-plough-progress">Plough</label>
-        </div>
-
-        <div id="discipline-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <!-- OTR Plough -->
-          <div>
-            <input type="checkbox" id="discipline-otr-plough-progress" name="otr-plough[]" value="otr-plough-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-plough-progress">OTR Plough</label>
-          </div>
-
-          <div id="discipline-otr-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-plough-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-plough-progress-qty" name="otr-plough-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-plough-progress-photos" style="margin-top: 15px;">
-    Before and After - OTR Plough (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after OTR Ploughing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-plough-progress-photos" 
-    name="otr-plough_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- Rock Plough -->
-          <div>
-            <input type="checkbox" id="discipline-rock-plough-progress" name="rock-plough[]" value="rock-plough-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-plough-progress">Rock Plough</label>
-          </div>
-
-          <div id="discipline-rock-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-plough-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-plough-progress-qty" name="rock-plough-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-plough-progress-photos" style="margin-top: 15px;">
-    Before and After - Rock Plough (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after Rock Ploughing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-plough-progress-photos" 
-    name="rock-plough_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
+    <!-- Route Preparation -->
+    <div>
+      <input type="checkbox" id="discipline-route-progress" name="discipline[]" value="route-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-route-progress">Route Preparation</label>
+    </div>
+    <div id="discipline-route-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <!-- Clearing -->
+      <div>
+        <input type="checkbox" id="discipline-clearing-progress" name="clearing[]" value="clearing-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-clearing-progress">Clearing</label>
       </div>
-</div>
-
-        <!-- Bore - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-bore-progress" name="discipline[]" value="bore-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-bore-progress">Bore</label>
-        </div>
-
-        <div id="discipline-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-        <!-- OTR Bore - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-otr-bore-progress" name="discipline[]" value="otr-bore-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-otr-bore-progress">OTR Bore</label>
-        </div>
-
-        <div id="discipline-otr-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-          <!-- OTR Bore - PE63 Size -->
-          <div>
-            <input type="checkbox" id="discipline-otr-bore-pe63-progress" name="otr-bore-size[]" value="otr-bore-pe63-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-bore-pe63-progress">Size - PE63</label>
-          </div>
-
-          <div id="discipline-otr-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-bore-pe63-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-bore-pe63-progress-qty" name="otr-bore-pe63-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-bore-pe63-progress-photos" style="margin-top: 15px;">
-    Before and After - PE63 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after boreing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-bore-pe63-progress-photos" 
-    name="otr-bore_pe63_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- OTR Bore - PE110 Size -->
-          <div>
-            <input type="checkbox" id="discipline-otr-bore-pe110-progress" name="bore-size[]" value="otr-bore-pe110-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-bore-pe110-progress">Size - PE110</label>
-          </div>
-
-          <div id="discipline-otr-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-bore-pe110-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-bore-pe110-progress-qty" name="otr-bore-pe110-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-bore-pe110-progress-photos" style="margin-top: 15px;">
-    Before and After - PE110 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after boreing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-bore-pe110-progress-photos" 
-    name="otr-bore_pe110_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-        </div>
-
-        <!-- Rock Bore - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-rock-bore-progress" name="discipline[]" value="rock-bore-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-rock-bore-progress">Rock Bore</label>
-        </div>
-
-        <div id="discipline-rock-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-          <!-- rock Bore - PE63 Size -->
-          <div>
-            <input type="checkbox" id="discipline-rock-bore-pe63-progress" name="rock-bore-size[]" value="rock-bore-pe63-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-bore-pe63-progress">Size - PE63</label>
-          </div>
-
-          <div id="discipline-rock-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-bore-pe63-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-bore-pe63-progress-qty" name="rock-bore-pe63-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-bore-pe63-progress-photos" style="margin-top: 15px;">
-    Before and After - PE63 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after boreing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-bore-pe63-progress-photos" 
-    name="rock-bore_pe63_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- rock Bore - PE110 Size -->
-          <div>
-            <input type="checkbox" id="discipline-rock-bore-pe110-progress" name="bore-size[]" value="rock-bore-pe110-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-bore-pe110-progress">Size - PE110</label>
-          </div>
-
-          <div id="discipline-rock-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-bore-pe110-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-bore-pe110-progress-qty" name="rock-bore-pe110-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-bore-pe110-progress-photos" style="margin-top: 15px;">
-    Before and After - PE110 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after boreing section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-bore-pe110-progress-photos" 
-    name="rock-bore_pe110_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-        </div>
-
-        <!-- Trench - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-trench-progress" name="discipline[]" value="trench-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-trench-progress">Trench</label>
-        </div>
-
-        <div id="discipline-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-        <!-- OTR Trench - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-otr-trench-progress" name="discipline[]" value="otr-trench-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-otr-trench-progress">OTR Trench</label>
-        </div>
-
-        <div id="discipline-otr-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-          <!-- OTR Trench Buried -->
-          <div>
-            <input type="checkbox" id="discipline-otr-trench-buried-progress" name="otr-trench-size[]" value="otr-trench-buried-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-trench-buried-progress">Direct Buried</label>
-          </div>
-
-          <div id="discipline-otr-trench-buried-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-trench-buried-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-trench-buried-progress-qty" name="otr-trench-buried-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-trench-buried-progress-photos" style="margin-top: 15px;">
-    Before and After - OTR Trench - Direct Buried (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-trench-buried-progress-photos" 
-    name="otr-trench-buried_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- OTR Trench - P50 Size -->
-          <div>
-            <input type="checkbox" id="discipline-otr-trench-p50-progress" name="otr-trench-size[]" value="otr-trench-p50-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-trench-p50-progress">Size - P50</label>
-          </div>
-
-          <div id="discipline-otr-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-trench-p50-progress-qty">Metres Completed:</label>
-            <input type="number" id="trench-p50-progress-qty" name="otr-trenchtrench-p50-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-trenchtrench-p50-progress-photos" style="margin-top: 15px;">
-    Before and After - P50 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-trenchtrench-p50-progress-photos" 
-    name="otr-trenchtrench_p50_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- OTR Trench - P100 Size -->
-          <div>
-            <input type="checkbox" id="discipline-otr-trench-p100-progress" name="trench-size[]" value="otr-trench-p100-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-otr-trench-p100-progress">Size - P100</label>
-          </div>
-
-          <div id="discipline-otr-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="otr-trench-p100-progress-qty">Metres Completed:</label>
-            <input type="number" id="otr-trench-p100-progress-qty" name="otr-trench-p100-progress-qty" min="0" step="0.1" />
-
-              <label for="otr-trench-p100-progress-photos" style="margin-top: 15px;">
-    Before and After - P100 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="otr-trench-p100-progress-photos" 
-    name="otr-trench_p100_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-        </div>
-
-        <!-- Rock Trench - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-rock-trench-progress" name="discipline[]" value="rock-trench-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-rock-trench-progress">Rock Trench</label>
-        </div>
-
-        <div id="discipline-rock-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
-
-          <!-- rock Trench Buried -->
-          <div>
-            <input type="checkbox" id="discipline-rock-trench-buried-progress" name="rock-trench-size[]" value="rock-trench-buried-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-trench-buried-progress">Direct Buried</label>
-          </div>
-
-          <div id="discipline-rock-trench-buried-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-trench-buried-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-trench-buried-progress-qty" name="rock-trench-buried-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-trench-buried-progress-photos" style="margin-top: 15px;">
-    Before and After - Rock Trench - Direct Buried (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-trench-buried-progress-photos" 
-    name="rock-trench-buried_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- rock Trench - P50 Size -->
-          <div>
-            <input type="checkbox" id="discipline-rock-trench-p50-progress" name="rock-trench-size[]" value="rock-trench-p50-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-trench-p50-progress">Size - P50</label>
-          </div>
-
-          <div id="discipline-rock-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-trench-p50-progress-qty">Metres Completed:</label>
-            <input type="number" id="trench-p50-progress-qty" name="rock-trenchtrench-p50-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-trenchtrench-p50-progress-photos" style="margin-top: 15px;">
-    Before and After - P50 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-trenchtrench-p50-progress-photos" 
-    name="rock-trenchtrench_p50_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-
-          <!-- rock Trench - P100 Size -->
-          <div>
-            <input type="checkbox" id="discipline-rock-trench-p100-progress" name="trench-size[]" value="rock-trench-p100-progress" onchange="toggleDisciplineFields(this)" />
-            <label for="discipline-rock-trench-p100-progress">Size - P100</label>
-          </div>
-
-          <div id="discipline-rock-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
-            <label for="rock-trench-p100-progress-qty">Metres Completed:</label>
-            <input type="number" id="rock-trench-p100-progress-qty" name="rock-trench-p100-progress-qty" min="0" step="0.1" />
-
-              <label for="rock-trench-p100-progress-photos" style="margin-top: 15px;">
-    Before and After - P100 (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after trenching section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="rock-trench-p100-progress-photos" 
-    name="rock-trench_p100_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-          </div>
-        </div>
-
-        <!-- Pits - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-pit-progress" name="discipline[]" value="pit-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-pit-progress">Pits</label>
-        </div>
-
-        <div id="discipline-pit-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          
-          <!-- C8 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-c8-progress" name="pit-size[]" value="pit-c8-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-c8-progress">C8</label>
-            </div>
-
-            <div id="discipline-pit-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-c8-progress-qty">Quantity:</label>
-              <input type="number" id="pit-c8-progress-qty" name="pit-c8-progress-qty" min="0" step="1" />
-
-  <label for="pit-c8-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-c8-progress-photos" 
-    name="pit_c8_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- C9 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-c9-progress" name="pit-size[]" value="pit-c9-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-c9-progress">C9</label>
-            </div>
-
-            <div id="discipline-pit-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-c9-progress-qty">Quantity:</label>
-              <input type="number" id="pit-c9-progress-qty" name="pit-c9-progress-qty" min="0" step="1" />
-
-  <label for="pit-c9-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-c9-progress-photos" 
-    name="pit_c9_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- Manhole Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-manhole-progress" name="pit-size[]" value="pit-manhole-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-manhole-progress">Manhole</label>
-            </div>
-
-            <div id="discipline-pit-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-manhole-progress-qty">Quantity:</label>
-              <input type="number" id="pit-manhole-progress-qty" name="pit-manhole-progress-qty" min="0" step="1" />
-
-  <label for="pit-manhole-progress-photos" style="margin-top: 15px;">
-    New Manhole Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after manhole installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-manhole-progress-photos" 
-    name="pit_manhole_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- P5 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-p5-progress" name="pit-size[]" value="pit-p5-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-p5-progress">P5</label>
-            </div>
-
-            <div id="discipline-pit-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-p5-progress-qty">Quantity:</label>
-              <input type="number" id="pit-p5-progress-qty" name="pit-p5-progress-qty" min="0" step="1" />
-
-  <label for="pit-p5-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-p5-progress-photos" 
-    name="pit_p5_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- P6 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-p6-progress" name="pit-size[]" value="pit-p6-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-p6-progress">P6</label>
-            </div>
-
-            <div id="discipline-pit-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-p6-progress-qty">Quantity:</label>
-              <input type="number" id="pit-p6-progress-qty" name="pit-p6-progress-qty" min="0" step="1" />
-
-  <label for="pit-p6-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-p6-progress-photos" 
-    name="pit_p6_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- P8 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-p8-progress" name="pit-size[]" value="pit-p8-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-p8-progress">P8</label>
-            </div>
-
-            <div id="discipline-pit-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-p8-progress-qty">Quantity:</label>
-              <input type="number" id="pit-p8-progress-qty" name="pit-p8-progress-qty" min="0" step="1" />
-
-  <label for="pit-p8-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-p8-progress-photos" 
-    name="pit_p8_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-            <!-- P9 Size -->
-            <div>
-              <input type="checkbox" id="discipline-pit-p9-progress" name="pit-size[]" value="pit-p9-progress" onchange="toggleDisciplineFields(this)" />
-              <label for="discipline-pit-p9-progress">P9</label>
-            </div>
-
-            <div id="discipline-pit-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
-              <label for="pit-p9-progress-qty">Quantity:</label>
-              <input type="number" id="pit-p9-progress-qty" name="pit-p9-progress-qty" min="0" step="1" />
-
-  <label for="pit-p9-progress-photos" style="margin-top: 15px;">
-    Pit Photos (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after pit installation
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="pit-p9-progress-photos" 
-    name="pit_p9_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-          </div>
-
-        <!-- Hauling - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-hauling-progress" name="discipline[]" value="hauling-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-hauling-progress">Hauling (per cable)</label>
-        </div>
-
-        <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="hauling-progress-qty">Metres Completed:</label>
-          <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
-
-  <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">
-    Cable Marker Photos - Start and End hauled section (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing cable markers at start and end of hauled section
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="hauling-progress-cable-marking-photos" 
-    name="hauling_progress_cable_marking_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-  </p>
-</div>
-
-        <!-- Marker Posts - Progress -->
-        <div>
-          <input type="checkbox" id="discipline-markers-progress" name="discipline[]" value="markers-progress" onchange="toggleDisciplineFields(this)" />
-          <label for="discipline-markers-progress">Marker Posts</label>
-        </div>
-
-        <div id="discipline-markers-progress-fields" class="discipline-conditional-fields" style="display: none;">
-          <label for="markers-progress-qty">Number Installed:</label>
-          <input type="number" id="markers-progress-qty" name="markers-progress-qty" min="0" step="1" />
-
-  <label for="markers-progress-photos" style="margin-top: 15px;">
-    Marker Post installations (GPS time/date enabled)
-    <br>
-    <small style="color: #666;">
-      Capture photos showing before and after marker post installs
-    </small>
-  </label>
-  <input 
-    type="file" 
-    id="markers-progress-photos" 
-    name="markers_progress_photos[]"
-    accept="image/*"
-    multiple
-    capture="environment"
-    style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;"
-  >
-  <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
-    You can select multiple photos or take new ones with your camera (enable GPS for time/date stamp).
-    </p>
-</div>
+      <div id="discipline-clearing-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="clearing-progress-qty">Metres Completed:</label>
+        <input type="number" id="clearing-progress-qty" name="clearing-progress-qty" min="0" step="0.1" />
+        <label for="clearing-progress-photos" style="margin-top: 15px;">Add Clearing Checklist photo here</label>
+        <input type="file" id="clearing-progress-photos" name="clearing_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
       </div>
-    </fieldset>
+
+      <!-- OTR Ripping -->
+      <div>
+        <input type="checkbox" id="discipline-otr-ripping-progress" name="otr-ripping[]" value="otr-ripping-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-otr-ripping-progress">OTR Ripping</label>
+      </div>
+      <div id="discipline-otr-ripping-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="otr-ripping-progress-qty">Metres Completed:</label>
+        <input type="number" id="otr-ripping-progress-qty" name="otr-ripping-progress-qty" min="0" step="0.1" />
+        <label for="otr-ripping-progress-photos" style="margin-top: 15px;">Add OTR Ripping Checklist photo here</label>
+        <input type="file" id="otr-ripping-progress-photos" name="otr-ripping_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- Rock Ripping -->
+      <div>
+        <input type="checkbox" id="discipline-rock-ripping-progress" name="rock-ripping[]" value="rock-ripping-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-rock-ripping-progress">Rock Ripping</label>
+      </div>
+      <div id="discipline-rock-ripping-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="rock-ripping-progress-qty">Metres Completed:</label>
+        <input type="number" id="rock-ripping-progress-qty" name="rock-ripping-progress-qty" min="0" step="0.1" />
+        <label for="rock-ripping-progress-photos" style="margin-top: 15px;">Add Rock Ripping Checklist photo here</label>
+        <input type="file" id="rock-ripping-progress-photos" name="rock-ripping_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- Rocksaw / Rock Hammer -->
+      <div>
+        <input type="checkbox" id="discipline-rocksaw-progress" name="rocksaw[]" value="rocksaw-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-rocksaw-progress">Rocksaw / Rock Hammer</label>
+      </div>
+      <div id="discipline-rocksaw-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="rocksaw-progress-qty">Metres Completed:</label>
+        <input type="number" id="rocksaw-progress-qty" name="rocksaw-progress-qty" min="0" step="0.1" />
+        <label for="rocksaw-progress-photos" style="margin-top: 15px;">Add Rocksaw / Rock Hammer Checklist photo here</label>
+        <input type="file" id="rocksaw-progress-photos" name="rocksaw_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+    </div>
+
+    <!-- Plough -->
+    <div>
+      <input type="checkbox" id="discipline-plough-progress" name="discipline[]" value="plough-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-plough-progress">Plough</label>
+    </div>
+    <div id="discipline-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <!-- OTR Plough -->
+      <div>
+        <input type="checkbox" id="discipline-otr-plough-progress" name="otr-plough[]" value="otr-plough-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-otr-plough-progress">OTR Plough</label>
+      </div>
+      <div id="discipline-otr-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="otr-plough-progress-qty">Metres Completed:</label>
+        <input type="number" id="otr-plough-progress-qty" name="otr-plough-progress-qty" min="0" step="0.1" />
+        <label for="otr-plough-progress-photos" style="margin-top: 15px;">Add OTR Plough Checklist photo here</label>
+        <input type="file" id="otr-plough-progress-photos" name="otr-plough_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- Rock Plough -->
+      <div>
+        <input type="checkbox" id="discipline-rock-plough-progress" name="rock-plough[]" value="rock-plough-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-rock-plough-progress">Rock Plough</label>
+      </div>
+      <div id="discipline-rock-plough-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="rock-plough-progress-qty">Metres Completed:</label>
+        <input type="number" id="rock-plough-progress-qty" name="rock-plough-progress-qty" min="0" step="0.1" />
+        <label for="rock-plough-progress-photos" style="margin-top: 15px;">Add Rock Plough Checklist photo here</label>
+        <input type="file" id="rock-plough-progress-photos" name="rock-plough_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+    </div>
+
+    <!-- Bore -->
+    <div>
+      <input type="checkbox" id="discipline-bore-progress" name="discipline[]" value="bore-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-bore-progress">Bore</label>
+    </div>
+    <div id="discipline-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <!-- OTR Bore -->
+      <div>
+        <input type="checkbox" id="discipline-otr-bore-progress" name="discipline[]" value="otr-bore-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-otr-bore-progress">OTR Bore</label>
+      </div>
+      <div id="discipline-otr-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <!-- PE63 Size -->
+        <div>
+          <input type="checkbox" id="discipline-otr-bore-pe63-progress" name="otr-bore-size[]" value="otr-bore-pe63-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-otr-bore-pe63-progress">Size - PE63</label>
+        </div>
+        <div id="discipline-otr-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="otr-bore-pe63-progress-qty">Metres Completed:</label>
+          <input type="number" id="otr-bore-pe63-progress-qty" name="otr-bore-pe63-progress-qty" min="0" step="0.1" />
+          <label for="otr-bore-pe63-progress-photos" style="margin-top: 15px;">Add OTR Bore (PE63) Checklist photo here</label>
+          <input type="file" id="otr-bore-pe63-progress-photos" name="otr-bore_pe63_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- PE110 Size -->
+        <div>
+          <input type="checkbox" id="discipline-otr-bore-pe110-progress" name="bore-size[]" value="otr-bore-pe110-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-otr-bore-pe110-progress">Size - PE110</label>
+        </div>
+        <div id="discipline-otr-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="otr-bore-pe110-progress-qty">Metres Completed:</label>
+          <input type="number" id="otr-bore-pe110-progress-qty" name="otr-bore-pe110-progress-qty" min="0" step="0.1" />
+          <label for="otr-bore-pe110-progress-photos" style="margin-top: 15px;">Add OTR Bore (PE110) Checklist photo here</label>
+          <input type="file" id="otr-bore-pe110-progress-photos" name="otr-bore_pe110_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+      </div>
+
+      <!-- Rock Bore -->
+      <div>
+        <input type="checkbox" id="discipline-rock-bore-progress" name="discipline[]" value="rock-bore-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-rock-bore-progress">Rock Bore</label>
+      </div>
+      <div id="discipline-rock-bore-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <!-- PE63 Size -->
+        <div>
+          <input type="checkbox" id="discipline-rock-bore-pe63-progress" name="rock-bore-size[]" value="rock-bore-pe63-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rock-bore-pe63-progress">Size - PE63</label>
+        </div>
+        <div id="discipline-rock-bore-pe63-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rock-bore-pe63-progress-qty">Metres Completed:</label>
+          <input type="number" id="rock-bore-pe63-progress-qty" name="rock-bore-pe63-progress-qty" min="0" step="0.1" />
+          <label for="rock-bore-pe63-progress-photos" style="margin-top: 15px;">Add Rock Bore (PE63) Checklist photo here</label>
+          <input type="file" id="rock-bore-pe63-progress-photos" name="rock-bore_pe63_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- PE110 Size -->
+        <div>
+          <input type="checkbox" id="discipline-rock-bore-pe110-progress" name="bore-size[]" value="rock-bore-pe110-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rock-bore-pe110-progress">Size - PE110</label>
+        </div>
+        <div id="discipline-rock-bore-pe110-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rock-bore-pe110-progress-qty">Metres Completed:</label>
+          <input type="number" id="rock-bore-pe110-progress-qty" name="rock-bore-pe110-progress-qty" min="0" step="0.1" />
+          <label for="rock-bore-pe110-progress-photos" style="margin-top: 15px;">Add Rock Bore (PE110) Checklist photo here</label>
+          <input type="file" id="rock-bore-pe110-progress-photos" name="rock-bore_pe110_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Trench -->
+    <div>
+      <input type="checkbox" id="discipline-trench-progress" name="discipline[]" value="trench-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-trench-progress">Trench</label>
+    </div>
+    <div id="discipline-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <!-- OTR Trench -->
+      <div>
+        <input type="checkbox" id="discipline-otr-trench-progress" name="discipline[]" value="otr-trench-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-otr-trench-progress">OTR Trench</label>
+      </div>
+      <div id="discipline-otr-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <!-- Direct Buried -->
+        <div>
+          <input type="checkbox" id="discipline-otr-trench-buried-progress" name="otr-trench-size[]" value="otr-trench-buried-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-otr-trench-buried-progress">Direct Buried</label>
+        </div>
+        <div id="discipline-otr-trench-buried-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="otr-trench-buried-progress-qty">Metres Completed:</label>
+          <input type="number" id="otr-trench-buried-progress-qty" name="otr-trench-buried-progress-qty" min="0" step="0.1" />
+          <label for="otr-trench-buried-progress-photos" style="margin-top: 15px;">Add OTR Trench - Direct Buried Checklist photo here</label>
+          <input type="file" id="otr-trench-buried-progress-photos" name="otr-trench-buried_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- Size - P50 -->
+        <div>
+          <input type="checkbox" id="discipline-otr-trench-p50-progress" name="otr-trench-size[]" value="otr-trench-p50-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-otr-trench-p50-progress">Size - P50</label>
+        </div>
+        <div id="discipline-otr-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="otr-trench-p50-progress-qty">Metres Completed:</label>
+          <input type="number" id="otr-trench-p50-progress-qty" name="otr-trench-p50-progress-qty" min="0" step="0.1" />
+          <label for="otr-trench-p50-progress-photos" style="margin-top: 15px;">Add OTR Trench - P50 Checklist photo here</label>
+          <input type="file" id="otr-trench-p50-progress-photos" name="otr-trench_p50_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- Size - P100 -->
+        <div>
+          <input type="checkbox" id="discipline-otr-trench-p100-progress" name="trench-size[]" value="otr-trench-p100-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-otr-trench-p100-progress">Size - P100</label>
+        </div>
+        <div id="discipline-otr-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="otr-trench-p100-progress-qty">Metres Completed:</label>
+          <input type="number" id="otr-trench-p100-progress-qty" name="otr-trench-p100-progress-qty" min="0" step="0.1" />
+          <label for="otr-trench-p100-progress-photos" style="margin-top: 15px;">Add OTR Trench - P100 Checklist photo here</label>
+          <input type="file" id="otr-trench-p100-progress-photos" name="otr-trench_p100_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+      </div>
+
+      <!-- Rock Trench -->
+      <div>
+        <input type="checkbox" id="discipline-rock-trench-progress" name="discipline[]" value="rock-trench-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-rock-trench-progress">Rock Trench</label>
+      </div>
+      <div id="discipline-rock-trench-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <!-- Direct Buried -->
+        <div>
+          <input type="checkbox" id="discipline-rock-trench-buried-progress" name="rock-trench-size[]" value="rock-trench-buried-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rock-trench-buried-progress">Direct Buried</label>
+        </div>
+        <div id="discipline-rock-trench-buried-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rock-trench-buried-progress-qty">Metres Completed:</label>
+          <input type="number" id="rock-trench-buried-progress-qty" name="rock-trench-buried-progress-qty" min="0" step="0.1" />
+          <label for="rock-trench-buried-progress-photos" style="margin-top: 15px;">Add Rock Trench - Direct Buried Checklist photo here</label>
+          <input type="file" id="rock-trench-buried-progress-photos" name="rock-trench-buried_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- Size - P50 -->
+        <div>
+          <input type="checkbox" id="discipline-rock-trench-p50-progress" name="rock-trench-size[]" value="rock-trench-p50-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rock-trench-p50-progress">Size - P50</label>
+        </div>
+        <div id="discipline-rock-trench-p50-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rock-trench-p50-progress-qty">Metres Completed:</label>
+          <input type="number" id="rock-trench-p50-progress-qty" name="rock-trench-p50-progress-qty" min="0" step="0.1" />
+          <label for="rock-trench-p50-progress-photos" style="margin-top: 15px;">Add Rock Trench - P50 Checklist photo here</label>
+          <input type="file" id="rock-trench-p50-progress-photos" name="rock-trench_p50_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+
+        <!-- Size - P100 -->
+        <div>
+          <input type="checkbox" id="discipline-rock-trench-p100-progress" name="trench-size[]" value="rock-trench-p100-progress" onchange="toggleDisciplineFields(this)" />
+          <label for="discipline-rock-trench-p100-progress">Size - P100</label>
+        </div>
+        <div id="discipline-rock-trench-p100-progress-fields" class="discipline-conditional-fields" style="display: none;">
+          <label for="rock-trench-p100-progress-qty">Metres Completed:</label>
+          <input type="number" id="rock-trench-p100-progress-qty" name="rock-trench-p100-progress-qty" min="0" step="0.1" />
+          <label for="rock-trench-p100-progress-photos" style="margin-top: 15px;">Add Rock Trench - P100 Checklist photo here</label>
+          <input type="file" id="rock-trench-p100-progress-photos" name="rock-trench_p100_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Pits -->
+    <div>
+      <input type="checkbox" id="discipline-pit-progress" name="discipline[]" value="pit-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-pit-progress">Pits</label>
+    </div>
+    <div id="discipline-pit-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <!-- C8 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-c8-progress" name="pit-size[]" value="pit-c8-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-c8-progress">C8</label>
+      </div>
+      <div id="discipline-pit-c8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-c8-progress-qty">Quantity:</label>
+        <input type="number" id="pit-c8-progress-qty" name="pit-c8-progress-qty" min="0" step="1" />
+        <label for="pit-c8-progress-photos" style="margin-top: 15px;">Add C8 Pit Checklist photo here</label>
+        <input type="file" id="pit-c8-progress-photos" name="pit_c8_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- C9 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-c9-progress" name="pit-size[]" value="pit-c9-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-c9-progress">C9</label>
+      </div>
+      <div id="discipline-pit-c9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-c9-progress-qty">Quantity:</label>
+        <input type="number" id="pit-c9-progress-qty" name="pit-c9-progress-qty" min="0" step="1" />
+        <label for="pit-c9-progress-photos" style="margin-top: 15px;">Add C Pit Checklist photo here</label>
+        <input type="file" id="pit-c9-progress-photos" name="pit_c9_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- Manhole -->
+      <div>
+        <input type="checkbox" id="discipline-pit-manhole-progress" name="pit-size[]" value="pit-manhole-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-manhole-progress">Manhole</label>
+      </div>
+      <div id="discipline-pit-manhole-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-manhole-progress-qty">Quantity:</label>
+        <input type="number" id="pit-manhole-progress-qty" name="pit-manhole-progress-qty" min="0" step="1" />
+        <label for="pit-manhole-progress-photos" style="margin-top: 15px;">Add Manhole Checklist photo here</label>
+        <input type="file" id="pit-manhole-progress-photos" name="pit_manhole_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- P5 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-p5-progress" name="pit-size[]" value="pit-p5-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-p5-progress">P5</label>
+      </div>
+      <div id="discipline-pit-p5-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-p5-progress-qty">Quantity:</label>
+        <input type="number" id="pit-p5-progress-qty" name="pit-p5-progress-qty" min="0" step="1" />
+        <label for="pit-p5-progress-photos" style="margin-top: 15px;">Add P5 Pit Checklist photo here</label>
+        <input type="file" id="pit-p5-progress-photos" name="pit_p5_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- P6 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-p6-progress" name="pit-size[]" value="pit-p6-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-p6-progress">P6</label>
+      </div>
+      <div id="discipline-pit-p6-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-p6-progress-qty">Quantity:</label>
+        <input type="number" id="pit-p6-progress-qty" name="pit-p6-progress-qty" min="0" step="1" />
+        <label for="pit-p6-progress-photos" style="margin-top: 15px;">Add P6 Pit Checklist photo here</label>
+        <input type="file" id="pit-p6-progress-photos" name="pit_p6_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- P8 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-p8-progress" name="pit-size[]" value="pit-p8-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-p8-progress">P8</label>
+      </div>
+      <div id="discipline-pit-p8-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-p8-progress-qty">Quantity:</label>
+        <input type="number" id="pit-p8-progress-qty" name="pit-p8-progress-qty" min="0" step="1" />
+        <label for="pit-p8-progress-photos" style="margin-top: 15px;">Add P8 Pit Checklist photo here</label>
+        <input type="file" id="pit-p8-progress-photos" name="pit_p8_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+
+      <!-- P9 -->
+      <div>
+        <input type="checkbox" id="discipline-pit-p9-progress" name="pit-size[]" value="pit-p9-progress" onchange="toggleDisciplineFields(this)" />
+        <label for="discipline-pit-p9-progress">P9</label>
+      </div>
+      <div id="discipline-pit-p9-progress-fields" class="discipline-conditional-fields" style="display: none;">
+        <label for="pit-p9-progress-qty">Quantity:</label>
+        <input type="number" id="pit-p9-progress-qty" name="pit-p9-progress-qty" min="0" step="1" />
+        <label for="pit-p9-progress-photos" style="margin-top: 15px;">Add P9 Pit Checklist photo here</label>
+        <input type="file" id="pit-p9-progress-photos" name="pit_p9_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      </div>
+    </div>
+
+    <!-- Hauling -->
+    <div>
+      <input type="checkbox" id="discipline-hauling-progress" name="discipline[]" value="hauling-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-hauling-progress">Hauling (per cable)</label>
+    </div>
+    <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <label for="hauling-progress-qty">Metres Completed:</label>
+      <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
+      <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">Add Hauling Checklist photo here</label>
+      <input type="file" id="hauling-progress-cable-marking-photos" name="hauling_progress_cable_marking_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+    </div>
+
+    <!-- Marker Posts -->
+    <div>
+      <input type="checkbox" id="discipline-markers-progress" name="discipline[]" value="markers-progress" onchange="toggleDisciplineFields(this)" />
+      <label for="discipline-markers-progress">Marker Posts</label>
+    </div>
+    <div id="discipline-markers-progress-fields" class="discipline-conditional-fields" style="display: none;">
+      <label for="markers-progress-qty">Number Installed:</label>
+      <input type="number" id="markers-progress-qty" name="markers-progress-qty" min="0" step="1" />
+      <label for="markers-progress-photos" style="margin-top: 15px;">Add Marker Posts Checklist photo here</label>
+      <input type="file" id="markers-progress-photos" name="markers_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+    </div>
+
+  </div>
+</fieldset>
 
     <label for="progress-comments">Additional Comments? Escalate SHEQ concerns to your Genus FCM/Supervisor or SHEQ Advisor</label>
     <textarea id="progress-comments" name="progress-comments" placeholder="Track required actions in MyOsh with SHEQ support"></textarea>
@@ -2105,6 +1597,7 @@ function returnToFormSwitcher() {
 }
 
 function showForm(formType) {
+  console.log('Showing form:', formType);  // Debug to confirm call
   document.getElementById('thank-you-message').style.display = 'none';
 
   ['form-bog', 'form-progress'].forEach(id => {
@@ -2552,9 +2045,41 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
 
     const activities = [];
 
+    // Rod, Rope & Prove
+    if (document.getElementById('discipline-rrp-progress')?.checked) {
+      btn.textContent = 'Uploading Rod, Rope & Prove Checklist photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('rrp-progress-photos')?.files || [],
+        'progressRegister',
+        'Rod, Rope & Prove Photos'
+      );
+      activities.push({
+        ...commonData,
+        "Activity": "Rod, Rope & Prove",
+        "Quantity/Metres": Number(document.getElementById('rrp-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+    
+    // Blockages
+    if (document.getElementById('discipline-blockages-progress')?.checked) {
+      btn.textContent = 'Uploading Blockages Checklist photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('blockages-progress-photos')?.files || [],
+        'progressRegister',
+        'Blockages Photos'
+      );
+      activities.push({
+        ...commonData,
+        "Activity": "Blockages",
+        "Quantity/Metres": Number(document.getElementById('blockages-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+    
     // Route Preparation sub-sections
     if (document.getElementById('discipline-clearing-progress')?.checked) {
-      btn.textContent = 'Uploading Clearing photos...';
+      btn.textContent = 'Uploading Clearing Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('clearing-progress-photos')?.files || [],
         'progressRegister',
@@ -2569,7 +2094,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     }
 
     if (document.getElementById('discipline-otr-ripping-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Ripping photos...';
+      btn.textContent = 'Uploading OTR Ripping Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('otr-ripping-progress-photos')?.files || [],
         'progressRegister',
@@ -2584,7 +2109,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     }
 
     if (document.getElementById('discipline-rock-ripping-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Ripping photos...';
+      btn.textContent = 'Uploading Rock Ripping Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rock-ripping-progress-photos')?.files || [],
         'progressRegister',
@@ -2599,7 +2124,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     }
 
     if (document.getElementById('discipline-rocksaw-progress')?.checked) {
-      btn.textContent = 'Uploading Rocksaw / Rock Hammer photos...';
+      btn.textContent = 'Uploading Rocksaw / Rock Hammer Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rocksaw-progress-photos')?.files || [],
         'progressRegister',
@@ -2615,7 +2140,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
 
     // Plough sub-categories
     if (document.getElementById('discipline-otr-plough-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Plough photos...';
+      btn.textContent = 'Uploading OTR Plough Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('otr-plough-progress-photos')?.files || [],
         'progressRegister',
@@ -2630,7 +2155,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
     }
 
     if (document.getElementById('discipline-rock-plough-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Plough photos...';
+      btn.textContent = 'Uploading Rock Plough Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rock-plough-progress-photos')?.files || [],
         'progressRegister',
@@ -2646,7 +2171,7 @@ document.getElementById('progress-form')?.addEventListener('submit', async funct
 
     // Bore - OTR Bore - PE63
 if (document.getElementById('discipline-otr-bore-pe63-progress')?.checked) {
-  btn.textContent = 'Uploading OTR Bore PE63 photos...';
+  btn.textContent = 'Uploading OTR Bore PE63 Checklist photos...';
   const photos = await uploadFilesToAirtable(
     document.getElementById('otr-bore-pe63-progress-photos')?.files || [],
     'progressRegister',
@@ -2662,7 +2187,7 @@ if (document.getElementById('discipline-otr-bore-pe63-progress')?.checked) {
 
 // Bore - OTR Bore - PE110
 if (document.getElementById('discipline-otr-bore-pe110-progress')?.checked) {
-  btn.textContent = 'Uploading OTR Bore PE110 photos...';
+  btn.textContent = 'Uploading OTR Bore PE110 Checklist photos...';
   const photos = await uploadFilesToAirtable(
     document.getElementById('otr-bore-pe110-progress-photos')?.files || [],
     'progressRegister',
@@ -2678,7 +2203,7 @@ if (document.getElementById('discipline-otr-bore-pe110-progress')?.checked) {
 
 // Bore - Rock Bore - PE63
 if (document.getElementById('discipline-rock-bore-pe63-progress')?.checked) {
-  btn.textContent = 'Uploading Rock Bore PE63 photos...';
+  btn.textContent = 'Uploading Rock Bore PE63 Checklist photos...';
   const photos = await uploadFilesToAirtable(
     document.getElementById('rock-bore-pe63-progress-photos')?.files || [],
     'progressRegister',
@@ -2694,7 +2219,7 @@ if (document.getElementById('discipline-rock-bore-pe63-progress')?.checked) {
 
 // Bore - Rock Bore - PE110
 if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
-  btn.textContent = 'Uploading Rock Bore PE110 photos...';
+  btn.textContent = 'Uploading Rock Bore PE110 Checklist photos...';
   const photos = await uploadFilesToAirtable(
     document.getElementById('rock-bore-pe110-progress-photos')?.files || [],
     'progressRegister',
@@ -2710,7 +2235,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
 
     // Trench + Direct Bury
     if (document.getElementById('discipline-otr-trench-buried-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Trench Buried photos...';
+      btn.textContent = 'Uploading OTR Trench Buried Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('otr-trench-buried-progress-photos')?.files || [],
         'progressRegister',
@@ -2725,7 +2250,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-rock-trench-buried-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Trench Buried photos...';
+      btn.textContent = 'Uploading Rock Trench Buried Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rock-trench-buried-progress-photos')?.files || [],
         'progressRegister',
@@ -2741,7 +2266,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
 
     // Trench - OTR Trench Conduit sub-categories
     if (document.getElementById('discipline-otr-trench-conduit-p50-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Trench Conduit P50 photos...';
+      btn.textContent = 'Uploading OTR Trench Conduit P50 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('otr-trench-conduit-p50-progress-photos')?.files || [],
         'progressRegister',
@@ -2756,7 +2281,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-otr-trench-conduit-p100-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Trench Conduit P100 photos...';
+      btn.textContent = 'Uploading OTR Trench Conduit P100 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('otr-trench-conduit-p100-progress-photos')?.files || [],
         'progressRegister',
@@ -2772,7 +2297,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
 
     // Trench - Rock Trench Conduit sub-categories
     if (document.getElementById('discipline-rock-trench-conduit-p50-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Trench Conduit P50 photos...';
+      btn.textContent = 'Uploading Rock Trench Conduit P50 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rock-trench-conduit-p50-progress-photos')?.files || [],
         'progressRegister',
@@ -2787,7 +2312,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-rock-trench-conduit-p100-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Trench Conduit P100 photos...';
+      btn.textContent = 'Uploading Rock Trench Conduit P100 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('rock-trench-conduit-p100-progress-photos')?.files || [],
         'progressRegister',
@@ -2803,7 +2328,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
 
     // Pits (single types)
     if (document.getElementById('discipline-pit-c8-progress')?.checked) {
-      btn.textContent = 'Uploading Pit C8 photos...';
+      btn.textContent = 'Uploading Pit C8 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-c8-progress-photos')?.files || [],
         'progressRegister',
@@ -2818,7 +2343,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-c9-progress')?.checked) {
-      btn.textContent = 'Uploading Pit C9 photos...';
+      btn.textContent = 'Uploading Pit C9 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-c9-progress-photos')?.files || [],
         'progressRegister',
@@ -2833,7 +2358,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-manhole-progress')?.checked) {
-      btn.textContent = 'Uploading Pit Manhole photos...';
+      btn.textContent = 'Uploading Pit Manhole Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-manhole-progress-photos')?.files || [],
         'progressRegister',
@@ -2848,7 +2373,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-p5-progress')?.checked) {
-      btn.textContent = 'Uploading Pit P5 photos...';
+      btn.textContent = 'Uploading Pit P5 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-p5-progress-photos')?.files || [],
         'progressRegister',
@@ -2863,7 +2388,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-p6-progress')?.checked) {
-      btn.textContent = 'Uploading Pit P6 photos...';
+      btn.textContent = 'Uploading Pit P6 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-p6-progress-photos')?.files || [],
         'progressRegister',
@@ -2878,7 +2403,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-p8-progress')?.checked) {
-      btn.textContent = 'Uploading Pit P8 photos...';
+      btn.textContent = 'Uploading Pit P8 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-p8-progress-photos')?.files || [],
         'progressRegister',
@@ -2893,7 +2418,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
     }
 
     if (document.getElementById('discipline-pit-p9-progress')?.checked) {
-      btn.textContent = 'Uploading Pit P9 photos...';
+      btn.textContent = 'Uploading Pit P9 Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('pit-p9-progress-photos')?.files || [],
         'progressRegister',
@@ -2907,9 +2432,24 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
       });
     }
 
+    if (document.getElementById('discipline-hauling-progress')?.checked) {
+      btn.textContent = 'Uploading Hauling Checklist photos...';
+      const photos = await uploadFilesToAirtable(
+        document.getElementById('hauling-progress-photos')?.files || [],
+        'progressRegister',
+        'Hauling Photos'
+      );
+      activities.push({
+        ...commonData,
+        "Activity": "Hauling",
+        "Quantity/Metres": Number(document.getElementById('hauling-progress-qty')?.value) || 0,
+        "Activity Photos": photos
+      });
+    }
+
     // Marker Posts
     if (document.getElementById('discipline-markers-progress')?.checked) {
-      btn.textContent = 'Uploading Marker Posts photos...';
+      btn.textContent = 'Uploading Marker Posts Checklist photos...';
       const photos = await uploadFilesToAirtable(
         document.getElementById('markers-progress-photos')?.files || [],
         'progressRegister',
