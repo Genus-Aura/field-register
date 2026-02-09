@@ -845,8 +845,8 @@ fieldset.time-group legend {
     <div id="discipline-rrp-progress-fields" class="discipline-conditional-fields" style="display: none;">
       <label for="rrp-progress-qty">Metres Completed:</label>
       <input type="number" id="rrp-progress-qty" name="rrp-progress-qty" min="0" step="0.1" />
-      <label for="rrp-progress-tag-photos" style="margin-top: 15px;">Add RRP Checklist photo here</label>
-      <input type="file" id="rrp-progress-tag-photos" name="rrp_progress_tag_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      <label for="rrp-progress-photos" style="margin-top: 15px;">Add RRP Checklist photo here</label>
+      <input type="file" id="rrp-progress-photos" name="rrp_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
     </div>
 
     <!-- Blockages -->
@@ -857,8 +857,8 @@ fieldset.time-group legend {
     <div id="discipline-blockages-progress-fields" class="discipline-conditional-fields" style="display: none;">
       <label for="blockages-progress-qty">Blockages Cleared:</label>
       <input type="number" id="blockages-progress-qty" name="blockages-progress-qty" min="0" step="1" />
-      <label for="blockages-progress-tag-photos" style="margin-top: 15px;">Add Blockage Checklist photo here</label>
-      <input type="file" id="blockages-progress-tag-photos" name="blockages_progress_tag_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      <label for="blockages-progress-photos" style="margin-top: 15px;">Add Blockage Checklist photo here</label>
+      <input type="file" id="blockages-progress-photos" name="blockages_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
     </div>
 
     <!-- Route Preparation -->
@@ -1208,8 +1208,8 @@ fieldset.time-group legend {
     <div id="discipline-hauling-progress-fields" class="discipline-conditional-fields" style="display: none;">
       <label for="hauling-progress-qty">Metres Completed:</label>
       <input type="number" id="hauling-progress-qty" name="hauling-progress-qty" min="0" step="0.1" />
-      <label for="hauling-progress-cable-marking-photos" style="margin-top: 15px;">Add Hauling Checklist photo here</label>
-      <input type="file" id="hauling-progress-cable-marking-photos" name="hauling_progress_cable_marking_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
+      <label for="hauling-progress-photos" style="margin-top: 15px;">Add Hauling Checklist photo here</label>
+      <input type="file" id="hauling-progress-photos" name="hauling_progress_photos[]" accept="image/*" multiple capture="environment" style="margin-top: 10px; width: calc(100% - 20px); padding: 8px; border: 1px solid var(--dark-20); border-radius: 0.5rem; font-size: 1rem; font-family: 'Exo', sans-serif; background-color: white;" />
     </div>
 
     <!-- Marker Posts -->
@@ -2264,64 +2264,64 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
       });
     }
 
-    // Trench - OTR Trench Conduit sub-categories
-    if (document.getElementById('discipline-otr-trench-conduit-p50-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Trench Conduit P50 Checklist photos...';
+    // Trench - OTR Trench sub-categories
+    if (document.getElementById('discipline-otr-trench-p50-progress')?.checked) {
+      btn.textContent = 'Uploading OTR Trench P50 Checklist photos...';
       const photos = await uploadFilesToAirtable(
-        document.getElementById('otr-trench-conduit-p50-progress-photos')?.files || [],
+        document.getElementById('otr-trench-p50-progress-photos')?.files || [],
         'progressRegister',
-        'OTR Trench Conduit P50 Photos'
+        'OTR Trench P50 Photos'
       );
       activities.push({
         ...commonData,
-        "Activity": "Trench - OTR Trench Conduit - P50",
-        "Quantity/Metres": Number(document.getElementById('otr-trench-conduit-p50-progress-qty')?.value) || 0,
+        "Activity": "Trench - OTR Trench - P50",
+        "Quantity/Metres": Number(document.getElementById('otr-trench-p50-progress-qty')?.value) || 0,
         "Activity Photos": photos
       });
     }
 
-    if (document.getElementById('discipline-otr-trench-conduit-p100-progress')?.checked) {
-      btn.textContent = 'Uploading OTR Trench Conduit P100 Checklist photos...';
+    if (document.getElementById('discipline-otr-trench-p100-progress')?.checked) {
+      btn.textContent = 'Uploading OTR Trench  P100 Checklist photos...';
       const photos = await uploadFilesToAirtable(
-        document.getElementById('otr-trench-conduit-p100-progress-photos')?.files || [],
+        document.getElementById('otr-trench-p100-progress-photos')?.files || [],
         'progressRegister',
-        'OTR Trench Conduit P100 Photos'
+        'OTR Trench P100 Photos'
       );
       activities.push({
         ...commonData,
-        "Activity": "Trench - OTR Trench Conduit - P100",
-        "Quantity/Metres": Number(document.getElementById('otr-trench-conduit-p100-progress-qty')?.value) || 0,
+        "Activity": "Trench - OTR Trench - P100",
+        "Quantity/Metres": Number(document.getElementById('otr-trench-p100-progress-qty')?.value) || 0,
         "Activity Photos": photos
       });
     }
 
-    // Trench - Rock Trench Conduit sub-categories
-    if (document.getElementById('discipline-rock-trench-conduit-p50-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Trench Conduit P50 Checklist photos...';
+    // Trench - Rock Trench sub-categories
+    if (document.getElementById('discipline-rock-trench-p50-progress')?.checked) {
+      btn.textContent = 'Uploading Rock Trench P50 Checklist photos...';
       const photos = await uploadFilesToAirtable(
-        document.getElementById('rock-trench-conduit-p50-progress-photos')?.files || [],
+        document.getElementById('rock-trench-p50-progress-photos')?.files || [],
         'progressRegister',
-        'Rock Trench Conduit P50 Photos'
+        'Rock Trench P50 Photos'
       );
       activities.push({
         ...commonData,
-        "Activity": "Trench - Rock Trench Conduit - P50",
-        "Quantity/Metres": Number(document.getElementById('rock-trench-conduit-p50-progress-qty')?.value) || 0,
+        "Activity": "Trench - Rock Trench - P50",
+        "Quantity/Metres": Number(document.getElementById('rock-trench-p50-progress-qty')?.value) || 0,
         "Activity Photos": photos
       });
     }
 
-    if (document.getElementById('discipline-rock-trench-conduit-p100-progress')?.checked) {
-      btn.textContent = 'Uploading Rock Trench Conduit P100 Checklist photos...';
+    if (document.getElementById('discipline-rock-trench-p100-progress')?.checked) {
+      btn.textContent = 'Uploading Rock Trench P100 Checklist photos...';
       const photos = await uploadFilesToAirtable(
-        document.getElementById('rock-trench-conduit-p100-progress-photos')?.files || [],
+        document.getElementById('rock-trench-p100-progress-photos')?.files || [],
         'progressRegister',
-        'Rock Trench Conduit P100 Photos'
+        'Rock Trench P100 Photos'
       );
       activities.push({
         ...commonData,
-        "Activity": "Trench - Rock Trench Conduit - P100",
-        "Quantity/Metres": Number(document.getElementById('rock-trench-conduit-p100-progress-qty')?.value) || 0,
+        "Activity": "Trench - Rock Trench - P100",
+        "Quantity/Metres": Number(document.getElementById('rock-trench-p100-progress-qty')?.value) || 0,
         "Activity Photos": photos
       });
     }
@@ -2432,6 +2432,7 @@ if (document.getElementById('discipline-rock-bore-pe110-progress')?.checked) {
       });
     }
 
+    // Hauling
     if (document.getElementById('discipline-hauling-progress')?.checked) {
       btn.textContent = 'Uploading Hauling Checklist photos...';
       const photos = await uploadFilesToAirtable(
